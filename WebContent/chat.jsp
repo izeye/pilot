@@ -68,9 +68,9 @@
 
 	<table border="1" cellspacing="0" cellpadding="3">
 		<tr>
-			<th width="100">Time</th>
+			<th width="200">Time</th>
 			<th width="100">User ID</th>
-			<th width="500">Message</th>
+			<th width="700">Message</th>
 		</tr>
 		<%
 			rs = stmt
