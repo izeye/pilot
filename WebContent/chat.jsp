@@ -78,7 +78,9 @@
 				userId = rs.getString("user_id");
 				message = rs.getString("message");
 
-				out.print("<tr><td>" + createdTime + "</td><td>" + userId
+				out.print("<tr><td>");
+				out.print(String.format("%TF %TT", createdTime, createdTime));
+				out.print("</td><td>" + userId
 						+ "</td><td>" + message + "</td></tr>");
 			}
 			stmt.close();
