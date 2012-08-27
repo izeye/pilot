@@ -12,7 +12,7 @@
 </script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
 </head>
-<body>가나
+<body>
 	<%
 		request.setCharacterEncoding("utf8");
 		String userId = request.getParameter("user_id");
@@ -21,7 +21,7 @@
 			rowCount = "10";
 		}
 		String message = request.getParameter("message");
-		out.println("message: " + message);
+		//out.println("message: " + message);
 	%>
 	<form method="post">
 		<table>
