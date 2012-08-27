@@ -1,3 +1,4 @@
+<%@page contentType="text/html; charset=utf8" %>
 <%@page import="java.util.Date" import="java.sql.*"%>
 <html>
 <head>
