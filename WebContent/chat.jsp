@@ -12,14 +12,16 @@
 </script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
 </head>
-<body>
+<body>가나
 	<%
+		request.setCharacterEncoding("utf8");
 		String userId = request.getParameter("user_id");
 		String rowCount = request.getParameter("row_count");
 		if (rowCount == null || rowCount.isEmpty()) {
 			rowCount = "10";
 		}
 		String message = request.getParameter("message");
+		out.println("message: " + message);
 	%>
 	<form method="post">
 		<table>
@@ -53,7 +55,7 @@
 		ResultSet rs = null;
 		Statement stmt = null;
 
-		String url = "jdbc:mysql://127.0.0.1/db_ctb?user=ctb&password=cTb0409";
+		String url = "jdbc:mysql://127.0.0.1/db_ctb?user=ctb&password=cTb0409&useUnicode=yes&characterEncoding=UTF-8";
 		con = DriverManager.getConnection(url);
 		stmt = con.createStatement();
 
