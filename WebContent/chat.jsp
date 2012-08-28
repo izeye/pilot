@@ -1,7 +1,10 @@
 <%@page contentType="text/html; charset=utf8" %>
 <%@page import="java.util.Date" import="java.sql.*"%>
+<%@include file="database.jsp"%>
+<!DOCTYPE html>
 <html>
 <head>
+<meta charset="utf-8">
 <title>Chat</title>
 <script>
 	var emptyChk = function() {
@@ -11,6 +14,16 @@
 	};
 </script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+<style type="text/css">
+table {
+	border-spacing:0;
+	border-collapse:collapse;
+}
+
+table td, table th {
+	padding:2px;
+}
+</style>
 </head>
 <body>
 	<%
@@ -55,7 +68,6 @@
 		ResultSet rs = null;
 		Statement stmt = null;
 
-		String url = "jdbc:mysql://127.0.0.1/db_ctb?user=ctb&password=cTb0409&useUnicode=yes&characterEncoding=UTF-8";
 		con = DriverManager.getConnection(url);
 		stmt = con.createStatement();
 
@@ -66,7 +78,7 @@
 		}
 	%>
 
-	<table border="1" cellspacing="0" cellpadding="3">
+	<table border="1">
 		<tr>
 			<th width="200">Time</th>
 			<th width="100">User ID</th>
