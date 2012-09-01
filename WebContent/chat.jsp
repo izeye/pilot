@@ -74,7 +74,7 @@ table td,table th {
 
 		String rowCount = request.getParameter("row_count");
 		if (rowCount == null || rowCount.isEmpty()) {
-			rowCount = "10";
+			rowCount = "100";
 		}
 		String message = request.getParameter("message");
 		//out.println("message: " + message);
