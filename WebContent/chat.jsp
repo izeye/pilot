@@ -46,19 +46,21 @@ table td,table th {
 
 		if (userSequence == null) {
 			Cookie[] cookies = request.getCookies();
-			for (Cookie cookie : cookies) {
-				String cookieName = cookie.getName();
-				if (cookieName.equals("seq")) {
-					String cookieValue = cookie.getValue();
-					userSequence = Integer.valueOf(cookieValue);
-					rs = stmt
-							.executeQuery("select * from tb_user where seq = "
-									+ userSequence);
-					rs.next();
-					nickname = rs.getString("nickname");
-					// TODO:
-					session.setAttribute("seq", userSequence);
-					session.setAttribute("nickname", nickname);
+			if (cookies != null) {
+				for (Cookie cookie : cookies) {
+					String cookieName = cookie.getName();
+					if (cookieName.equals("seq")) {
+						String cookieValue = cookie.getValue();
+						userSequence = Integer.valueOf(cookieValue);
+						rs = stmt
+								.executeQuery("select * from tb_user where seq = "
+										+ userSequence);
+						rs.next();
+						nickname = rs.getString("nickname");
+						// TODO:
+						session.setAttribute("seq", userSequence);
+						session.setAttribute("nickname", nickname);
+					}
 				}
 			}
 		}
