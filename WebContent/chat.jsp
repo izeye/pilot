@@ -1,15 +1,17 @@
-<%@page contentType="text/html; charset=utf8" %>
-<%@page import="java.util.Date" import="java.sql.*"%>
+<%@page contentType="text/html; charset=utf8"%>
+<%@page import="java.sql.*"%>
 <%@include file="database.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
+<!--
 <meta http-equiv="refresh" content="10">
+-->
 <title>Chat</title>
 <script>
 	var emptyChk = function() {
-		if (user_id.value == "" || message.value == "") {
+		if (message.value == "") {
 			alert("Empty field!");
 		}
 	};
@@ -17,19 +19,57 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
 <style type="text/css">
 table {
-	border-spacing:0;
-	border-collapse:collapse;
+	border-spacing: 0;
+	border-collapse: collapse;
 }
 
-table td, table th {
-	padding:2px;
+table td,table th {
+	padding: 2px;
 }
 </style>
 </head>
 <body>
 	<%
+		Class.forName("org.gjt.mm.mysql.Driver");
+
+		Connection con = null;
+		ResultSet rs = null;
+		Statement stmt = null;
+
+		con = DriverManager.getConnection(url);
+		stmt = con.createStatement();
+
 		request.setCharacterEncoding("utf8");
-		String userId = request.getParameter("user_id");
+
+		Integer userSequence = (Integer) session.getAttribute("seq");
+		String nickname = (String) session.getAttribute("nickname");
+
+		if (userSequence == null) {
+			Cookie[] cookies = request.getCookies();
+			for (Cookie cookie : cookies) {
+				String cookieName = cookie.getName();
+				if (cookieName.equals("seq")) {
+					String cookieValue = cookie.getValue();
+					userSequence = Integer.valueOf(cookieValue);
+					rs = stmt
+							.executeQuery("select * from tb_user where seq = "
+									+ userSequence);
+					rs.next();
+					nickname = rs.getString("nickname");
+					// TODO:
+					session.setAttribute("seq", userSequence);
+					session.setAttribute("nickname", nickname);
+				}
+			}
+		}
+		//out.println("userSequence: " + userSequence);
+		//out.println("nickname: " + nickname);
+
+		if (userSequence == null) {
+			response.sendRedirect("login.html");
+			return;
+		}
+
 		String rowCount = request.getParameter("row_count");
 		if (rowCount == null || rowCount.isEmpty()) {
 			rowCount = "10";
@@ -37,13 +77,12 @@ table td, table th {
 		String message = request.getParameter("message");
 		//out.println("message: " + message);
 	%>
-	<form method="post">
+	<form method="post" action="chat.jsp">
 		<table>
 			<tr>
-				<td>ID:</td>
+				<td>Nickname:</td>
 				<%
-					out.println("<td><input type=\"text\" name=\"user_id\" id=\"user_id\" value=\""
-							+ (userId == null ? "" : userId) + "\"/></td>");
+					out.println("<td>" + nickname + "</td>");
 				%>
 				<td></td>
 			</tr>
@@ -63,19 +102,9 @@ table td, table th {
 		</table>
 	</form>
 	<%
-		Class.forName("org.gjt.mm.mysql.Driver");
-
-		Connection con = null;
-		ResultSet rs = null;
-		Statement stmt = null;
-
-		con = DriverManager.getConnection(url);
-		stmt = con.createStatement();
-
-		if (userId != null && !userId.isEmpty() && message != null
-				&& !message.isEmpty()) {
-			stmt.executeUpdate("insert into tb_chat_message (created_time, user_id, message) values (now(), '"
-					+ userId + "', '" + message + "')");
+		if (message != null && !message.isEmpty()) {
+			stmt.executeUpdate("insert into tb_chat_message (created_time, user_seq, message) values (now(), '"
+					+ userSequence + "', '" + message + "')");
 		}
 	%>
 
@@ -87,17 +116,17 @@ table td, table th {
 		</tr>
 		<%
 			rs = stmt
-					.executeQuery("select * from tb_chat_message order by id desc limit "
+					.executeQuery("select * from tb_chat_message cm, tb_user u where cm.user_seq = u.seq order by cm.seq desc limit "
 							+ rowCount);
 			while (rs.next()) {
 				Timestamp createdTime = rs.getTimestamp("created_time");
-				userId = rs.getString("user_id");
-				message = rs.getString("message");
+				String nicknameInHistory = rs.getString("nickname");
+				String messageInHistory = rs.getString("message");
 
 				out.print("<tr><td>");
 				out.print(String.format("%TF %TT", createdTime, createdTime));
-				out.print("</td><td>" + userId
-						+ "</td><td>" + message + "</td></tr>");
+				out.print("</td><td>" + nicknameInHistory + "</td><td>"
+						+ messageInHistory + "</td></tr>");
 			}
 			stmt.close();
 			con.close();
