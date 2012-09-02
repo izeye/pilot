@@ -89,20 +89,13 @@ table td,table th {
 				<td></td>
 			</tr>
 			<tr>
-				<td>Row Count</td>
-				<%
-					out.println("<td><input type=\"text\" name=\"row_count\" id=\"row_count\" value=\""
-							+ rowCount + "\"/></td>");
-				%>
-				<td></td>
-			</tr>
-			<tr>
 				<td>Message:</td>
-				<td><input type="text" name="message" id="message" /></td>
+				<td><input type="text" name="message" id="message" size=100 /></td>
 				<td><input type="submit" value="Send" onClick="emptyChk()" /></td>
 			</tr>
 		</table>
 	</form>
+	<br>
 	<%
 		if (message != null && !message.isEmpty()) {
 			stmt.executeUpdate("insert into tb_chat_message (created_time, user_seq, message) values (now(), '"
@@ -133,6 +126,11 @@ table td,table th {
 			stmt.close();
 			con.close();
 		%>
-	</table>
+	</table><br>
+	Row Count:
+	<%
+		out.println("<input type=\"text\" name=\"row_count\" id=\"row_count\" value=\""
+				+ rowCount + "\"/>");
+	%>
 </body>
 </html>
