@@ -27,9 +27,8 @@
 	String nickname = rs.getString("nickname");
 	session.setAttribute("seq", userSequence);
 	session.setAttribute("nickname", nickname);
-	RequestDispatcher dispatcher = request.getRequestDispatcher("chat.jsp");
 	Cookie cookie = new Cookie("seq", String.valueOf(userSequence));
 	cookie.setMaxAge(60 * 60 * 24 * 365);
 	response.addCookie(cookie);
-	dispatcher.forward(request, response);
 %>
+<<jsp:forward page="chat.jsp" />
