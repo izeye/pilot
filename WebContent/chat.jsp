@@ -15,7 +15,7 @@
 		if (message.value == "") {
 			alert("Empty field!");
 		} else {
-			$('#message').focus();
+			$('#message').click();
 		}
 	};
 	
