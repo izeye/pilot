@@ -14,11 +14,13 @@
 	var emptyChk = function() {
 		if (message.value == "") {
 			alert("Empty field!");
+		} else {
+			$('#message').focus();
 		}
 	};
 	
 	$(function(){
-		$('#message').focus();	
+		$('#message').focus();
 	});
 </script>
 <style type="text/css">
