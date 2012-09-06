@@ -9,14 +9,18 @@
 <meta http-equiv="refresh" content="10">
 -->
 <title>Chat</title>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
 <script>
 	var emptyChk = function() {
 		if (message.value == "") {
 			alert("Empty field!");
 		}
 	};
+	
+	$(function(){
+		$('#message').focus();	
+	});
 </script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
 <style type="text/css">
 table {
 	border-spacing: 0;

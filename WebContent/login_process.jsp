@@ -31,4 +31,4 @@
 	cookie.setMaxAge(60 * 60 * 24 * 365);
 	response.addCookie(cookie);
 %>
-<<jsp:forward page="chat.jsp" />
+<jsp:forward page="chat.jsp" />
