@@ -1,0 +1,5 @@
+TITLE=CTB 채팅
+NICKNAME=별명
+MESSAGE=메시지
+TIME=시각
+MAX_ROW_COUNT=최대 행수

@@ -3,6 +3,13 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@include file="database.jsp"%>
+<fmt:bundle basename="chat">
+	<fmt:message var="title" key="TITLE" />
+	<fmt:message var="nickname" key="NICKNAME" />
+	<fmt:message var="message" key="MESSAGE" />
+	<fmt:message var="time" key="TIME" />
+	<fmt:message var="maxRowCount" key="MAX_ROW_COUNT" />
+</fmt:bundle>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +17,7 @@
 <!--
 <meta http-equiv="refresh" content="10">
 -->
-<title>Chat</title>
+<title>${chat}</title>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
 <script>
 	var emptyChk = function() {
@@ -90,14 +97,14 @@ table td,table th {
 	<form method="post" action="chat.jsp">
 		<table>
 			<tr>
-				<td>Nickname:</td>
+				<td>${nickname}:</td>
 				<%
 					out.println("<td>" + nickname + "</td>");
 				%>
 				<td></td>
 			</tr>
 			<tr>
-				<td>Message:</td>
+				<td>${message}:</td>
 				<td><input type="text" name="message" id="message" size=100 /></td>
 				<td><input type="submit" value="Send" onClick="emptyChk()" /></td>
 			</tr>
@@ -113,9 +120,9 @@ table td,table th {
 
 	<table border="1">
 		<tr>
-			<th width="200">Time</th>
-			<th width="100">User ID</th>
-			<th width="700">Message</th>
+			<th width="200">${time}</th>
+			<th width="100">${nickname}</th>
+			<th width="700">${message}</th>
 		</tr>
 		<%
 			rs = stmt
@@ -139,7 +146,7 @@ table td,table th {
 			con.close();
 		%>
 	</table><br>
-	Row Count:
+	${maxRowCount}:
 	<%
 		out.println("<input type=\"text\" name=\"row_count\" id=\"row_count\" value=\""
 				+ rowCount + "\"/>");
