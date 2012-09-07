@@ -17,7 +17,7 @@
 <!--
 <meta http-equiv="refresh" content="10">
 -->
-<title>${chat}</title>
+<title>${title}</title>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
 <script>
 	var emptyChk = function() {
