@@ -1,5 +1,7 @@
 <%@page contentType="text/html; charset=utf8"%>
 <%@page import="java.sql.*"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@include file="database.jsp"%>
 <!DOCTYPE html>
 <html>
@@ -120,12 +122,16 @@ table td,table th {
 					.executeQuery("select * from tb_chat_message cm, tb_user u where cm.user_seq = u.seq order by cm.seq desc limit "
 							+ rowCount);
 			while (rs.next()) {
-				Timestamp createdTime = rs.getTimestamp("created_time");
+				java.util.Date createdTime = rs.getTimestamp("created_time");
 				String nicknameInHistory = rs.getString("nickname");
 				String messageInHistory = rs.getString("message");
 
 				out.print("<tr><td>");
-				out.print(String.format("%TF %TT", createdTime, createdTime));
+				//out.print(String.format("%TF %TT", createdTime, createdTime));
+		%>
+		<c:set var="createdTime" value="<%= createdTime %>" />
+		<fmt:formatDate value="${createdTime}" type="both" pattern="yyyy-MM-dd HH:mm:ss" />
+		<%
 				out.print("</td><td>" + nicknameInHistory + "</td><td>"
 						+ messageInHistory + "</td></tr>");
 			}
