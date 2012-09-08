@@ -30,3 +30,5 @@ insert into tb_user (user_id, password, nickname, join_date) values ('j.x.tic@ho
 insert into tb_user (user_id, password, nickname, join_date) values ('huiyuan989@msn.cn', '1234', 'kelly', now());
 insert into tb_user (user_id, password, nickname, join_date) values ('Minjw0@nate.com', '1234', 'min ji won', now());
 insert into tb_user (user_id, password, nickname, join_date) values ('mateushenriquebrum@gmail.com', '1234', 'mateusbrum', now());
+insert into tb_user (user_id, password, nickname, join_date) values ('enosent7@gmail.com', '1234', 'enosent7', now());
+insert into tb_user (user_id, password, nickname, join_date) values ('oasishun@gmail.com', '1234', 'oasishun', now());
