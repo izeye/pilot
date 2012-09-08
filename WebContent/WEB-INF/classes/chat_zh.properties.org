@@ -1,0 +1,5 @@
+TITLE=CTB 聊天
+NICKNAME=暱稱
+MESSAGE=消息
+TIME=時間
+MAX_ROW_COUNT=最大行数
