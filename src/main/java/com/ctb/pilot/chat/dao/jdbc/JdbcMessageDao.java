@@ -4,6 +4,7 @@ import static com.ctb.pilot.common.DbConstants.CONNECTION_URL;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -72,16 +73,17 @@ public class JdbcMessageDao implements MessageDao {
 	@Override
 	public void insertMessage(int userSequence, String message) {
 		Connection con = null;
-		Statement stmt = null;
+		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		try {
 			Class.forName("org.gjt.mm.mysql.Driver");
 
 			con = DriverManager.getConnection(CONNECTION_URL);
-			stmt = con.createStatement();
-
-			stmt.executeUpdate("insert into tb_chat_message (created_time, user_seq, message) values (now(), '"
-					+ userSequence + "', '" + message + "')");
+			stmt = con
+					.prepareStatement("insert into tb_chat_message (created_time, user_seq, message) values (now(), ?, ?)");
+			stmt.setInt(1, userSequence);
+			stmt.setString(2, message);
+			stmt.executeUpdate();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
