@@ -1,1 +1,1 @@
-Home
+<a href="../join/join.jsp">Join</a>

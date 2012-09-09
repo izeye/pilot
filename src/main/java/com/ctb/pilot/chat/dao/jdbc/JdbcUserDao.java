@@ -4,6 +4,7 @@ import static com.ctb.pilot.common.DbConstants.CONNECTION_URL;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -75,4 +76,49 @@ public class JdbcUserDao implements UserDao {
 	public User getUserBySequence(int sequence) {
 		return getUserBySql("select * from tb_user where seq = " + sequence);
 	}
+
+	@Override
+	public void join(String userId, String password, String nickname) {
+		Connection con = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try {
+			Class.forName("org.gjt.mm.mysql.Driver");
+
+			con = DriverManager.getConnection(CONNECTION_URL);
+			stmt = con
+					.prepareStatement("insert into tb_user (user_id, password, nickname, join_date) values (?, ?, ?, now())");
+			stmt.setString(1, userId);
+			stmt.setString(2, password);
+			stmt.setString(3, nickname);
+			stmt.executeUpdate();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
 }

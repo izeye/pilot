@@ -29,4 +29,12 @@ public class JdbcUserDaoTest {
 		System.out.println(user);
 	}
 
+	@Test
+	public void test() {
+		String userId = "jsp@naver.com";
+		String password = "1234";
+		String nickname = "jsp";
+		userDao.join(userId, password, nickname);
+	}
+
 }

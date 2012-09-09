@@ -1,5 +1,4 @@
 <%@page contentType="text/html; charset=utf8"%>
-<%@page import="java.sql.*"%>
 <%@page import="com.ctb.pilot.chat.model.*,com.ctb.pilot.chat.dao.*,com.ctb.pilot.chat.dao.jdbc.*"%>
 <%
 	String userId = request.getParameter("user_id");
