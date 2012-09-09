@@ -15,5 +15,6 @@
 	Cookie cookie = new Cookie("seq", String.valueOf(userDao));
 	cookie.setMaxAge(60 * 60 * 24 * 365);
 	response.addCookie(cookie);
+	
+	response.sendRedirect("../chat/chat.jsp");
 %>
-<jsp:forward page="../chat/chat.jsp" />
