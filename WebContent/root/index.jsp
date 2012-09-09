@@ -14,11 +14,13 @@
 					</p>
 				</td>
 				<td>
+				<!--
 					<form action="login_process.jsp" method="post">
 						User ID (Email): <input type="text" name="user_id"/><br>
 						Password: <input type="password" name="password"/>
 						<input type="submit" value="Login" />
 					</form>
+				-->
 				</td>
 			</tr>
 		</table>
