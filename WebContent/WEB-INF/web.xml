@@ -9,4 +9,21 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+  <filter>
+  	<filter-name>access-log-filter</filter-name>
+  	<filter-class>com.ctb.pilot.common.filter.log.AccessLogFilter</filter-class>
+  	<init-param>
+  		<param-name>REQUEST_LOG_FILENAME</param-name>
+  		<param-value>request.log</param-value>
+  	</init-param>
+  	<init-param>
+  		<param-name>RESPONSE_LOG_FILENAME</param-name>
+  		<param-value>response.log</param-value>
+  	</init-param>
+  </filter>
+  <filter-mapping>
+  	<filter-name>access-log-filter</filter-name>
+  	<url-pattern>*</url-pattern>
+  </filter-mapping>
 </web-app>
