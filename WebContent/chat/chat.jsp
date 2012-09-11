@@ -31,33 +31,6 @@
 		Integer userSequence = (Integer) session.getAttribute("seq");
 		String nickname = (String) session.getAttribute("nickname");
 
-		if (userSequence == null) {
-			Cookie[] cookies = request.getCookies();
-			if (cookies != null) {
-				for (Cookie cookie : cookies) {
-					String cookieName = cookie.getName();
-					if (cookieName.equals("seq")) {
-						UserDao userDao = new JdbcUserDao();
-						String cookieValue = cookie.getValue();
-						userSequence = Integer.valueOf(cookieValue);
-						User user = userDao.getUserBySequence(userSequence);
-						nickname = user.getNickname();
-						// TODO:
-						session.setAttribute("seq", userSequence);
-						session.setAttribute("nickname", nickname);
-						break;
-					}
-				}
-			}
-		}
-		//out.println("userSequence: " + userSequence);
-		//out.println("nickname: " + nickname);
-
-		if (userSequence == null) {
-			response.sendRedirect("../login/login.html");
-			return;
-		}
-
 		String rowCount = request.getParameter("row_count");
 		if (rowCount == null || rowCount.isEmpty()) {
 			rowCount = "100";

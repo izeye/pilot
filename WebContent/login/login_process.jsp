@@ -11,8 +11,9 @@
 
 	session.setAttribute("seq", sequence);
 	session.setAttribute("nickname", nickname);
-	Cookie cookie = new Cookie("seq", String.valueOf(userDao));
+	Cookie cookie = new Cookie("seq", String.valueOf(sequence));
 	cookie.setMaxAge(60 * 60 * 24 * 365);
+	cookie.setPath("/");
 	response.addCookie(cookie);
 	
 	response.sendRedirect("../chat/chat.jsp");
