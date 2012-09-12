@@ -9,5 +9,7 @@ public interface UserDao {
 	User getUserBySequence(int sequence);
 
 	void join(String userId, String password, String nickname);
+	
+	void update(User user);
 
 }

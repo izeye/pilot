@@ -121,4 +121,52 @@ public class JdbcUserDao implements UserDao {
 		}
 	}
 
+	@Override
+	public void update(User user) {
+		int sequence = user.getSequence();
+		String password = user.getPassword();
+		String nickname = user.getNickname();
+		
+		Connection con = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try {
+			Class.forName("org.gjt.mm.mysql.Driver");
+
+			con = DriverManager.getConnection(CONNECTION_URL);
+			stmt = con
+					.prepareStatement("update tb_user set password=?, nickname=? where seq=?");
+			stmt.setString(1, password);
+			stmt.setString(2, nickname);
+			stmt.setInt(3, sequence);
+			stmt.executeUpdate();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
 }

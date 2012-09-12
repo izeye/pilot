@@ -7,6 +7,9 @@ public class HttpUtils {
 
 	public static String getCookie(HttpServletRequest request, String cookieName) {
 		Cookie[] cookies = request.getCookies();
+		if (cookies == null) {
+			return null;
+		}
 		for (Cookie cookie : cookies) {
 			String name = cookie.getName();
 			if (name.equals(cookieName)) {

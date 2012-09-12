@@ -20,16 +20,19 @@
 <meta http-equiv="refresh" content="10">
 -->
 <title>${title}</title>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
 <script src="chat.js"></script>
 <link rel="stylesheet" type="text/css" href="../common/css/common.css" />
 </head>
 <body>
 	<%
+		User user = (User) session.getAttribute("user");
+	
 		request.setCharacterEncoding("utf8");
 
-		Integer userSequence = (Integer) session.getAttribute("seq");
-		String nickname = (String) session.getAttribute("nickname");
+		int userSequence = user.getSequence();
+		String nickname = user.getNickname();
 
 		String rowCount = request.getParameter("row_count");
 		if (rowCount == null || rowCount.isEmpty()) {

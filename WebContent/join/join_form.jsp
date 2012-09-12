@@ -1,11 +1,11 @@
 <html>
 	<head>
 		<title>Join</title>
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
 		<script src="join.js"></script>
 	</head>
 	<body>
-		<form id = "join" name="join" action="join.jsp">
+		<form id="join" name="join" action="join.jsp">
 			<table>
 				<tr>
 					<td>User ID (Email) :</td><td> <input type="text" id="user_id" name="user_id"/></td>

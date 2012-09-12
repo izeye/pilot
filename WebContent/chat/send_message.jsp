@@ -1,10 +1,12 @@
 <%@page import="com.ctb.pilot.chat.model.*,com.ctb.pilot.chat.dao.*,com.ctb.pilot.chat.dao.jdbc.*"%>
 <%
-	Integer userSequence = (Integer) session.getAttribute("seq");
+	User user = (User) session.getAttribute("user");
+
+	int userSequence = user.getSequence();
 	String message = request.getParameter("message");
 	
-	if (userSequence == null || message == null || message.isEmpty()) {
-		throw new Exception("Some field is null or empty.");
+	if (message == null || message.isEmpty()) {
+		throw new Exception("Message is null or empty.");
 	}
 
 	MessageDao messageDao = new JdbcMessageDao();

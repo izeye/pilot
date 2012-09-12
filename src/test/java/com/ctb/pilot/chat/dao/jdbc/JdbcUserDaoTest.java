@@ -30,11 +30,25 @@ public class JdbcUserDaoTest {
 	}
 
 	@Test
-	public void test() {
+	public void testJoin() {
 		String userId = "jsp@naver.com";
 		String password = "1234";
 		String nickname = "jsp";
 		userDao.join(userId, password, nickname);
+	}
+
+	@Test
+	public void testUpdate() {
+		int sequence = 1;
+		String password = "12345";
+		String nickname = "Johnny";
+
+		User user = new User();
+		user.setSequence(sequence);
+		user.setPassword(password);
+		user.setNickname(nickname);
+
+		userDao.update(user);
 	}
 
 }

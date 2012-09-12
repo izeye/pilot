@@ -33,6 +33,7 @@
   </filter>
   <filter-mapping>
   	<filter-name>login-check-filter</filter-name>
-  	<url-pattern>/chat/chat.jsp</url-pattern>
+  	<url-pattern>/chat/*</url-pattern>
+  	<url-pattern>/user/*</url-pattern>
   </filter-mapping>
 </web-app>
