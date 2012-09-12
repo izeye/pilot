@@ -40,6 +40,7 @@ public class LoginCheckFilter implements Filter {
 			}
 			Integer userSequence = Integer.valueOf(sequenceInCookie);
 			User user = userDao.getUserBySequence(userSequence);
+			System.out.println("user: " + user);
 			session.setAttribute("user", user);
 		}
 		chain.doFilter(request, response);
