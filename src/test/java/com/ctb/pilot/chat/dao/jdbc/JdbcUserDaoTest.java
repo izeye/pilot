@@ -1,5 +1,7 @@
 package com.ctb.pilot.chat.dao.jdbc;
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -49,6 +51,12 @@ public class JdbcUserDaoTest {
 		user.setNickname(nickname);
 
 		userDao.update(user);
+	}
+
+	@Test
+	public void testGetAllUsers() {
+		List<User> allUsers = userDao.getAllUsers();
+		System.out.println(allUsers);
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.ctb.pilot.chat.dao;
 
+import java.util.List;
+
 import com.ctb.pilot.chat.model.User;
 
 public interface UserDao {
@@ -11,5 +13,7 @@ public interface UserDao {
 	void join(String userId, String password, String nickname);
 	
 	void update(User user);
+	
+	List<User> getAllUsers();
 
 }
