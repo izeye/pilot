@@ -39,7 +39,7 @@
 
 		MessageDao messageDao = new JdbcMessageDao();
 	%>
-	<form method="post" action="send_message.jsp">
+	<form method="post" action="send_message.jsp" name="chat" id="chat">
 		<table>
 			<tr>
 				<td>${nickname}:</td>
@@ -51,7 +51,7 @@
 			<tr>
 				<td>${message}:</td>
 				<td><input type="text" name="message" id="message" size=100 /></td>
-				<td><input type="submit" value="Send" onClick="emptyChk()" /></td>
+				<td><input type="button" value="Send" onClick="emptyChk()" /></td>
 			</tr>
 		</table>
 	</form>
