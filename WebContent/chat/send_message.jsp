@@ -2,6 +2,8 @@
 <%
 	User user = (User) session.getAttribute("user");
 
+	request.setCharacterEncoding("utf8");
+
 	int userSequence = user.getSequence();
 	String message = request.getParameter("message");
 	
