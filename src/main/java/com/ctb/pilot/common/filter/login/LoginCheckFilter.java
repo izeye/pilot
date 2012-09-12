@@ -31,16 +31,15 @@ public class LoginCheckFilter implements Filter {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 		HttpSession session = httpRequest.getSession();
-		Object sequence = session.getAttribute("seq");
-		if (sequence == null) {
+		User user = (User) session.getAttribute("user");
+		if (user == null) {
 			String sequenceInCookie = HttpUtils.getCookie(httpRequest, "seq");
 			if (sequenceInCookie == null) {
 				httpResponse.sendRedirect("/pilot/login/login.html");
 				return;
 			}
 			Integer userSequence = Integer.valueOf(sequenceInCookie);
-			User user = userDao.getUserBySequence(userSequence);
-			System.out.println("user: " + user);
+			user = userDao.getUserBySequence(userSequence);
 			session.setAttribute("user", user);
 		}
 		chain.doFilter(request, response);
