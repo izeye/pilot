@@ -1,21 +1,21 @@
 GRANT ALL PRIVILEGES ON db_ctb.* TO 'ctb'@'localhost' IDENTIFIED BY 'cTb0409';
 
-create database db_ctb;
+create database db_ctb character set utf8;
 
 create table tb_chat_message (
 	seq INT AUTO_INCREMENT,
-	created_time DATETIME,
-	user_seq INT,
-	message VARCHAR(1000),
+	created_time DATETIME not null,
+	user_seq INT not null,
+	message VARCHAR(1000) not null,
 	PRIMARY KEY (seq)
 );
 
 create table tb_user (
 	seq INT AUTO_INCREMENT,
-	user_id VARCHAR(100),
-	password VARCHAR(100),
-	nickname VARCHAR(100),
-	join_date DATETIME,
+	user_id VARCHAR(100) not null,
+	password VARCHAR(100) not null,
+	nickname VARCHAR(100) not null,
+	join_date DATETIME not null,
 	del_yn INT,
 	PRIMARY KEY (seq),
 	UNIQUE KEY (user_id),

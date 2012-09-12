@@ -35,12 +35,10 @@
 		if (rowCount == null || rowCount.isEmpty()) {
 			rowCount = "100";
 		}
-		String message = request.getParameter("message");
-		//out.println("message: " + message);
 
 		MessageDao messageDao = new JdbcMessageDao();
 	%>
-	<form method="post" action="chat.jsp">
+	<form method="post" action="send_message.jsp">
 		<table>
 			<tr>
 				<td>${nickname}:</td>
@@ -57,12 +55,6 @@
 		</table>
 	</form>
 	<br>
-	<%
-		if (message != null && !message.isEmpty()) {
-			messageDao.insertMessage(userSequence, message);
-		}
-	%>
-
 	<table border="1">
 		<tr>
 			<th width="200">${time}</th>

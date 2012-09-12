@@ -1,1 +1,1 @@
-<a href="/pilot/join/join.jsp">Join</a>
+<a href="/pilot/join/join_form.jsp">Join</a>
