@@ -42,6 +42,7 @@ public class LoginCheckFilter implements Filter {
 			user = userDao.getUserBySequence(userSequence);
 			session.setAttribute("user", user);
 		}
+		System.out.println("user: " + user);
 		chain.doFilter(request, response);
 	}
 
