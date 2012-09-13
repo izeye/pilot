@@ -128,7 +128,7 @@ public class JdbcUserDao implements UserDao {
 		int sequence = user.getSequence();
 		String password = user.getPassword();
 		String nickname = user.getNickname();
-		
+
 		Connection con = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -174,15 +174,18 @@ public class JdbcUserDao implements UserDao {
 	@Override
 	public List<User> getAllUsers() {
 		List<User> users = new ArrayList<User>();
-		
+
 		Connection con = null;
 		Statement stmt = null;
 		ResultSet rs = null;
 
 		try {
 			Class.forName("org.gjt.mm.mysql.Driver");
+			// con = DriverManager.getConnection(CONNECTION_URL);
 
-			con = DriverManager.getConnection(CONNECTION_URL);
+			Class.forName("org.apache.commons.dbcp.PoolingDriver");
+			con = DriverManager
+					.getConnection("jdbc:apache:commons:dbcp:/ctb_db_pool");
 			stmt = con.createStatement();
 
 			rs = stmt.executeQuery("select * from tb_user");

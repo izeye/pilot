@@ -36,4 +36,9 @@
   	<url-pattern>/chat/*</url-pattern>
   	<url-pattern>/user/*</url-pattern>
   </filter-mapping>
+  
+  <error-page>
+  	<error-code>500</error-code>
+  	<location>/pilot/common/error.jsp</location>
+  </error-page>
 </web-app>

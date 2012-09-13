@@ -24,8 +24,11 @@ public class JdbcMessageDao implements MessageDao {
 		List<Message> messageList = new ArrayList<Message>();
 		try {
 			Class.forName("org.gjt.mm.mysql.Driver");
+			// con = DriverManager.getConnection(CONNECTION_URL);
 
-			con = DriverManager.getConnection(CONNECTION_URL);
+			Class.forName("org.apache.commons.dbcp.PoolingDriver");
+			con = DriverManager
+					.getConnection("jdbc:apache:commons:dbcp:/ctb_db_pool");
 			stmt = con.createStatement();
 
 			rs = stmt
