@@ -42,7 +42,7 @@ public class ChatServlet extends HttpServlet {
 		ServletContext servletContext = req.getServletContext();
 		String contextPath = servletContext.getContextPath();
 		System.out.println("contextPath: " + contextPath);
-		if (contextPath.equals("/")) {
+		if (!contextPath.equals("/pilot")) {
 			viewUri = "/pilot" + viewUri;
 		}
 
