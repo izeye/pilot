@@ -10,6 +10,15 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
+  <servlet>
+  	<servlet-name>chat-servlet</servlet-name>
+  	<servlet-class>com.ctb.pilot.chat.service.ChatServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>chat-servlet</servlet-name>
+  	<url-pattern>/chat</url-pattern>
+  </servlet-mapping>
+  
   <filter>
   	<filter-name>access-log-filter</filter-name>
   	<filter-class>com.ctb.pilot.common.filter.log.AccessLogFilter</filter-class>
