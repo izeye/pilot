@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -35,8 +36,17 @@ public class ChatServlet extends HttpServlet {
 		req.setAttribute("messages", messages);
 		req.setAttribute("maxRowCount", rowCount);
 
-		RequestDispatcher dispatcher = req
-				.getRequestDispatcher("/chat/chat_view.jsp");
+		String viewUri = "/chat/chat_view.jsp";
+
+		// FIXME: Handle a deploy problem temporarily.
+		ServletContext servletContext = req.getServletContext();
+		String contextPath = servletContext.getContextPath();
+		System.out.println("contextPath: " + contextPath);
+		if (contextPath.equals("/")) {
+			viewUri = "/pilot" + viewUri;
+		}
+
+		RequestDispatcher dispatcher = req.getRequestDispatcher(viewUri);
 		dispatcher.forward(req, resp);
 	}
 
