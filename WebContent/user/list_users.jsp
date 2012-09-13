@@ -6,21 +6,7 @@
 <%
 	UserDao userDao = new JdbcUserDao();
 	List<User> users = userDao.getAllUsers();
+	request.setAttribute("users", users);
+	RequestDispatcher dispatcher = request.getRequestDispatcher("list_users_view.jsp");
+	dispatcher.forward(request, response);
 %>
-<html>
-	<head>
-		<title>User List</title>
-	</head>
-	<body>
-		<h1>User List</h1>
-		<c:set var="users" value="<%= users %>"></c:set>
-		<table border=1>
-			<c:forEach var="user" items="${users}">
-				<tr>
-					<td>${user.nickname}</td>
-					<td><fmt:formatDate value="${user.joinDate}" type="both" pattern="yyyy-MM-dd HH:mm:ss" /></td>
-				</tr>
-			</c:forEach>
-		</table>
-	</body>
-</html>
