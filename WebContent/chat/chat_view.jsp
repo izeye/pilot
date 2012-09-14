@@ -57,7 +57,14 @@
 		<a href="chat?page_no=${requestScope.pageNo - 1}">Prev</a>
 	</c:if>
 	<c:forEach var="page" begin="1" end="${requestScope.pageCount}">
-		<a href="chat?page_no=${page}">${page}</a>
+		<a href="chat?page_no=${page}">
+			<c:if test="${page == requestScope.pageNo}">
+				<b>${page}</b>
+			</c:if>
+			<c:if test="${page != requestScope.pageNo}">
+				${page}
+			</c:if>
+		</a>
 	</c:forEach>
 	<c:if test="${requestScope.pageNo != requestScope.pageCount}">
 		<a href="chat?page_no=${requestScope.pageNo + 1}">Next</a>
