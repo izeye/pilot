@@ -16,5 +16,5 @@
 	cookie.setPath("/");
 	response.addCookie(cookie);
 	
-	response.sendRedirect("../chat/chat.jsp");
+	response.sendRedirect("../chat");
 %>
