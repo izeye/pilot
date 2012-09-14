@@ -118,10 +118,11 @@ public class JdbcMessageDao implements MessageDao {
 
 	@Override
 	public long getAllMessageCount() {
+		Connection con = null;
 		Statement stmt = null;
 		ResultSet rs = null;
 		try {
-			Connection con = DriverManager
+			con = DriverManager
 					.getConnection("jdbc:apache:commons:dbcp:/ctb_db_pool");
 			stmt = con.createStatement();
 
@@ -142,6 +143,13 @@ public class JdbcMessageDao implements MessageDao {
 			if (stmt != null) {
 				try {
 					stmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
