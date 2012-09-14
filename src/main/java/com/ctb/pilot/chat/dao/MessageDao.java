@@ -6,8 +6,10 @@ import com.ctb.pilot.chat.model.Message;
 
 public interface MessageDao {
 
-	List<Message> getMessagesWithRowCount(int rowCount);
-	
+	List<Message> getMessages(int pageSize, int pageNo);
+
 	void insertMessage(int userSequence, String message);
+
+	long getAllMessageCount();
 
 }

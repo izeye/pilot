@@ -53,7 +53,18 @@
 			</tr>
 		</c:forEach>
 	</table>
+	<c:if test="${requestScope.pageNo != 1 }">
+		<a href="chat?page_no=${requestScope.pageNo - 1}">Prev</a>
+	</c:if>
+	<c:forEach var="page" begin="1" end="${requestScope.pageCount}">
+		<a href="chat?page_no=${page}">${page}</a>
+	</c:forEach>
+	<c:if test="${requestScope.pageNo != requestScope.pageCount}">
+		<a href="chat?page_no=${requestScope.pageNo + 1}">Next</a>
+	</c:if>
+	<!--
 	<br> ${maxRowCount}:
 	<input type="text" name="row_count" id="row_count" value="${requestScope.maxRowCount}"/>
+	-->
 </body>
 </html>

@@ -17,10 +17,10 @@ public class JdbcMessageDaoTest {
 	}
 
 	@Test
-	public void testGetMessagesWithRowCount() {
-		int rowCount = 100;
-		List<Message> messageList = messageDao
-				.getMessagesWithRowCount(rowCount);
+	public void testGetMessages() {
+		int pageSize = 20;
+		int pageNo = 1;
+		List<Message> messageList = messageDao.getMessages(pageSize, pageNo);
 		System.out.println(messageList);
 	}
 
@@ -30,4 +30,11 @@ public class JdbcMessageDaoTest {
 		String message = "This is a test.";
 		messageDao.insertMessage(userSequence, message);
 	}
+
+	@Test
+	public void testGetAllMessageCount() {
+		long allMessageCount = messageDao.getAllMessageCount();
+		System.out.println(allMessageCount);
+	}
+
 }

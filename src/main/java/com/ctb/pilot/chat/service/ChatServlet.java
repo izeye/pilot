@@ -23,6 +23,8 @@ public class ChatServlet extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private static final int PAGE_SIZE = 20;
+
 	private MessageDao messageDao = new JdbcMessageDao();
 
 	@Override
@@ -31,10 +33,21 @@ public class ChatServlet extends HttpServlet {
 		String requestURI = req.getRequestURI();
 		System.out.println("In doGet(), requestURI: " + requestURI);
 
-		int rowCount = 100;
-		List<Message> messages = messageDao.getMessagesWithRowCount(rowCount);
+		String pageNoAsString = req.getParameter("page_no");
+		int pageNo;
+		if (pageNoAsString == null) {
+			pageNo = 1;
+		} else {
+			pageNo = Integer.parseInt(pageNoAsString);
+		}
+
+		long total = messageDao.getAllMessageCount();
+		long pageCount = total / PAGE_SIZE + (total % PAGE_SIZE != 0 ? 1 : 0);
+
+		List<Message> messages = messageDao.getMessages(PAGE_SIZE, pageNo);
 		req.setAttribute("messages", messages);
-		req.setAttribute("maxRowCount", rowCount);
+		req.setAttribute("pageNo", pageNo);
+		req.setAttribute("pageCount", pageCount);
 
 		String viewUri = "/chat/chat_view.jsp";
 
