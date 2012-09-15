@@ -17,9 +17,10 @@
 		</style>
 	</head>
 	<body>
+		<h3>World Clock</h3>
 		<c:set var="now" value="<%= new Date() %>" />
 		<c:set var="timeZoneIds" value="<%= TimeZone.getAvailableIDs() %>" />
-		<table border="1">
+		<table class="data" border="1">
 			<tr><th>Time Zone ID</th><th>Time</th>
 		<c:forEach var="timeZoneId" items="${timeZoneIds}">
 			<tr>

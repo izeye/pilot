@@ -2,10 +2,11 @@
 <head>
 <title>Edit Profile</title>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-<script src="edit_profile.js"></script>
+<script src="/services/user/profile/edit_profile.js"></script>
 </head>
 <body>
-	<form id="edit_profile" name="edit_profile" action="edit_profile.jsp">
+	<h3>Edit Profile</h3>
+	<form id="edit_profile" name="edit_profile" action="/services/user/profile/edit_profile.jsp">
 		<table>
 			<tr>
 				<td>User ID (Email) :</td>

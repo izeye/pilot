@@ -7,6 +7,6 @@
 	UserDao userDao = new JdbcUserDao();
 	List<User> users = userDao.getAllUsers();
 	request.setAttribute("users", users);
-	RequestDispatcher dispatcher = request.getRequestDispatcher("list_users_view.jsp");
+	RequestDispatcher dispatcher = request.getRequestDispatcher("/common/web_template.jsp?body_path=/services/admin/user/list_users_view.jsp");
 	dispatcher.forward(request, response);
 %>

@@ -48,7 +48,7 @@ public class ChatServlet extends HttpServlet {
 		req.setAttribute("pageNo", pageNo);
 		req.setAttribute("pageCount", pageCount);
 
-		String viewUri = "/services/chat/chat_view.jsp";
+		String viewUri = "/common/web_template.jsp?body_path=/services/chat/chat_view.jsp";
 		RequestDispatcher dispatcher = req.getRequestDispatcher(viewUri);
 		dispatcher.forward(req, resp);
 	}

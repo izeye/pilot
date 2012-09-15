@@ -6,7 +6,7 @@
 		<title>User List</title>
 	</head>
 	<body>
-		<h1>User List</h1>
+		<h3>User List</h3>
 		<table border=1>
 			<c:forEach var="user" items="${requestScope.users}">
 				<tr>

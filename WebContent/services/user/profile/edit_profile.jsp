@@ -18,5 +18,5 @@
 	
 	UserDao userDao = new JdbcUserDao();
 	userDao.update(user);
-	response.sendRedirect("edit_profile_result.jsp");
+	response.sendRedirect("/common/web_template.jsp?body_path=/services/user/profile/edit_profile_result.jsp");
 %>

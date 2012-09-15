@@ -12,6 +12,6 @@
 	UserDao userDao = new JdbcUserDao();
 	userDao.join(userId, password, nickname);
 	
-	response.sendRedirect("join_result.jsp");
+	response.sendRedirect("/common/web_template.jsp?body_path=/services/user/join/join_result.jsp");
 %>
 Completed!

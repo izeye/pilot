@@ -23,6 +23,7 @@
 	href="/common/css/common.css" />
 </head>
 <body>
+	<h3>Chat</h3>
 	<form method="post" action="/services/chat" name="chat" id="chat">
 		<table>
 			<tr>
