@@ -39,7 +39,7 @@
 		</table>
 	</form>
 	<br>
-	<table border="1">
+	<table class="data" border="1">
 		<tr>
 			<th width="200">${time}</th>
 			<th width="100">${nickname}</th>
@@ -59,12 +59,15 @@
 		<a href="/services/chat?page_no=${requestScope.pageNo - 1}">Prev</a>
 	</c:if>
 	<c:forEach var="page" begin="1" end="${requestScope.pageCount}">
-		<a href="/services/chat?page_no=${page}"> <c:if
-				test="${page == requestScope.pageNo}">
-				<b>${page}</b>
-			</c:if> <c:if test="${page != requestScope.pageNo}">
-				${page}
-			</c:if>
+		<a href="/services/chat?page_no=${page}">
+			<c:choose>
+				<c:when test="${page == requestScope.pageNo}">
+					<b>${page}</b>
+				</c:when>
+				<c:otherwise>
+					${page}
+				</c:otherwise>
+			</c:choose>
 		</a>
 	</c:forEach>
 	<c:if test="${requestScope.pageNo != requestScope.pageCount}">
