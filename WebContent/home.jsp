@@ -1,6 +1,6 @@
 <h3>Home</h3>
-<a href="/pilot/join/join_form.jsp">Join</a>
+<a href="/services/user/join/join_form.jsp">Join</a>
 <br>
-<a href="/pilot/user/edit_profile_form.jsp">Edit Profile</a>
+<a href="/services/user/profile/edit_profile_form.jsp">Edit Profile</a>
 <br>
-<a href="/pilot/user/list_users.jsp">Users</a>
+<a href="/services/admin/user/list_users.jsp">Users</a>

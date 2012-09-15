@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -49,16 +48,7 @@ public class ChatServlet extends HttpServlet {
 		req.setAttribute("pageNo", pageNo);
 		req.setAttribute("pageCount", pageCount);
 
-		String viewUri = "/chat/chat_view.jsp";
-
-		// FIXME: Handle a deploy problem temporarily.
-		ServletContext servletContext = req.getServletContext();
-		String contextPath = servletContext.getContextPath();
-		System.out.println("contextPath: " + contextPath);
-		if (!contextPath.equals("/pilot")) {
-			viewUri = "/pilot" + viewUri;
-		}
-
+		String viewUri = "/services/chat/chat_view.jsp";
 		RequestDispatcher dispatcher = req.getRequestDispatcher(viewUri);
 		dispatcher.forward(req, resp);
 	}
@@ -81,7 +71,7 @@ public class ChatServlet extends HttpServlet {
 
 		messageDao.insertMessage(userSequence, message);
 
-		resp.sendRedirect("chat");
+		resp.sendRedirect("/services/chat");
 	}
 
 }

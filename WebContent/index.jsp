@@ -8,9 +8,9 @@
 				<td width="70%">
 					<h1>CTB</h1>
 					<p>
-						<a href="home.jsp" target="content">Home</a>
-						<a href="pilot.jsp" target="content">Pilot</a>
-						<a href="about_us.jsp" target="content">About Us</a>
+						<a href="/home.jsp" target="content">Home</a>
+						<a href="/pilot.jsp" target="content">Pilot</a>
+						<a href="/about_us.jsp" target="content">About Us</a>
 					</p>
 				</td>
 				<!--
