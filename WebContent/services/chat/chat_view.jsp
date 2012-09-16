@@ -19,12 +19,18 @@
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
 <script src="/services/chat/chat.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="/common/css/common.css" />
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("table#chat tr:even").css("background-color", "#F4F4F8");
+		$("table#chat tr:odd").css("background-color", "#FFFFFF");
+	});
+</script>
+<link rel="stylesheet" type="text/css" href="/common/css/common.css" />
 </head>
 <body>
 	<h3>Chat</h3>
-	<form method="post" action="/services/chat" name="chat" id="chat" onsubmit="return emptyChk()">
+	<form method="post" action="/services/chat" name="chat" id="chat"
+		onsubmit="return emptyChk()">
 		<table>
 			<tr>
 				<td>${nickname}:</td>
@@ -33,13 +39,13 @@
 			</tr>
 			<tr>
 				<td>${message}:</td>
-				<td><input type="text" name="message" id="message" size=100  /></td>
+				<td><input type="text" name="message" id="message" size=100 /></td>
 				<td><input type="submit" value="Send" /></td>
 			</tr>
 		</table>
 	</form>
 	<br>
-	<table class="data" border="1">
+	<table class="data" border="1" id="chat">
 		<tr>
 			<th width="200">${time}</th>
 			<th width="100">${nickname}</th>
@@ -59,8 +65,7 @@
 		<a href="/services/chat?page_no=${requestScope.pageNo - 1}">Prev</a>
 	</c:if>
 	<c:forEach var="page" begin="1" end="${requestScope.pageCount}">
-		<a href="/services/chat?page_no=${page}">
-			<c:choose>
+		<a href="/services/chat?page_no=${page}"> <c:choose>
 				<c:when test="${page == requestScope.pageNo}">
 					<b>${page}</b>
 				</c:when>
