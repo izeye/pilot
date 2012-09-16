@@ -24,7 +24,7 @@
 </head>
 <body>
 	<h3>Chat</h3>
-	<form method="post" action="/services/chat" name="chat" id="chat">
+	<form method="post" action="/services/chat" name="chat" id="chat" onsubmit="return emptyChk()">
 		<table>
 			<tr>
 				<td>${nickname}:</td>
@@ -33,8 +33,8 @@
 			</tr>
 			<tr>
 				<td>${message}:</td>
-				<td><input type="text" name="message" id="message" size=100 /></td>
-				<td><input type="button" value="Send" onClick="emptyChk()" /></td>
+				<td><input type="text" name="message" id="message" size=100  /></td>
+				<td><input type="submit" value="Send" /></td>
 			</tr>
 		</table>
 	</form>

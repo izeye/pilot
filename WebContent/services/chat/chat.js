@@ -3,7 +3,6 @@ var emptyChk = function() {
 		alert("Empty field!");
 		return false;
 	}
-	document.chat.submit();
 };
 
 $(function() {
