@@ -27,6 +27,10 @@
 				<td><input type="text" id="nickname" name="nickname" /></td>
 			</tr>
 			<tr>
+				<td>Image :</td>
+				<td><input type="file" id="imageFile" name="imageFile"/></td>
+			</tr>
+			<tr>
 				<td><input type="reset" value="Clear" /></td>
 				<td><input type="button" value="Join"
 					onClick="checkValidation()" /></td>

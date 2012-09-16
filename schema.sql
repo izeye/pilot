@@ -15,12 +15,14 @@ create table tb_user (
 	user_id VARCHAR(100) not null,
 	password VARCHAR(100) not null,
 	nickname VARCHAR(100) not null,
+	image    BLOB,
 	join_date DATETIME not null,
 	del_yn INT,
 	PRIMARY KEY (seq),
 	UNIQUE KEY (user_id),
 	UNIQUE KEY (nickname)
 );
+
 
 insert into tb_user (user_id, password, nickname, join_date) values ('izeye@naver.com', '1234', 'izeye', now());
 insert into tb_user (user_id, password, nickname, join_date) values ('icpu@naver.com', '1234', 'icpu', now());
