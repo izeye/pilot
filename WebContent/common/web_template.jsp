@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<title>CTB</title>
+		<script src="/common/js/common.js"></script>
 	</head>
 	<body>
 		<h1>CTB</h1>

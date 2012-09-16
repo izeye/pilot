@@ -35,7 +35,7 @@ public class LoginCheckFilter implements Filter {
 		if (user == null) {
 			String sequenceInCookie = HttpUtils.getCookie(httpRequest, "seq");
 			if (sequenceInCookie == null) {
-				httpResponse.sendRedirect("/services/user/login/login.jsp");
+				httpResponse.sendRedirect("/common/web_template.jsp?body_path=/services/user/login/login_form.jsp");
 				return;
 			}
 			Integer userSequence = Integer.valueOf(sequenceInCookie);

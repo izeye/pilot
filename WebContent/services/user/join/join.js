@@ -7,6 +7,11 @@ var checkValidation = function() {
 		alert("Password and confirmed password don't match!");
 		return false;
 	}
+	
+	if(!validateEmail(user_id.value)){
+		alert("Invalid Email");
+		return false;
+	}
 	document.join.submit();
 };
 
