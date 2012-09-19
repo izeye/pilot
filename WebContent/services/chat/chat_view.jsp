@@ -3,7 +3,6 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <fmt:bundle basename="chat">
 	<fmt:message var="title" key="TITLE" />
-	<fmt:message var="nickname" key="NICKNAME" />
 	<fmt:message var="message" key="MESSAGE" />
 	<fmt:message var="time" key="TIME" />
 	<fmt:message var="maxRowCount" key="MAX_ROW_COUNT" />
@@ -32,11 +31,6 @@
 	<form method="post" action="/services/chat" name="chat" id="chat"
 		onsubmit="return emptyChk()">
 		<table>
-			<tr>
-				<td>${nickname}:</td>
-				<td>${sessionScope.user.nickname}</td>
-				<td></td>
-			</tr>
 			<tr>
 				<td>${message}:</td>
 				<td><input type="text" name="message" id="message" size=100 /></td>

@@ -1,6 +1,6 @@
-<h3>CTB</h3>
+<h3>About CTB</h3>
 <p>CTB stands for "cushion the blow".</p>
-<h3>Members</h3>
+<h3>About Members</h3>
 <ul>
 	<li>cush19n</li>
 	<li>icpu</li>

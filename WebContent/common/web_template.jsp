@@ -22,6 +22,7 @@
 					<a href="/common/web_template.jsp?body_path=/home.jsp">Home</a><br>
 					<a href="/common/web_template.jsp?body_path=/pilot.jsp">Pilot Services</a><br>
 					<a href="/common/web_template.jsp?body_path=/about_us.jsp">About Us</a><br>
+					<a href="/common/web_template.jsp?body_path=/admin.jsp">Admin</a><br>
 				</td>
 				<td valign="top" width="850">
 					<jsp:include page="${param.body_path}" />
