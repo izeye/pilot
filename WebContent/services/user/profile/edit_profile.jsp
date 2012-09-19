@@ -1,5 +1,5 @@
 <%@page contentType="text/html; charset=utf8" errorPage="../common/error.jsp"%>
-<%@page import="com.ctb.pilot.chat.model.*,com.ctb.pilot.chat.dao.*,com.ctb.pilot.chat.dao.jdbc.*"%>
+<%@page import="com.ctb.pilot.user.model.*,com.ctb.pilot.user.dao.*,com.ctb.pilot.user.dao.jdbc.*"%>
 <%
 	User user = (User) session.getAttribute("user");
 

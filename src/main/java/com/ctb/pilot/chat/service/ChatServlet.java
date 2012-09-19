@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import com.ctb.pilot.chat.dao.MessageDao;
 import com.ctb.pilot.chat.dao.jdbc.JdbcMessageDao;
 import com.ctb.pilot.chat.model.Message;
-import com.ctb.pilot.chat.model.User;
+import com.ctb.pilot.user.model.User;
 
 public class ChatServlet extends HttpServlet {
 
