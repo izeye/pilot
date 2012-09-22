@@ -18,6 +18,16 @@
   	<servlet-name>chat-servlet</servlet-name>
   	<url-pattern>/services/chat</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>chat-history-servlet</servlet-name>
+  	<servlet-class>com.ctb.pilot.chat.service.ChatHistoryServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>chat-history-servlet</servlet-name>
+  	<url-pattern>/services/chat/history</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
   	<servlet-name>login-servlet</servlet-name>
   	<servlet-class>com.ctb.pilot.user.service.LoginServlet</servlet-class>

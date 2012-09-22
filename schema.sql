@@ -23,6 +23,8 @@ create table tb_user (
 	UNIQUE KEY (nickname)
 );
 
+alter table tb_user add column image MEDIUMBLOB;
+
 insert into tb_user (user_id, password, nickname, join_date) values ('izeye@naver.com', '1234', 'izeye', now());
 insert into tb_user (user_id, password, nickname, join_date) values ('icpu@naver.com', '1234', 'icpu', now());
 insert into tb_user (user_id, password, nickname, join_date) values ('toujour19@gmail.com', '1234', 'toujour19', now());
