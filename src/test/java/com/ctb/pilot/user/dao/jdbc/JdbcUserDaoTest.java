@@ -1,11 +1,13 @@
 package com.ctb.pilot.user.dao.jdbc;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import com.ctb.pilot.user.dao.jdbc.JdbcUserDao;
 import com.ctb.pilot.user.model.User;
 
 public class JdbcUserDaoTest {
@@ -33,11 +35,13 @@ public class JdbcUserDaoTest {
 	}
 
 	@Test
-	public void testJoin() {
+	public void testSignUp() throws FileNotFoundException {
 		String userId = "jsp@naver.com";
 		String password = "1234";
 		String nickname = "jsp";
-		userDao.join(userId, password, nickname);
+		InputStream iamge = new FileInputStream(
+				"src/test/resources/samples/images/cushion_1.gif");
+		userDao.signUp(userId, password, nickname, iamge);
 	}
 
 	@Test

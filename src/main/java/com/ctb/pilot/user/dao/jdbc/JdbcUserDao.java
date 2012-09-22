@@ -2,6 +2,7 @@ package com.ctb.pilot.user.dao.jdbc;
 
 import static com.ctb.pilot.common.DbConstants.CONNECTION_URL;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -80,7 +81,8 @@ public class JdbcUserDao implements UserDao {
 	}
 
 	@Override
-	public void join(String userId, String password, String nickname) {
+	public void signUp(String userId, String password, String nickname,
+			InputStream image) {
 		Connection con = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -89,10 +91,11 @@ public class JdbcUserDao implements UserDao {
 
 			con = DriverManager.getConnection(CONNECTION_URL);
 			stmt = con
-					.prepareStatement("insert into tb_user (user_id, password, nickname, join_date) values (?, ?, ?, now())");
+					.prepareStatement("insert into tb_user (user_id, password, nickname, image, join_date) values (?, ?, ?, ?, now())");
 			stmt.setString(1, userId);
 			stmt.setString(2, password);
 			stmt.setString(3, nickname);
+			stmt.setBinaryStream(4, image);
 			stmt.executeUpdate();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();

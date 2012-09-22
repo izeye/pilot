@@ -7,7 +7,7 @@
 </head>
 <body>
 	<h3>Sign Up</h3>
-	<form id="sign_up" name="sign_up" action="/services/user/sign_up/sign_up.jsp">
+	<form id="sign_up" name="sign_up" action="/services/user/sign-up" method="post" enctype="multipart/form-data">
 		<table>
 			<tr>
 				<td>User ID (Email) :</td>
@@ -32,7 +32,7 @@
 			</tr>
 			<tr>
 				<td><input type="reset" value="Clear" /></td>
-				<td><input type="button" value="Join"
+				<td><input type="button" value="Sign Up"
 					onClick="checkValidation()" /></td>
 			</tr>
 		</table>

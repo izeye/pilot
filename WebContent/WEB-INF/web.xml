@@ -34,6 +34,14 @@
   	<servlet-name>logout-servlet</servlet-name>
   	<url-pattern>/services/user/logout</url-pattern>
   </servlet-mapping>
+  <servlet>
+  	<servlet-name>sign-up-servlet</servlet-name>
+  	<servlet-class>com.ctb.pilot.user.service.SignUpServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>sign-up-servlet</servlet-name>
+  	<url-pattern>/services/user/sign-up</url-pattern>
+  </servlet-mapping>
   
   <filter>
   	<filter-name>access-log-filter</filter-name>
