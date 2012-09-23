@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.GregorianCalendar;
+import java.util.Date;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -15,10 +15,15 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ctb.pilot.stat.dao.VisitLogDao;
+import com.ctb.pilot.stat.dao.jdbc.JdbcVisitLogDao;
+import com.ctb.pilot.stat.model.VisitLog;
+
 public class AccessLogFilter implements Filter {
 
 	private PrintWriter requestLogWriter;
 	private PrintWriter responseLogWriter;
+	private VisitLogDao visitLogDao;
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
@@ -40,6 +45,8 @@ public class AccessLogFilter implements Filter {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
+		visitLogDao = new JdbcVisitLogDao();
 	}
 
 	@Override
@@ -47,11 +54,31 @@ public class AccessLogFilter implements Filter {
 			FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
-		GregorianCalendar now = new GregorianCalendar();
-		String remoteAddr = httpRequest.getRemoteAddr();
-		requestLogWriter.printf("[%TF %TT]%n", now, now);
-		requestLogWriter.printf("Client IP: %s%n", remoteAddr);
-		requestLogWriter.println("----------");
+
+		Date visitDate = new Date();
+		String ip = httpRequest.getRemoteAddr();
+		String uri = httpRequest.getRequestURI();
+		String referer = httpRequest.getHeader("Referer");
+		String userAgent = httpRequest.getHeader("User-Agent");
+		VisitLog visitLog = new VisitLog();
+		visitLog.setIp(ip);
+		visitLog.setReferer(referer);
+		visitLog.setUri(uri);
+		visitLog.setUserAgent(userAgent);
+
+		System.out.println("visitDate: " + visitDate);
+		System.out.println("ip: " + ip);
+		System.out.println("uri: " + uri);
+		System.out.println("referer: " + referer);
+		System.out.println("userAgent: " + userAgent);
+		System.out.println(userAgent.length());
+
+		visitLogDao.insertVisitLog(visitLog);
+
+		// GregorianCalendar now = new GregorianCalendar();
+		// requestLogWriter.printf("[%TF %TT]%n", now, now);
+		// requestLogWriter.printf("Client IP: %s%n", remoteAddr);
+		// requestLogWriter.println("----------");
 		chain.doFilter(request, response);
 	}
 

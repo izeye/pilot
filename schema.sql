@@ -35,3 +35,13 @@ insert into tb_user (user_id, password, nickname, join_date) values ('Minjw0@nat
 insert into tb_user (user_id, password, nickname, join_date) values ('mateushenriquebrum@gmail.com', '1234', 'mateusbrum', now());
 insert into tb_user (user_id, password, nickname, join_date) values ('enosent7@gmail.com', '1234', 'enosent7', now());
 insert into tb_user (user_id, password, nickname, join_date) values ('oasishun@gmail.com', '1234', 'oasishun', now());
+
+create table tb_visit_log (
+	seq INT AUTO_INCREMENT,
+	visit_date DATETIME not null,
+	ip VARCHAR(100) not null,
+	uri VARCHAR(100) not null,
+	referer VARCHAR(1000),
+	user_agent VARCHAR(1000) not null,
+	PRIMARY KEY (seq)
+);
