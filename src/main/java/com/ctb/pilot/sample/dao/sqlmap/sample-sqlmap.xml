@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sql.sample">
+
+	<select id="selectSampleUserList" parameterType="map" resultType="map">
+		SELECT SEQ,
+		       USER_ID,
+		       PASSWORD,
+		       NICKNAME,
+		       JOIN_DATE,
+		       DEL_YN
+	      FROM TB_USER
+	     WHERE 1=1
+	      <if test="nick != null">
+	       AND NICKNAME like '%#{nick}%' 
+	      </if>
+	      
+	</select>
+	
+	<select id="selectSampleMessageList" parameterType="map" resultType="map">
+	    SELECT SEQ,
+	           CREATED_TIME,
+	           USER_SEQ,
+	           MESSAGE
+	      FROM TB_CHAT_MESSAGE
+	     WHERE 1=1
+	      <if test="nick != null">
+	       AND SEQ > #{seq} 
+		  </if>	      
+	       
+	</select>
+	
+	<insert id="insertMessage" parameterType="map">
+		INSERT INTO TB_CHAT_MESSAGE(
+		       SEQ,
+	           CREATED_TIME,
+	           USER_SEQ,
+	           MESSAGE)
+	    VALUES(
+	    	#{seq}, 
+	    	NOW,
+	    	#{userSeq},
+	    	#{message}
+	    )
+	</insert>
+	
+</mapper>

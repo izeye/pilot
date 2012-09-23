@@ -1,0 +1,30 @@
+[Framework Guide]
+0. Project 의 maven dependency 는 update를 한번 해줘야 합니다~
+
+1. DB설정: 
+ - jdbc.properteis 파일의 설정 변경 (HSQLDB, MySQL 설정 있음)
+ - HSQLDB 사용 시: 
+   > start.sh 또는 start.bat(윈도우)를 따로 실행해서 DB를 기동한 뒤 웹애플리케이션 실행
+   > 추가 테이블, 데이터는 pilot.script 에 추가하면 됨
+
+
+2. 서버측 개발 가이드
+ 1) Controller: 
+    URL은 항상 .do 로 끝나도록 해야 함 (web.xml의 servlet mapping참조)
+
+ 2) Service 작성: 인터페이스(클래스명이 Service로 끝나야 함), 구현 클래스(Impl을 붙임) 
+  - *Service.java 형식으로 꼭 이름을 작성 (클래스명이 Service로 끝나야 함) 
+   - 트랜잭션의 처리 단위는 Service 객체의 각 메소드 단위임
+    (context-datasource.xml 내용 참조)
+
+ 3) Dao 작성: 인터페이스(Dao로 끝남), 구현 클래스 (Impl을 붙임)
+    > 도메인객체가 필요없는 단순 레포트성인 경우는 공통Dao를 활용
+    
+
+ 4) sqlMap: *-sqlmap.xml 형식으로 이름 작성, 주요 모듈단위로 생성
+ 
+*) Log 사용방법
+	> 각 클래스에 기본속성(멤버변수)로 선언해서 사용
+      private Log log = LogFactory.getLog(getClass());
+    > 설정파일: log4j.xml 
+
