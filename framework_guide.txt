@@ -9,6 +9,11 @@
 
 
 2. 서버측 개발 가이드
+ 0) Test URL
+    http://localhost:8080/pilot/sample1.do
+    http://localhost:8080/pilot/sample2.do
+    http://localhost:8080/pilot/sample3.do
+    
  1) Controller: 
     URL은 항상 .do 로 끝나도록 해야 함 (web.xml의 servlet mapping참조)
 
