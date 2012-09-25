@@ -1,9 +1,9 @@
 package com.ctb.pilot.chat.service;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -13,10 +13,10 @@ import javax.servlet.http.HttpSession;
 import com.ctb.pilot.chat.dao.MessageDao;
 import com.ctb.pilot.chat.dao.jdbc.JdbcMessageDao;
 import com.ctb.pilot.chat.model.Message;
-import com.ctb.pilot.chat.model.User;
+import com.ctb.pilot.common.util.JsonUtils;
+import com.ctb.pilot.user.model.User;
 
 public class ChatServlet extends HttpServlet {
-
 	/**
 	 * 
 	 */
@@ -32,25 +32,14 @@ public class ChatServlet extends HttpServlet {
 		String requestURI = req.getRequestURI();
 		System.out.println("In doGet(), requestURI: " + requestURI);
 
-		String pageNoAsString = req.getParameter("page_no");
-		int pageNo;
-		if (pageNoAsString == null) {
-			pageNo = 1;
-		} else {
-			pageNo = Integer.parseInt(pageNoAsString);
-		}
-
-		long total = messageDao.getAllMessageCount();
-		long pageCount = total / PAGE_SIZE + (total % PAGE_SIZE != 0 ? 1 : 0);
-
-		List<Message> messages = messageDao.getMessages(PAGE_SIZE, pageNo);
-		req.setAttribute("messages", messages);
-		req.setAttribute("pageNo", pageNo);
-		req.setAttribute("pageCount", pageCount);
-
-		String viewUri = "/common/web_template.jsp?body_path=/services/chat/chat_view.jsp";
-		RequestDispatcher dispatcher = req.getRequestDispatcher(viewUri);
-		dispatcher.forward(req, resp);
+		List<Message> messages = messageDao.getMessages(PAGE_SIZE, 1);
+		resp.setCharacterEncoding("utf8");
+		PrintWriter out = resp.getWriter();
+		String json = JsonUtils.toJson(messages);
+		System.out.println(json);
+		out.print(json);
+		out.flush();
+		out.close();
 	}
 
 	@Override
@@ -65,13 +54,12 @@ public class ChatServlet extends HttpServlet {
 
 		req.setCharacterEncoding("utf8");
 		String message = req.getParameter("message");
+		System.out.println("message: " + message);
 		if (message == null || message.isEmpty()) {
 			throw new ServletException("Message is null or empty.");
 		}
 
 		messageDao.insertMessage(userSequence, message);
 
-		resp.sendRedirect("/services/chat");
 	}
-
 }

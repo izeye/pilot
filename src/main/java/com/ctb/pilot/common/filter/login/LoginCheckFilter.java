@@ -1,6 +1,7 @@
 package com.ctb.pilot.common.filter.login;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -12,14 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.ctb.pilot.chat.dao.UserDao;
-import com.ctb.pilot.chat.dao.jdbc.JdbcUserDao;
-import com.ctb.pilot.chat.model.User;
-import com.ctb.pilot.common.util.HttpUtils;
+import com.ctb.pilot.user.model.User;
 
 public class LoginCheckFilter implements Filter {
-
-	private UserDao userDao = new JdbcUserDao();
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
@@ -33,14 +29,12 @@ public class LoginCheckFilter implements Filter {
 		HttpSession session = httpRequest.getSession();
 		User user = (User) session.getAttribute("user");
 		if (user == null) {
-			String sequenceInCookie = HttpUtils.getCookie(httpRequest, "seq");
-			if (sequenceInCookie == null) {
-				httpResponse.sendRedirect("/common/web_template.jsp?body_path=/services/user/login/login_form.jsp");
-				return;
-			}
-			Integer userSequence = Integer.valueOf(sequenceInCookie);
-			user = userDao.getUserBySequence(userSequence);
-			session.setAttribute("user", user);
+			String encodedMessage = URLEncoder.encode(
+					"You need to login first.", "utf8");
+			httpResponse
+					.sendRedirect("/common/web_template.jsp?body_path=/common/notice.jsp?message="
+							+ encodedMessage);
+			return;
 		}
 		chain.doFilter(request, response);
 	}

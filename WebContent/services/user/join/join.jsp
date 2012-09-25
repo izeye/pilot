@@ -1,4 +1,4 @@
-<%@page import="com.ctb.pilot.chat.model.*,com.ctb.pilot.chat.dao.*,com.ctb.pilot.chat.dao.jdbc.*"%>
+<%@page import="com.ctb.pilot.user.model.*,com.ctb.pilot.user.dao.*,com.ctb.pilot.user.dao.jdbc.*"%>
 <%
 	String userId = request.getParameter("user_id");
 	String password = request.getParameter("password");

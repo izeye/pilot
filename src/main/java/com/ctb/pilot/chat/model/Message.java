@@ -6,6 +6,7 @@ public class Message {
 
 	private int sequence;
 	private Date createdTime;
+	private String formattedCreatedTime;
 	private int userSequence;
 	private String nickname;
 	private String message;
@@ -22,8 +23,14 @@ public class Message {
 		return createdTime;
 	}
 
+	public String getFormattedCreatedTime() {
+		return formattedCreatedTime;
+	}
+
 	public void setCreatedTime(Date createdTime) {
 		this.createdTime = createdTime;
+		this.formattedCreatedTime = String.format("%TF %TT", createdTime,
+				createdTime);
 	}
 
 	public int getUserSequence() {
@@ -53,6 +60,7 @@ public class Message {
 	@Override
 	public String toString() {
 		return "Message [sequence=" + sequence + ", createdTime=" + createdTime
+				+ ", formattedCreatedTime=" + formattedCreatedTime
 				+ ", userSequence=" + userSequence + ", nickname=" + nickname
 				+ ", message=" + message + "]";
 	}

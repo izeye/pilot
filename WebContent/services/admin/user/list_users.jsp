@@ -2,7 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@page import="java.util.*"%>
-<%@page import="com.ctb.pilot.chat.model.*,com.ctb.pilot.chat.dao.*,com.ctb.pilot.chat.dao.jdbc.*"%>
+<%@page import="com.ctb.pilot.user.model.*,com.ctb.pilot.user.dao.*,com.ctb.pilot.user.dao.jdbc.*"%>
 <%
 	UserDao userDao = new JdbcUserDao();
 	List<User> users = userDao.getAllUsers();
