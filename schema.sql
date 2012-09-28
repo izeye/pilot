@@ -1,6 +1,6 @@
-GRANT ALL PRIVILEGES ON db_ctb.* TO 'ctb'@'localhost' IDENTIFIED BY 'cTb0409';
+GRANT ALL PRIVILEGES ON ctbrg.* TO 'ctbrg'@'localhost' IDENTIFIED BY 'ctbrgctbrg2';
 
-create database db_ctb character set utf8;
+create database ctbrg character set utf8;
 
 create table tb_chat_message (
 	seq INT AUTO_INCREMENT,

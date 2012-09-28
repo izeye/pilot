@@ -6,17 +6,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import com.ctb.pilot.chat.model.Message;
 import com.ctb.pilot.stat.dao.VisitLogDao;
 import com.ctb.pilot.stat.model.VisitLog;
 
 public class JdbcVisitLogDao implements VisitLogDao {
-	
+
 	public JdbcVisitLogDao() {
 		try {
 			Class.forName("org.gjt.mm.mysql.Driver");
@@ -73,7 +70,6 @@ public class JdbcVisitLogDao implements VisitLogDao {
 		Connection con = null;
 		Statement stmt = null;
 		ResultSet rs = null;
-		List<Message> messageList = new ArrayList<Message>();
 		try {
 			con = DriverManager
 					.getConnection("jdbc:apache:commons:dbcp:/ctb_db_pool");
@@ -81,8 +77,8 @@ public class JdbcVisitLogDao implements VisitLogDao {
 
 			Map<String, Long> hm = new HashMap<String, Long>();
 			rs = stmt
-					.executeQuery("select ip, count(1) as count from tb_visit_log group by ip");
-			while(rs.next()) {
+					.executeQuery("select ip, count(1) as count from tb_visit_log group by ip order by ip");
+			while (rs.next()) {
 				hm.put(rs.getString("ip"), rs.getLong("count"));
 			}
 			return hm;
