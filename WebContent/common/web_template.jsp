@@ -2,12 +2,12 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 	<head>
-		<title>CTB</title>
+		<title>CTB Research Group</title>
 		<script src="/common/js/common.js"></script>
 		<script src="/services/user/login/login.js"></script>
 	</head>
 	<body>
-		<h1>CTB</h1>
+		<h1>CTB Research Group</h1>
 		<table border="1" cellpadding="10">
 			<tr>
 				<td width="150" valign="top">
@@ -29,6 +29,6 @@
 				</td>
 			</tr>
 		</table>
-		<h5>Copyright@ 2012 CTB</h5>
+		<h5>Copyright@ 2012 CTB Research Group</h5>
 	</body>
 </html>
