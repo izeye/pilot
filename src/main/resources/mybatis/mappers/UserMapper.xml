@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ctb.pilot.user.dao.mybatis.UserMapper">
+	<resultMap id="userResultMap" type="User">
+		<id property="sequence" column="seq" />
+		<result property="deleted" column="del_yn"/>
+	</resultMap>
+	<select id="login" parameterType="java.lang.String" resultMap="userResultMap">
+		select * from tb_user where user_id=#{userId} and password=#{password}
+	</select>
+</mapper>
