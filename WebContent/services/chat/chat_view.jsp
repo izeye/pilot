@@ -24,13 +24,13 @@
 	<h3>Chat</h3>
 	<form method="post" action="/services/chat" name="chat" id="chat"
 		onsubmit="return emptyChk()">
-		<table>
-			<tr>
-				<td>${message}:</td>
-				<td><input type="text" name="message" id="message" size=100 /></td>
-				<td><input type="submit" value="Send" /></td>
-			</tr>
-		</table>
+		<p>
+			<label>
+				${message}:
+				<input type="text" name="message" id="message" size=100 />
+				<input type="submit" value="Send" />
+			</label>
+		</p>
 	</form>
 	<br>
 	<table id="output" class="data" border="1" id="chat">

@@ -5,10 +5,12 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.ctb.pilot.user.dao.UserDao;
 import com.ctb.pilot.user.model.User;
 
+@Repository("userDao")
 public class MyBatisUserDao implements UserDao {
 
 	@Autowired
@@ -22,27 +24,30 @@ public class MyBatisUserDao implements UserDao {
 
 	@Override
 	public User getUserBySequence(int sequence) {
-		// TODO Auto-generated method stub
-		return null;
+		UserMapper userMapper = sessionTemplate.getMapper(UserMapper.class);
+		return userMapper.getUserBySequence(sequence);
 	}
 
 	@Override
 	public void signUp(String userId, String password, String nickname,
 			InputStream image) {
-		// TODO Auto-generated method stub
-
+		UserMapper userMapper = sessionTemplate.getMapper(UserMapper.class);
+		userMapper.signUp(userId, password, nickname, image);
 	}
 
 	@Override
 	public void update(User user) {
-		// TODO Auto-generated method stub
-
+		UserMapper userMapper = sessionTemplate.getMapper(UserMapper.class);
+		int sequence = user.getSequence();
+		String password = user.getPassword();
+		String nickname = user.getNickname();
+		userMapper.update(sequence, password, nickname);
 	}
 
 	@Override
 	public List<User> getAllUsers() {
-		// TODO Auto-generated method stub
-		return null;
+		UserMapper userMapper = sessionTemplate.getMapper(UserMapper.class);
+		return userMapper.getAllUsers();
 	}
 
 }
