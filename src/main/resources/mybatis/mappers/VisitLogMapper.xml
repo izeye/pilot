@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ctb.pilot.stat.dao.mybatis.VisitLogMapper">
+	<insert id="insertVisitLog" parameterType="com.ctb.pilot.stat.model.VisitLog">
+		INSERT INTO tb_visit_log (visit_date, ip, uri, referer, user_agent)
+				VALUES (NOW(), #{ip}, #{uri}, #{referer}, #{userAgent})
+	</insert>
+	<select id="getDailyVisitLog" resultType="com.ctb.pilot.stat.model.DailyVisitLog">
+		SELECT SUBSTR(visit_date, 1, 10) day, COUNT(1) count
+				FROM tb_visit_log GROUP BY day ORDER BY day DESC;
+	</select>
+</mapper>

@@ -7,9 +7,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.ctb.pilot.stat.dao.VisitLogDao;
+import com.ctb.pilot.stat.model.DailyVisitLog;
 import com.ctb.pilot.stat.model.VisitLog;
 
 public class JdbcVisitLogDao implements VisitLogDao {
@@ -32,7 +34,7 @@ public class JdbcVisitLogDao implements VisitLogDao {
 			con = DriverManager
 					.getConnection("jdbc:apache:commons:dbcp:/ctb_db_pool");
 			stmt = con
-					.prepareStatement("insert into tb_visit_log (visit_date, ip, uri,referer,user_agent) values (now(), ?, ?, ?, ?)");
+					.prepareStatement("insert into tb_visit_log (visit_date, ip, uri, referer, user_agent) values (now(), ?, ?, ?, ?)");
 			stmt.setString(1, visitLog.getIp());
 			stmt.setString(2, visitLog.getUri());
 			stmt.setString(3, visitLog.getReferer());
@@ -66,7 +68,7 @@ public class JdbcVisitLogDao implements VisitLogDao {
 	}
 
 	@Override
-	public Map<String, Long> getVisitTodayStatByIP() {
+	public Map<String, Long> getDailyVisitIpLogs() {
 		Connection con = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -108,6 +110,11 @@ public class JdbcVisitLogDao implements VisitLogDao {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public List<DailyVisitLog> getDailyVisitLogs() {
+		throw new UnsupportedOperationException();
 	}
 
 }

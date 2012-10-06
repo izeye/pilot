@@ -18,7 +18,7 @@
 	</tr>
 	<%
 		JdbcVisitLogDao jvld = new JdbcVisitLogDao();
-		Map<String, Long> m = jvld.getVisitTodayStatByIP();
+		Map<String, Long> m = jvld.getDailyVisitIpLogs();
 		Iterator<String> it = m.keySet().iterator();
 		while(it.hasNext()) {
 			String ip = it.next();

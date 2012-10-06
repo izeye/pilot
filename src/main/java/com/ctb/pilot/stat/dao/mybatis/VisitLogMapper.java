@@ -1,4 +1,4 @@
-package com.ctb.pilot.stat.dao;
+package com.ctb.pilot.stat.dao.mybatis;
 
 import java.util.List;
 import java.util.Map;
@@ -6,12 +6,12 @@ import java.util.Map;
 import com.ctb.pilot.stat.model.DailyVisitLog;
 import com.ctb.pilot.stat.model.VisitLog;
 
-public interface VisitLogDao {
+public interface VisitLogMapper {
 
 	void insertVisitLog(VisitLog visitLog);
 
-	List<DailyVisitLog> getDailyVisitLogs();
+	List<DailyVisitLog> getDailyVisitLog();
 
-	Map<String, Long> getDailyVisitIpLogs();
+	Map<String, Long> getVisitTodayStatByIP();
 
 }
