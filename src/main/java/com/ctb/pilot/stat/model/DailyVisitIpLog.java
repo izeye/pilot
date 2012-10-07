@@ -1,8 +1,11 @@
 package com.ctb.pilot.stat.model;
 
+import com.ctb.pilot.common.util.whois.Whois;
+
 public class DailyVisitIpLog {
 
 	private String ip;
+	private Whois whois;
 	private Long count;
 
 	public String getIp() {
@@ -11,6 +14,14 @@ public class DailyVisitIpLog {
 
 	public void setIp(String ip) {
 		this.ip = ip;
+	}
+
+	public Whois getWhois() {
+		return whois;
+	}
+
+	public void setWhois(Whois whois) {
+		this.whois = whois;
 	}
 
 	public Long getCount() {
@@ -23,7 +34,8 @@ public class DailyVisitIpLog {
 
 	@Override
 	public String toString() {
-		return "DailyVisitIpLog [ip=" + ip + ", count=" + count + "]";
+		return "DailyVisitIpLog [ip=" + ip + ", whois=" + whois + ", count="
+				+ count + "]";
 	}
 
 }

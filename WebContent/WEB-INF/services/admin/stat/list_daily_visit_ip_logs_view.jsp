@@ -17,13 +17,24 @@
 	<h3>${requestScope.day} Visit IP Statistics</h3>
 	<table border=1 id="daily_visit_ip_log_list">
 		<tr>
-			<th>Rank</th><th>IP</th><th>Count</th>
+			<th>Rank</th><th>IP</th><th>Count</th><th>Location</th>
 		</tr>
 		<c:forEach var="dailyVisitIpLog" varStatus="status" items="${requestScope.dailyVisitIpLogs}">
 			<tr>
 				<td>${status.count}</td>
 				<td>${dailyVisitIpLog.ip}</td>
 				<td>${dailyVisitIpLog.count}</td>
+				<td>
+					${dailyVisitIpLog.whois.countryCode}/
+					<c:choose>
+					<c:when test="${dailyVisitIpLog.whois.koreanUserAddr != null}">
+						${dailyVisitIpLog.whois.koreanUserAddr}/${dailyVisitIpLog.whois.koreanUserOrgName}
+					</c:when>
+					<c:otherwise>
+						${dailyVisitIpLog.whois.koreanIspAddr}/${dailyVisitIpLog.whois.koreanIspOrgName}
+					</c:otherwise>
+					</c:choose>
+				</td>
 			</tr>
 		</c:forEach>
 	</table>
