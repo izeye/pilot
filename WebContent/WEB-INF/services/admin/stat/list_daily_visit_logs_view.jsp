@@ -15,9 +15,9 @@
 </head>
 <body>
 	<h3>Daily Visit Statistics</h3>
-	<table>
+	<table width="100%">
 	<tr>
-	<td width="35%">
+	<td width="40%">
 	<table border=1 id="daily_visit_log_list">
 		<tr>
 			<th>Day</th><th>Count</th><th>&nbsp;</th><th>&nbsp;</th>
@@ -38,7 +38,7 @@
 		</c:forEach>
 	</table>
 	</td>
-	<td width="65%" height="100%"><iframe id="detail" width="100%" height="100%"></iframe></td>
+	<td width="65%" height="100%"><iframe id="detail" name="detail" width="100%" height="100%"></iframe></td>
 	</tr>
 	</table>
 </body>
