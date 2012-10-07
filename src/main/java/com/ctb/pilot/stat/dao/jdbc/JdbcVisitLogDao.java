@@ -11,7 +11,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.ctb.pilot.stat.dao.VisitLogDao;
+import com.ctb.pilot.stat.model.DailyVisitIpLog;
 import com.ctb.pilot.stat.model.DailyVisitLog;
+import com.ctb.pilot.stat.model.DailyVisitUriLog;
 import com.ctb.pilot.stat.model.VisitLog;
 
 public class JdbcVisitLogDao implements VisitLogDao {
@@ -68,7 +70,7 @@ public class JdbcVisitLogDao implements VisitLogDao {
 	}
 
 	@Override
-	public Map<String, Long> getDailyVisitIpLogs() {
+	public Map<String, Long> getVisitIpLogs() {
 		Connection con = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -114,6 +116,16 @@ public class JdbcVisitLogDao implements VisitLogDao {
 
 	@Override
 	public List<DailyVisitLog> getDailyVisitLogs() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public List<DailyVisitIpLog> getDailyVisitIpLogs(String day) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public List<DailyVisitUriLog> getDailyVisitUriLogs(String day) {
 		throw new UnsupportedOperationException();
 	}
 

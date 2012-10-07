@@ -5,8 +5,18 @@
 		INSERT INTO tb_visit_log (visit_date, ip, uri, referer, user_agent)
 				VALUES (NOW(), #{ip}, #{uri}, #{referer}, #{userAgent})
 	</insert>
-	<select id="getDailyVisitLog" resultType="com.ctb.pilot.stat.model.DailyVisitLog">
+	<select id="getDailyVisitLogs" resultType="com.ctb.pilot.stat.model.DailyVisitLog">
 		SELECT SUBSTR(visit_date, 1, 10) day, COUNT(1) count
-				FROM tb_visit_log GROUP BY day ORDER BY day DESC;
+				FROM tb_visit_log WHERE uri != '/services/chat' GROUP BY day ORDER BY day DESC;
+	</select>
+	<select id="getDailyVisitIpLogs" parameterType="java.lang.String"
+			resultType="com.ctb.pilot.stat.model.DailyVisitIpLog">
+		SELECT ip, COUNT(1) count FROM tb_visit_log
+				WHERE uri != '/services/chat' AND SUBSTR(visit_date, 1, 10) = #{day} GROUP BY ip ORDER BY count DESC;
+	</select>
+	<select id="getDailyVisitUriLogs" parameterType="java.lang.String"
+			resultType="com.ctb.pilot.stat.model.DailyVisitUriLog">
+		SELECT uri, COUNT(1) count FROM tb_visit_log
+				WHERE SUBSTR(visit_date, 1, 10) = #{day} GROUP BY uri ORDER BY count DESC;
 	</select>
 </mapper>

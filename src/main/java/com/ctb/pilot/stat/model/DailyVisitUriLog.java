@@ -1,16 +1,16 @@
 package com.ctb.pilot.stat.model;
 
-public class DailyVisitLog {
+public class DailyVisitUriLog {
 
-	private String day;
+	private String uri;
 	private Long count;
 
-	public String getDay() {
-		return day;
+	public String getUri() {
+		return uri;
 	}
 
-	public void setDay(String day) {
-		this.day = day;
+	public void setUri(String uri) {
+		this.uri = uri;
 	}
 
 	public Long getCount() {
@@ -23,7 +23,7 @@ public class DailyVisitLog {
 
 	@Override
 	public String toString() {
-		return "DailyVisitLog [day=" + day + ", count=" + count + "]";
+		return "DailyVisitUriLog [uri=" + uri + ", count=" + count + "]";
 	}
 
 }

@@ -30,7 +30,7 @@ public class JdbcVisitLogDaoTest {
 
 	@Test
 	public void testGetDailyVisitIpLog() {
-		Map<String, Long> dailyVisitIpLog = visitLogDao.getDailyVisitIpLogs();
+		Map<String, Long> dailyVisitIpLog = visitLogDao.getVisitIpLogs();
 		System.out.println(dailyVisitIpLog);
 	}
 

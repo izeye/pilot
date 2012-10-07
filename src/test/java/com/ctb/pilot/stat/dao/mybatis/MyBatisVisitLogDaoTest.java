@@ -9,7 +9,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.ctb.pilot.stat.dao.VisitLogDao;
+import com.ctb.pilot.stat.model.DailyVisitIpLog;
 import com.ctb.pilot.stat.model.DailyVisitLog;
+import com.ctb.pilot.stat.model.DailyVisitUriLog;
 import com.ctb.pilot.stat.model.VisitLog;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -31,9 +33,25 @@ public class MyBatisVisitLogDaoTest {
 	}
 
 	@Test
-	public void testGetDailyVisitLog() {
-		List<DailyVisitLog> dailyVisitLog = visitLogDao.getDailyVisitLogs();
-		System.out.println(dailyVisitLog);
+	public void testGetDailyVisitLogs() {
+		List<DailyVisitLog> dailyVisitLogs = visitLogDao.getDailyVisitLogs();
+		System.out.println(dailyVisitLogs);
+	}
+
+	@Test
+	public void testGetDailyVisitIpLogs() {
+		String day = "2012-10-06";
+		List<DailyVisitIpLog> dailyVisitIpLogs = visitLogDao
+				.getDailyVisitIpLogs(day);
+		System.out.println(dailyVisitIpLogs);
+	}
+
+	@Test
+	public void testGetDailyVisitUriLogs() {
+		String day = "2012-10-06";
+		List<DailyVisitUriLog> dailyVisitUriLogs = visitLogDao
+				.getDailyVisitUriLogs(day);
+		System.out.println(dailyVisitUriLogs);
 	}
 
 }
