@@ -58,6 +58,9 @@ public class AccessLogFilter implements Filter {
 		Date visitDate = new Date();
 		String ip = httpRequest.getRemoteAddr();
 		String uri = httpRequest.getRequestURI();
+		if (uri.equals("/common/web_template.jsp")) {
+			uri = httpRequest.getParameter("body_path");
+		}
 		String referer = httpRequest.getHeader("Referer");
 		String userAgent = httpRequest.getHeader("User-Agent");
 		VisitLog visitLog = new VisitLog();
