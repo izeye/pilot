@@ -11,6 +11,7 @@ import java.util.List;
 
 import com.ctb.pilot.chat.dao.MessageDao;
 import com.ctb.pilot.chat.model.Message;
+import com.ctb.pilot.common.util.HtmlUtils;
 
 public class JdbcMessageDao implements MessageDao {
 
@@ -44,7 +45,10 @@ public class JdbcMessageDao implements MessageDao {
 				message.setCreatedTime(rs.getTimestamp("created_time"));
 				message.setUserSequence(rs.getInt("user_seq"));
 				message.setNickname(rs.getString("nickname"));
-				message.setMessage(rs.getString("message"));
+				String messageText = rs.getString("message");
+				String decoratedMessageText = HtmlUtils
+						.decorateUrl(messageText);
+				message.setMessage(decoratedMessageText);
 				messageList.add(message);
 			}
 		} catch (SQLException e) {
