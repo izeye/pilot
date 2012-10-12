@@ -22,5 +22,11 @@ public class DefaultUserServiceTest {
 		List<User> allUsers = userService.getAllUsers();
 		System.out.println(allUsers);
 	}
+	
+	@Test
+	public void testGetAllStaff(){
+		List<User> allStaff = userService.getAllStaff();
+		System.out.println(allStaff);
+	}
 
 }

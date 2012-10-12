@@ -10,6 +10,15 @@ public class User {
 	private String nickname;
 	private Date joinDate;
 	private boolean deleted;
+	private String role;
+	
+	public String getRole(){
+		return role;
+	}
+	
+	public void setRole(String role){
+		this.role = role;
+	}
 
 	public int getSequence() {
 		return sequence;

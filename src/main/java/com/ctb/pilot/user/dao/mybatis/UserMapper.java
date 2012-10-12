@@ -24,5 +24,7 @@ public interface UserMapper {
 			@Param("nickname") String nickname);
 
 	List<User> getAllUsers();
+	
+	List<User> getAllStaff();
 
 }

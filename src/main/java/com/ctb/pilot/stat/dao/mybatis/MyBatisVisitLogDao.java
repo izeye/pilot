@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ctb.pilot.stat.dao.VisitLogDao;
-import com.ctb.pilot.stat.model.DailyVisitIpLog;
+import com.ctb.pilot.stat.model.VisitIpLog;
 import com.ctb.pilot.stat.model.DailyVisitLog;
-import com.ctb.pilot.stat.model.DailyVisitUriLog;
+import com.ctb.pilot.stat.model.VisitUriLog;
 import com.ctb.pilot.stat.model.VisitLog;
 
 @Repository("visitLogDao")
@@ -34,14 +34,14 @@ public class MyBatisVisitLogDao implements VisitLogDao {
 	}
 
 	@Override
-	public List<DailyVisitIpLog> getDailyVisitIpLogs(String day) {
+	public List<VisitIpLog> getDailyVisitIpLogs(String day) {
 		VisitLogMapper visitLogMapper = sessionTemplate
 				.getMapper(VisitLogMapper.class);
 		return visitLogMapper.getDailyVisitIpLogs(day);
 	}
 
 	@Override
-	public List<DailyVisitUriLog> getDailyVisitUriLogs(String day) {
+	public List<VisitUriLog> getDailyVisitUriLogs(String day) {
 		VisitLogMapper visitLogMapper = sessionTemplate
 				.getMapper(VisitLogMapper.class);
 		return visitLogMapper.getDailyVisitUriLogs(day);
@@ -49,8 +49,21 @@ public class MyBatisVisitLogDao implements VisitLogDao {
 
 	@Override
 	public Map<String, Long> getVisitIpLogs() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public List<VisitIpLog> getDailyVisitIpLogs(String day, String uri) {
+		VisitLogMapper visitLogMapper = sessionTemplate
+				.getMapper(VisitLogMapper.class);
+		return visitLogMapper.getDailyVisitIpLogsWithDayAndUri(day, uri);
+	}
+
+	@Override
+	public List<VisitUriLog> getDailyVisitUriLogs(String day, String ipAddress) {
+		VisitLogMapper visitLogMapper = sessionTemplate
+				.getMapper(VisitLogMapper.class);
+		return visitLogMapper.getDailyVisitUriLogsWithDayAndIpAddress(day, ipAddress);
 	}
 
 }

@@ -14,7 +14,7 @@
 </script>
 </head>
 <body>
-	<h3>${requestScope.day} Visit URI Statistics</h3>
+	<h3>${requestScope.day} ${ipAddress} Visit URI Statistics</h3>
 	<table border=1 id="daily_visit_uri_log_list">
 		<tr>
 			<th>Rank</th><th>URI</th><th>Count</th>

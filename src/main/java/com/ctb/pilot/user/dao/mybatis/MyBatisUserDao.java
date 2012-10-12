@@ -50,4 +50,10 @@ public class MyBatisUserDao implements UserDao {
 		return userMapper.getAllUsers();
 	}
 
+	@Override
+	public List<User> getAllStaff() {
+		UserMapper userMapper = sessionTemplate.getMapper(UserMapper.class);
+		return userMapper.getAllStaff();
+	}
+
 }

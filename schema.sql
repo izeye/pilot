@@ -25,6 +25,8 @@ create table tb_user (
 
 alter table tb_user add column image MEDIUMBLOB;
 
+alter table tb_user add column role VARCHAR(10) DEFAULT 'user';
+
 insert into tb_user (user_id, password, nickname, join_date) values ('izeye@naver.com', '1234', 'izeye', now());
 insert into tb_user (user_id, password, nickname, join_date) values ('icpu@naver.com', '1234', 'icpu', now());
 insert into tb_user (user_id, password, nickname, join_date) values ('toujour19@gmail.com', '1234', 'toujour19', now());
@@ -35,6 +37,8 @@ insert into tb_user (user_id, password, nickname, join_date) values ('Minjw0@nat
 insert into tb_user (user_id, password, nickname, join_date) values ('mateushenriquebrum@gmail.com', '1234', 'mateusbrum', now());
 insert into tb_user (user_id, password, nickname, join_date) values ('enosent7@gmail.com', '1234', 'enosent7', now());
 insert into tb_user (user_id, password, nickname, join_date) values ('oasishun@gmail.com', '1234', 'oasishun', now());
+
+update tb_user set role='staff' where nickname in ('izeye', 'icpu', 'toujour19', 'enosent7', 'oasishun');
 
 create table tb_visit_log (
 	seq INT AUTO_INCREMENT,

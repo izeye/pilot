@@ -21,4 +21,8 @@
 	<select id="getAllUsers" resultMap="userResultMap">
 		select * from tb_user;
 	</select>
+	
+	<select id="getAllStaff" resultMap="userResultMap">
+		select * from tb_user where role = "staff";
+	</select>
 </mapper>

@@ -19,4 +19,9 @@ public class DefaultUserService implements UserService {
 		return userDao.getAllUsers();
 	}
 
+	@Override
+	public List<User> getAllStaff() {
+		return userDao.getAllStaff();
+	}
+
 }

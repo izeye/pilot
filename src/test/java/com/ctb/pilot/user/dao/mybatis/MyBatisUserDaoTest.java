@@ -65,5 +65,11 @@ public class MyBatisUserDaoTest {
 		List<User> allUsers = userDao.getAllUsers();
 		System.out.println(allUsers);
 	}
+	
+	@Test
+	public void testGetAllStaff(){
+		List<User> allStaff = userDao.getAllStaff();
+		System.out.println(allStaff);
+	}
 
 }

@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.ctb.pilot.stat.model.DailyVisitIpLog;
+import com.ctb.pilot.stat.model.VisitIpLog;
 import com.ctb.pilot.stat.model.DailyVisitLog;
-import com.ctb.pilot.stat.model.DailyVisitUriLog;
+import com.ctb.pilot.stat.model.VisitUriLog;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "/applicationContext.xml")
@@ -29,7 +29,7 @@ public class DefaultVisitLogServiceTest {
 	@Test
 	public void testGetDailyVisitIpLogs() {
 		String day = "2012-10-06";
-		List<DailyVisitIpLog> dailyVisitIpLogs = visitLogService
+		List<VisitIpLog> dailyVisitIpLogs = visitLogService
 				.getDailyVisitIpLogs(day);
 		System.out.println(dailyVisitIpLogs);
 	}
@@ -37,9 +37,26 @@ public class DefaultVisitLogServiceTest {
 	@Test
 	public void testGetDailyVisitUriLogs() {
 		String day = "2012-10-06";
-		List<DailyVisitUriLog> dailyVisitUriLogs = visitLogService
+		List<VisitUriLog> dailyVisitUriLogs = visitLogService
 				.getDailyVisitUriLogs(day);
 		System.out.println(dailyVisitUriLogs);
 	}
+	
+	@Test
+	public void testGetDailyVisitIpLogsWithDayAndUri() {
+		String day = "2012-10-12";
+		String uri = "/";
+		List<VisitIpLog> dailyVisitIpLogs = visitLogService.getDailyVisitIpLogs(
+				day, uri);
+		System.out.println(dailyVisitIpLogs);
+	}
 
+	@Test
+	public void testGetDailyVisitUriLogsWithDayAndIpAddress() {
+		String day = "2012-10-12";
+		String ipAddress = "127.0.0.1";
+		List<VisitUriLog> dailyVisitUriLogs = visitLogService.getDailyVisitUriLogs(
+				day, ipAddress);
+		System.out.println(dailyVisitUriLogs);
+	}
 }

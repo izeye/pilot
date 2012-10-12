@@ -3,9 +3,11 @@ package com.ctb.pilot.stat.dao.mybatis;
 import java.util.List;
 import java.util.Map;
 
-import com.ctb.pilot.stat.model.DailyVisitIpLog;
+import org.apache.ibatis.annotations.Param;
+
+import com.ctb.pilot.stat.model.VisitIpLog;
 import com.ctb.pilot.stat.model.DailyVisitLog;
-import com.ctb.pilot.stat.model.DailyVisitUriLog;
+import com.ctb.pilot.stat.model.VisitUriLog;
 import com.ctb.pilot.stat.model.VisitLog;
 
 public interface VisitLogMapper {
@@ -14,10 +16,17 @@ public interface VisitLogMapper {
 
 	List<DailyVisitLog> getDailyVisitLogs();
 
-	List<DailyVisitIpLog> getDailyVisitIpLogs(String day);
+	List<VisitIpLog> getDailyVisitIpLogs(String day);
 
-	List<DailyVisitUriLog> getDailyVisitUriLogs(String day);
+	List<VisitIpLog> getDailyVisitIpLogsWithDayAndUri(@Param("day") String day,
+			@Param("uri") String uri);
 
-	Map<String, Long> getVisitTodayStatByIP();
+	List<VisitUriLog> getDailyVisitUriLogs(String day);
+
+	List<VisitUriLog> getDailyVisitUriLogsWithDayAndIpAddress(
+			@Param("day") String day, @Param("ipAddress") String ipAddress);
+
+	// TODO: Remove me later.
+	Map<String, Long> getVisitIpLogs();
 
 }

@@ -232,4 +232,9 @@ public class JdbcUserDao implements UserDao {
 		return users;
 	}
 
+	@Override
+	public List<User> getAllStaff() {
+		throw new UnsupportedOperationException();
+	}
+
 }

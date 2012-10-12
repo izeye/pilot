@@ -10,13 +10,21 @@
 				FROM tb_visit_log WHERE uri != '/services/chat' GROUP BY day ORDER BY day DESC;
 	</select>
 	<select id="getDailyVisitIpLogs" parameterType="java.lang.String"
-			resultType="com.ctb.pilot.stat.model.DailyVisitIpLog">
+			resultType="com.ctb.pilot.stat.model.VisitIpLog">
 		SELECT ip, COUNT(1) count FROM tb_visit_log
 				WHERE uri != '/services/chat' AND SUBSTR(visit_date, 1, 10) = #{day} GROUP BY ip ORDER BY count DESC;
 	</select>
+	<select id="getDailyVisitIpLogsWithDayAndUri" resultType="com.ctb.pilot.stat.model.VisitIpLog">
+		SELECT ip, COUNT(1) count FROM tb_visit_log
+				WHERE uri != '/services/chat' AND uri = #{uri} AND SUBSTR(visit_date, 1, 10) = #{day} GROUP BY ip ORDER BY count DESC;
+	</select>
 	<select id="getDailyVisitUriLogs" parameterType="java.lang.String"
-			resultType="com.ctb.pilot.stat.model.DailyVisitUriLog">
+			resultType="com.ctb.pilot.stat.model.VisitUriLog">
 		SELECT uri, COUNT(1) count FROM tb_visit_log
 				WHERE SUBSTR(visit_date, 1, 10) = #{day} GROUP BY uri ORDER BY count DESC;
+	</select>
+	<select id="getDailyVisitUriLogsWithDayAndIpAddress" resultType="com.ctb.pilot.stat.model.VisitUriLog">
+		SELECT uri, COUNT(1) count FROM tb_visit_log
+				WHERE ip = #{ipAddress} AND SUBSTR(visit_date, 1, 10) = #{day} GROUP BY uri ORDER BY count DESC;
 	</select>
 </mapper>
