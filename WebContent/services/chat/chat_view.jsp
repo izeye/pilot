@@ -27,7 +27,7 @@
 		<p>
 			<label>
 				${message}:
-				<input type="text" name="message" id="message" size=100 />
+				<input type="text" name="message" id="message" size=100 x-webkit-speech />
 				<input type="submit" value="Send" />
 			</label>
 		</p>
