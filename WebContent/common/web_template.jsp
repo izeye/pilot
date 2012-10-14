@@ -3,6 +3,7 @@
 <html>
 	<head>
 		<title>CTB Research Group</title>
+		<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 		<script src="/common/js/common.js"></script>
 		<script src="/services/user/login/login.js"></script>
 		<script type="text/javascript">
@@ -18,6 +19,8 @@
 		  })();
 		
 		</script>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+		<script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
 	</head>
 	<body>
 		<h1>CTB Research Group</h1>
@@ -35,7 +38,9 @@
 					<a href="/common/web_template.jsp?body_path=/home.jsp">Home</a><br>
 					<a href="/common/web_template.jsp?body_path=/pilot.jsp">Pilot Services</a><br>
 					<a href="/common/web_template.jsp?body_path=/about_us.do">About Us</a><br>
-					<a href="/common/web_template.jsp?body_path=/admin.jsp">Admin</a><br>
+					<c:if test="${sessionScope.user.role == 'staff'}">
+						<a href="/common/web_template.jsp?body_path=/admin.jsp">Admin</a><br>
+					</c:if>
 				</td>
 				<td valign="top" width="850">
 					<jsp:include page="${param.body_path}" />

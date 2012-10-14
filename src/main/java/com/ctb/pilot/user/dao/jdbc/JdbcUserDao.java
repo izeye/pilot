@@ -35,6 +35,7 @@ public class JdbcUserDao implements UserDao {
 				user.setUserId(rs.getString("user_id"));
 				user.setPassword(rs.getString("password"));
 				user.setNickname(rs.getString("nickname"));
+				user.setRole(rs.getString("role"));
 				user.setJoinDate(rs.getTimestamp("join_date"));
 				user.setDeleted(rs.getInt("del_yn") == 1);
 				return user;
@@ -198,6 +199,7 @@ public class JdbcUserDao implements UserDao {
 				user.setUserId(rs.getString("user_id"));
 				user.setPassword(rs.getString("password"));
 				user.setNickname(rs.getString("nickname"));
+				user.setRole(rs.getString("role"));
 				user.setJoinDate(rs.getTimestamp("join_date"));
 				user.setDeleted(rs.getInt("del_yn") == 1);
 				users.add(user);

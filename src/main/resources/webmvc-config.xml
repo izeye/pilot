@@ -14,5 +14,9 @@
 	    <property name="prefix"><value>/WEB-INF/</value></property>
 	    <property name="suffix"><value>.jsp</value></property>
 	</bean>
+	
+	<mvc:interceptors>
+		<bean class="com.ctb.pilot.user.service.SessionFromCookieHandlerInterceptor"></bean>
+	</mvc:interceptors>
     	
 </beans>

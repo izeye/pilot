@@ -8,17 +8,9 @@ public class User {
 	private String userId;
 	private String password;
 	private String nickname;
+	private String role;
 	private Date joinDate;
 	private boolean deleted;
-	private String role;
-	
-	public String getRole(){
-		return role;
-	}
-	
-	public void setRole(String role){
-		this.role = role;
-	}
 
 	public int getSequence() {
 		return sequence;
@@ -52,6 +44,14 @@ public class User {
 		this.nickname = nickname;
 	}
 
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
 	public Date getJoinDate() {
 		return joinDate;
 	}
@@ -72,7 +72,8 @@ public class User {
 	public String toString() {
 		return "User [sequence=" + sequence + ", userId=" + userId
 				+ ", password=" + password + ", nickname=" + nickname
-				+ ", joinDate=" + joinDate + ", deleted=" + deleted + "]";
+				+ ", role=" + role + ", joinDate=" + joinDate + ", deleted="
+				+ deleted + "]";
 	}
 
 }
