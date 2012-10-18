@@ -11,6 +11,7 @@ import java.util.List;
 
 import com.ctb.pilot.chat.dao.MessageDao;
 import com.ctb.pilot.chat.model.Message;
+import com.ctb.pilot.chat.util.ChatUtils;
 import com.ctb.pilot.common.util.HtmlUtils;
 
 public class JdbcMessageDao implements MessageDao {
@@ -48,6 +49,8 @@ public class JdbcMessageDao implements MessageDao {
 				String messageText = rs.getString("message");
 				String decoratedMessageText = HtmlUtils
 						.decorateUrl(messageText);
+				decoratedMessageText = ChatUtils
+						.decorateEmoticon(decoratedMessageText);
 				message.setMessage(decoratedMessageText);
 				messageList.add(message);
 			}
