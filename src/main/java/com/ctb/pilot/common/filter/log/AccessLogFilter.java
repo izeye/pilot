@@ -66,6 +66,9 @@ public class AccessLogFilter implements Filter {
 		VisitLog visitLog = new VisitLog();
 		visitLog.setIp(ip);
 		visitLog.setReferer(referer);
+		if (uri.length() > 100) {
+			uri = uri.substring(0, 100);
+		}
 		visitLog.setUri(uri);
 		visitLog.setUserAgent(userAgent);
 

@@ -37,6 +37,7 @@ insert into tb_user (user_id, password, nickname, join_date) values ('Minjw0@nat
 insert into tb_user (user_id, password, nickname, join_date) values ('mateushenriquebrum@gmail.com', '1234', 'mateusbrum', now());
 insert into tb_user (user_id, password, nickname, join_date) values ('enosent7@gmail.com', '1234', 'enosent7', now());
 insert into tb_user (user_id, password, nickname, join_date) values ('oasishun@gmail.com', '1234', 'oasishun', now());
+insert into tb_user (user_id, password, nickname, join_date) values ('eliza@eliza.com', '1234', 'Eliza', now());
 
 update tb_user set role='staff' where nickname in ('izeye', 'icpu', 'toujour19', 'enosent7', 'oasishun');
 
