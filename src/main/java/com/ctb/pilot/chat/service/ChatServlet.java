@@ -3,7 +3,9 @@ package com.ctb.pilot.chat.service;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -34,30 +36,18 @@ public class ChatServlet extends HttpServlet {
 	private MessageDao messageDao = new JdbcMessageDao();
 	private UserDao userDao = new JdbcUserDao();
 
-	private ElizaMain eliza = new ElizaMain();
+	private Map<Integer, ElizaMain> elizaMap = new HashMap<Integer, ElizaMain>();
 	private int elizaSequence;
 
-	private boolean elizaInitialized = false;
-
 	public ChatServlet() {
+		UserDao userDao = new JdbcUserDao();
+		User elizaUser = userDao.login("eliza@eliza.com", "1234");
+		elizaSequence = elizaUser.getSequence();
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		if (!elizaInitialized) {
-			String script = "/WEB-INF/script";
-			ServletContext servletContext = getServletContext();
-			InputStream is = servletContext.getResourceAsStream(script);
-			eliza.readScript(is);
-
-			UserDao userDao = new JdbcUserDao();
-			User user = userDao.login("eliza@eliza.com", "1234");
-			elizaSequence = user.getSequence();
-
-			elizaInitialized = true;
-		}
-
 		String requestURI = req.getRequestURI();
 		System.out.println("In doGet(), requestURI: " + requestURI);
 
@@ -89,8 +79,25 @@ public class ChatServlet extends HttpServlet {
 		}
 
 		messageDao.insertMessage(userSequence, message);
-		String reply = eliza.processInput(message);
-		messageDao.insertMessage(elizaSequence, reply);
+
+		if (message.startsWith("@Eliza ")) {
+			ElizaMain eliza = elizaMap.get(userSequence);
+			if (eliza == null) {
+				eliza = new ElizaMain();
+
+				String script = "/WEB-INF/eliza/script";
+				ServletContext servletContext = getServletContext();
+				InputStream is = servletContext.getResourceAsStream(script);
+				eliza.readScript(is);
+
+				elizaMap.put(userSequence, eliza);
+			}
+
+			String nickname = user.getNickname();
+			message = message.substring("@Eliza ".length());
+			String reply = "@" + nickname + " " + eliza.processInput(message);
+			messageDao.insertMessage(elizaSequence, reply);
+		}
 	}
 
 }
