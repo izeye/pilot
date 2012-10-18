@@ -15,8 +15,6 @@
 <meta http-equiv="refresh" content="10">
 -->
 <title>${title}</title>
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
 <script src="/services/chat/chat.js"></script>
 <link rel="stylesheet" type="text/css" href="/common/css/common.css" />
 </head>
@@ -27,20 +25,18 @@
 		<p>
 			<label>
 				${message}:
-				<input type="text" name="message" id="message" size=100 x-webkit-speech />
+				<input class="input-xxlarge" type="text" name="message" id="message" size=100 x-webkit-speech />
 				<input type="submit" value="Send" />
 			</label>
 		</p>
 	</form>
 	<br>
-	<table id="output" class="data" border="1" id="chat">
+	<table id="output" class="table table-striped table-bordered table-hover table-condensed">
 		<tr>
 			<th width="200">${time}</th>
 			<th width="100">${nickname}</th>
 			<th width="700">${message}</th>
 		</tr>
-		
 	</table>
-	
 </body>
 </html>

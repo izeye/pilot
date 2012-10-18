@@ -5,28 +5,12 @@
 <html>
 <head>
 <title>World Clock</title>
-<style type="text/css">
-table {
-	border-spacing: 0;
-	border-collapse: collapse;
-}
-
-table td,table th {
-	padding: 2px;
-}
-</style>
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		$("table#world_clock tr:even").css("background-color", "#F4F4F8");
-		$("table#world_clock tr:odd").css("background-color", "#FFFFFF");
-	});
-</script>
 </head>
 <body>
 	<h3>World Clock</h3>
-	<table class="data" border="1" id="world_clock">
+	<table class="table table-striped table-bordered table-hover table-condensed" id="world_clock">
 		<tr>
 			<th>Time Zone ID</th>
 			<th>Time</th>

@@ -4,18 +4,13 @@
 <html>
 <head>
 <title>Daily Visit URI Statistics</title>
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		$("table#daily_visit_uri_log_list tr:even").css("background-color", "#F4F4F8");
-		$("table#daily_visit_uri_log_list tr:odd").css("background-color", "#FFFFFF");
-	});
-</script>
+		<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+		<script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<h3>${requestScope.day} Visit URI Statistics</h3>
-	<table border=1 id="daily_visit_uri_log_list">
+	<table class="table table-striped table-bordered table-hover table-condensed" id="daily_visit_uri_log_list">
 		<tr>
 			<th>Rank</th><th>URI</th><th>Count</th>
 		</tr>
