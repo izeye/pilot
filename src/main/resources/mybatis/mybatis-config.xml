@@ -6,5 +6,6 @@
 	</settings>
 	<typeAliases>
 		<typeAlias alias="User" type="com.ctb.pilot.user.model.User"/>
+		<typeAlias alias="Message" type="com.ctb.pilot.chat.model.Message"/>
 	</typeAliases>
 </configuration>

@@ -7,7 +7,7 @@
 </head>
 <body>
 	<h3>Sign Up</h3>
-	<form id="sign_up" name="sign_up" action="/services/user/sign-up" method="post" enctype="multipart/form-data">
+	<form id="sign_up" name="sign_up" action="/services/user/sign-up.do" method="post" enctype="multipart/form-data">
 		<table>
 			<tr>
 				<td>User ID (Email) :</td>

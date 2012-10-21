@@ -1,28 +1,26 @@
 package eliza;
 
-import java.util.Vector;
+import java.util.ArrayList;
 
 /**
- *  Eliza reassembly list.
+ * Eliza reassembly list.
  */
-public class ReasembList extends Vector {
+public class ReasembList extends ArrayList<String> {
 
-    /**
-     *  Add an element to the reassembly list.
-     */
-    public void add(String reasmb) {
-        addElement(reasmb);
-    }
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-    /**
-     *  Print the reassembly list.
-     */
-    public void print(int indent) {
-        for (int i = 0; i < size(); i++) {
-            for (int j = 0; j < indent; j++) System.out.print(" ");
-            String s = (String)elementAt(i);
-            System.out.println("reasemb: " + s);
-        }
-    }
+	/**
+	 * Print the reassembly list.
+	 */
+	public void print(int indent) {
+		for (String reasemb : this) {
+			for (int j = 0; j < indent; j++)
+				System.out.print(" ");
+			System.out.println("reasemb: " + reasemb);
+		}
+	}
+
 }
-

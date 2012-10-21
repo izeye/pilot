@@ -18,17 +18,8 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-
-	<servlet>
-		<servlet-name>chat-servlet</servlet-name>
-		<servlet-class>com.ctb.pilot.chat.service.ChatServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>chat-servlet</servlet-name>
-		<url-pattern>/services/chat</url-pattern>
-	</servlet-mapping>
   
-  <!-- The front controller of this Spring Web application, responsible for handling all application requests -->
+  	<!-- The front controller of this Spring Web application, responsible for handling all application requests -->
 	<servlet>
 		<servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -52,31 +43,6 @@
 	<servlet-mapping>
 		<servlet-name>chat-history-servlet</servlet-name>
 		<url-pattern>/services/chat/history</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>login-servlet</servlet-name>
-		<servlet-class>com.ctb.pilot.user.service.LoginServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>login-servlet</servlet-name>
-		<url-pattern>/services/user/login</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>logout-servlet</servlet-name>
-		<servlet-class>com.ctb.pilot.user.service.LogoutServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>logout-servlet</servlet-name>
-		<url-pattern>/services/user/logout</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>sign-up-servlet</servlet-name>
-		<servlet-class>com.ctb.pilot.user.service.SignUpServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>sign-up-servlet</servlet-name>
-		<url-pattern>/services/user/sign-up</url-pattern>
 	</servlet-mapping>
 
 	<filter>

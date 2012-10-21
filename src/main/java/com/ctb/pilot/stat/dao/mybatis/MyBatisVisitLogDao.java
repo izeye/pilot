@@ -21,30 +21,26 @@ public class MyBatisVisitLogDao implements VisitLogDao {
 
 	@Override
 	public void insertVisitLog(VisitLog visitLog) {
-		VisitLogMapper visitLogMapper = sessionTemplate
-				.getMapper(VisitLogMapper.class);
-		visitLogMapper.insertVisitLog(visitLog);
+		VisitLogMapper mapper = sessionTemplate.getMapper(VisitLogMapper.class);
+		mapper.insertVisitLog(visitLog);
 	}
 
 	@Override
 	public List<DailyVisitLog> getDailyVisitLogs() {
-		VisitLogMapper visitLogMapper = sessionTemplate
-				.getMapper(VisitLogMapper.class);
-		return visitLogMapper.getDailyVisitLogs();
+		VisitLogMapper mapper = sessionTemplate.getMapper(VisitLogMapper.class);
+		return mapper.getDailyVisitLogs();
 	}
 
 	@Override
 	public List<VisitIpLog> getDailyVisitIpLogs(String day) {
-		VisitLogMapper visitLogMapper = sessionTemplate
-				.getMapper(VisitLogMapper.class);
-		return visitLogMapper.getDailyVisitIpLogs(day);
+		VisitLogMapper mapper = sessionTemplate.getMapper(VisitLogMapper.class);
+		return mapper.getDailyVisitIpLogs(day);
 	}
 
 	@Override
 	public List<VisitUriLog> getDailyVisitUriLogs(String day) {
-		VisitLogMapper visitLogMapper = sessionTemplate
-				.getMapper(VisitLogMapper.class);
-		return visitLogMapper.getDailyVisitUriLogs(day);
+		VisitLogMapper mapper = sessionTemplate.getMapper(VisitLogMapper.class);
+		return mapper.getDailyVisitUriLogs(day);
 	}
 
 	@Override
@@ -54,16 +50,14 @@ public class MyBatisVisitLogDao implements VisitLogDao {
 
 	@Override
 	public List<VisitIpLog> getDailyVisitIpLogs(String day, String uri) {
-		VisitLogMapper visitLogMapper = sessionTemplate
-				.getMapper(VisitLogMapper.class);
-		return visitLogMapper.getDailyVisitIpLogsWithDayAndUri(day, uri);
+		VisitLogMapper mapper = sessionTemplate.getMapper(VisitLogMapper.class);
+		return mapper.getDailyVisitIpLogsWithDayAndUri(day, uri);
 	}
 
 	@Override
 	public List<VisitUriLog> getDailyVisitUriLogs(String day, String ipAddress) {
-		VisitLogMapper visitLogMapper = sessionTemplate
-				.getMapper(VisitLogMapper.class);
-		return visitLogMapper.getDailyVisitUriLogsWithDayAndIpAddress(day, ipAddress);
+		VisitLogMapper mapper = sessionTemplate.getMapper(VisitLogMapper.class);
+		return mapper.getDailyVisitUriLogsWithDayAndIpAddress(day, ipAddress);
 	}
 
 }

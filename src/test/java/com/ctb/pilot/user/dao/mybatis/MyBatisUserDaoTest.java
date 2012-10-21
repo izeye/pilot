@@ -22,7 +22,7 @@ public class MyBatisUserDaoTest {
 	private UserDao userDao;
 
 	@Test
-	public void testLogin() {
+	public void login() {
 		String userId = "izeye@naver.com";
 		String password = "1234";
 		User user = userDao.login(userId, password);
@@ -30,14 +30,14 @@ public class MyBatisUserDaoTest {
 	}
 
 	@Test
-	public void testGetUserBySequence() {
+	public void getUserBySequence() {
 		int sequence = 1;
 		User user = userDao.getUserBySequence(sequence);
 		System.out.println(user);
 	}
 
 	@Test
-	public void testSignUp() throws FileNotFoundException {
+	public void signUp() throws FileNotFoundException {
 		String userId = "jsp@naver.com";
 		String password = "1234";
 		String nickname = "jsp";
@@ -47,7 +47,7 @@ public class MyBatisUserDaoTest {
 	}
 
 	@Test
-	public void testUpdate() {
+	public void update() {
 		int sequence = 1;
 		String password = "12345";
 		String nickname = "Johnny";
@@ -61,13 +61,13 @@ public class MyBatisUserDaoTest {
 	}
 
 	@Test
-	public void testGetAllUsers() {
+	public void getAllUsers() {
 		List<User> allUsers = userDao.getAllUsers();
 		System.out.println(allUsers);
 	}
-	
+
 	@Test
-	public void testGetAllStaff(){
+	public void getAllStaff() {
 		List<User> allStaff = userDao.getAllStaff();
 		System.out.println(allStaff);
 	}

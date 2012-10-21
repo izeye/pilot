@@ -1,28 +1,18 @@
 package eliza;
 
-import java.util.Vector;
+import java.util.ArrayList;
 
-/**
- *  Eliza decomp list.
- *  This stores all the decompositions of a single key.
- */
-public class DecompList extends Vector {
+public class DecompList extends ArrayList<Decomp> {
 
-    /**
-     *  Add another decomp rule to the list.
-     */
-    public void add(String word, boolean mem, ReasembList reasmb) {
-        addElement(new Decomp(word, mem, reasmb));
-    }
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-    /**
-     *  Print the whole decomp list.
-     */
-    public void print(int indent) {
-        for (int i = 0; i < size(); i++) {
-            Decomp d = (Decomp)elementAt(i);
-            d.print(indent);
-        }
-    }
+	public void print(int indent) {
+		for (Decomp decomp : this) {
+			decomp.print(indent);
+		}
+	}
+
 }
-

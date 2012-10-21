@@ -14,7 +14,7 @@ $(function() {
 });
 
 var getMessages = function(){
-	$.getJSON('/services/chat',{just:new Date().getTime()},	function(data){
+	$.getJSON('/services/chat/messages.do',{just:new Date().getTime()},	function(data){
 		$('#output').empty();
 
 		var header = '<tr><td width="200">TIME</td><td width="100">NICKNAME</td><td width="700">MESSAGE</td></tr>';
@@ -31,7 +31,7 @@ var getMessages = function(){
 
 $(function(){
 	$('#chat').submit(function(event){
-		$.post('/services/chat',$(this).serialize());
+		$.post('/services/chat/send-message.do',$(this).serialize());
 		$('#message').val('');
 		event.preventDefault();
 					

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ctb.pilot.chat.dao.mybatis.MessageMapper">
+	<select id="getMessages" resultType="Message">
+		SELECT * FROM tb_chat_message cm, tb_user u
+			where cm.user_seq = u.seq order by cm.seq desc limit #{pageSize} offset #{pageNo}
+	</select>
+	<insert id="insertMessage">
+		INSERT INTO tb_chat_message (created_time, user_seq, message) values (now(), #{userSequence}, #{message})
+	</insert>
+	<select id="getAllMessageCount" resultType="long">
+		SELECT count(1) FROM tb_chat_message
+	</select>
+</mapper>

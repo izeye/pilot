@@ -20,7 +20,7 @@
 </head>
 <body>
 	<h3>Chat</h3>
-	<form method="post" action="/services/chat" name="chat" id="chat"
+	<form method="post" action="/services/chat/send-message.do" name="chat" id="chat"
 		onsubmit="return emptyChk()">
 		<p>
 			<label>
