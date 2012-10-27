@@ -4,7 +4,7 @@
 	<select id="getMessages" resultType="Message">
 		SELECT cm.seq sequence, cm.created_time, cm.user_seq user_sequence, u.nickname, cm.message
 			FROM tb_chat_message cm, tb_user u
-			WHERE cm.user_seq = u.seq order by cm.seq DESC LIMIT #{pageSize} OFFSET #{pageNo}
+			WHERE cm.user_seq = u.seq order by cm.seq DESC LIMIT #{pageSize} OFFSET #{offset}
 	</select>
 	<insert id="insertMessage">
 		INSERT INTO tb_chat_message (created_time, user_seq, message) values (now(), #{userSequence}, #{message})

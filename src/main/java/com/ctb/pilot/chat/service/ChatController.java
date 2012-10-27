@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ctb.pilot.chat.model.Message;
@@ -55,6 +56,27 @@ public class ChatController {
 		out.print(json);
 		out.flush();
 		out.close();
+	}
+
+	@RequestMapping("/services/chat/history.do")
+	public String getHistoryMessages(HttpServletRequest req, Model model) {
+		String pageNoAsString = req.getParameter("page_no");
+		int pageNo;
+		if (pageNoAsString == null) {
+			pageNo = 1;
+		} else {
+			pageNo = Integer.parseInt(pageNoAsString);
+		}
+
+		long total = chatService.getAllMessageCount();
+		long pageCount = total / PAGE_SIZE + (total % PAGE_SIZE != 0 ? 1 : 0);
+
+		List<Message> messages = chatService.getMessages(PAGE_SIZE, pageNo);
+		model.addAttribute("messages", messages);
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("pageCount", pageCount);
+
+		return "services/chat/chat_history_view";
 	}
 
 	@RequestMapping("/services/chat/send-message.do")

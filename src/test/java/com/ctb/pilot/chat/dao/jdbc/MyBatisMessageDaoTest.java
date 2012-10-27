@@ -24,6 +24,10 @@ public class MyBatisMessageDaoTest {
 		int pageNo = 1;
 		List<Message> messageList = messageDao.getMessages(pageSize, pageNo);
 		System.out.println(messageList);
+
+		pageNo = 2;
+		messageList = messageDao.getMessages(pageSize, pageNo);
+		System.out.println(messageList);
 	}
 
 	@Test

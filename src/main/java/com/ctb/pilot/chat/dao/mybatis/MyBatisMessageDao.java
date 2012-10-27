@@ -18,7 +18,8 @@ public class MyBatisMessageDao implements MessageDao {
 	@Override
 	public List<Message> getMessages(int pageSize, int pageNo) {
 		MessageMapper mapper = sessionTemplate.getMapper(MessageMapper.class);
-		return mapper.getMessages(pageSize, pageNo);
+		int offset = (pageNo - 1) * pageSize;
+		return mapper.getMessages(pageSize, offset);
 	}
 
 	@Override

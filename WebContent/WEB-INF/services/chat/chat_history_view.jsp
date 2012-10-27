@@ -35,7 +35,7 @@
 		</table>
 	</form>
 	<br>
-	<table class="data" border="1" id="chat">
+	<table id="chat" class="table table-striped table-bordered table-hover table-condensed">
 		<tr>
 			<th width="200">${time}</th>
 			<th width="100">${nickname}</th>
@@ -52,10 +52,10 @@
 		</c:forEach>
 	</table>
 	<c:if test="${pageNo != 1 }">
-		<a href="/services/chat/history.do?page_no=${pageNo - 1}">Prev</a>
+		<a href="/common/web_template.jsp?body_path=/services/chat/history.do?page_no=${pageNo - 1}">Prev</a>
 	</c:if>
 	<c:forEach var="page" begin="1" end="${pageCount}">
-		<a href="/services/chat/history.do?page_no=${page}"> <c:choose>
+		<a href="/common/web_template.jsp?body_path=/services/chat/history.do?page_no=${page}"> <c:choose>
 				<c:when test="${page == pageNo}">
 					<b>${page}</b>
 				</c:when>
@@ -66,7 +66,7 @@
 		</a>
 	</c:forEach>
 	<c:if test="${pageNo != pageCount}">
-		<a href="/services/chat/history.do?page_no=${pageNo + 1}">Next</a>
+		<a href="/common/web_template.jsp?body_path=/services/chat/history.do?page_no=${pageNo + 1}">Next</a>
 	</c:if>
 	<!--
 	<br> ${maxRowCount}:

@@ -9,7 +9,7 @@ import com.ctb.pilot.chat.model.Message;
 public interface MessageMapper {
 
 	List<Message> getMessages(@Param("pageSize") int pageSize,
-			@Param("pageNo") int pageNo);
+			@Param("offset") int offset);
 
 	void insertMessage(@Param("userSequence") int userSequence,
 			@Param("message") String message);

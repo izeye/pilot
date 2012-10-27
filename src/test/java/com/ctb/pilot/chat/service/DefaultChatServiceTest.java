@@ -23,6 +23,10 @@ public class DefaultChatServiceTest {
 		int pageNo = 1;
 		List<Message> messageList = chatService.getMessages(pageSize, pageNo);
 		System.out.println(messageList);
+
+		pageNo = 2;
+		messageList = chatService.getMessages(pageSize, pageNo);
+		System.out.println(messageList);
 	}
 
 	@Test
