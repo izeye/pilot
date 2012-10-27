@@ -28,7 +28,8 @@ public class JdbcMessageDaoTest {
 	public void testInsertMessage() {
 		int userSequence = 1;
 		String message = "This is a test.";
-		messageDao.insertMessage(userSequence, message);
+		String language = "ko";
+		messageDao.insertMessage(userSequence, message, language);
 	}
 
 	@Test

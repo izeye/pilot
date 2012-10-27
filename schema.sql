@@ -10,6 +10,8 @@ create table tb_chat_message (
 	PRIMARY KEY (seq)
 );
 
+alter table tb_chat_message add column language VARCHAR(5);
+
 create table tb_user (
 	seq INT AUTO_INCREMENT,
 	user_id VARCHAR(100) not null,

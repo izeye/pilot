@@ -33,7 +33,8 @@ public class DefaultChatServiceTest {
 	public void insertMessage() {
 		int userSequence = 1;
 		String message = "This is a test.";
-		chatService.insertMessage(userSequence, message);
+		String language = "ko";
+		chatService.insertMessage(userSequence, message, language);
 	}
 
 	@Test

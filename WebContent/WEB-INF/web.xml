@@ -36,15 +36,6 @@
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
 
-	<servlet>
-		<servlet-name>chat-history-servlet</servlet-name>
-		<servlet-class>com.ctb.pilot.chat.service.ChatHistoryServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>chat-history-servlet</servlet-name>
-		<url-pattern>/services/chat/history</url-pattern>
-	</servlet-mapping>
-
 	<filter>
 		<filter-name>access-log-filter</filter-name>
 		<filter-class>com.ctb.pilot.common.filter.log.AccessLogFilter</filter-class>
