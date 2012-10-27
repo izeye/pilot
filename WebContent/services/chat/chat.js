@@ -19,14 +19,13 @@ var ajax = function(text,seq){
 	$.ajax({
 		type:"GET",
 		url:"/services/translation/accessToken.do",
-		dataType:"json",
+		dataType:"text",
 	    error:function(xhr,status,e){
 	    	alert("errors :  " + status);
 	    },
 		success:function(msg){
-			var json = msg;
 			tableSeq = seq;
-			translator(json.access_token,"en","ko",text);
+			translator(msg,"en","ko",text);
 		}
 	});	
 };

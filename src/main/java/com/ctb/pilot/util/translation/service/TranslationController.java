@@ -21,7 +21,7 @@ public class TranslationController {
 	public void getAccessToken(HttpServletRequest request,
 			HttpServletResponse response) throws ClientProtocolException,
 			IOException {
-		String temp = translationService.getAccessTokenAsJson();
+		String temp = translationService.getAccessToken();
 		System.out.println(temp);
 		PrintWriter out = response.getWriter();
 		out.print(temp);

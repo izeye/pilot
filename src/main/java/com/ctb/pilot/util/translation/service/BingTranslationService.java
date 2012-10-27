@@ -41,6 +41,8 @@ public class BingTranslationService implements TranslationService {
 	private static final String BING_LANGUAGE_DETECT_URL = "http://api.microsofttranslator.com/V2/Ajax.svc/Detect?appId=Bearer"
 			+ PLACEHOLDER_ACCESS_TOKEN + "&text=" + PLACEHOLDER_TEXT;
 
+	private static final String KEY_ACCESS_TOKEN = "access_token";
+
 	private String createLanguageDetectUrl(String accessToken, String text) {
 		String encodedAccessToken = new URLEncoder().encode(" " + accessToken);
 		String encodedText = new URLEncoder().encode(text);
@@ -68,7 +70,7 @@ public class BingTranslationService implements TranslationService {
 		}
 	}
 
-	public String getAccessTokenAsJson() throws UnsupportedEncodingException,
+	public String getAccessToken() throws UnsupportedEncodingException,
 			IOException, ClientProtocolException {
 		DefaultHttpClient client = new DefaultHttpClient();
 		HttpPost post = new HttpPost(BING_ACCESS_TOKEN_URL);
@@ -82,12 +84,9 @@ public class BingTranslationService implements TranslationService {
 				VALUE_CLIENT_SECRET));
 		post.setEntity(new UrlEncodedFormEntity(parameters));
 		HttpResponse httpResponse = client.execute(post);
-		return EntityUtils.toString(httpResponse.getEntity());
-	}
-
-	private String getAccessToken() throws ClientProtocolException, IOException {
-		String accessTokenAsJson = getAccessTokenAsJson();
-		return JsonUtils.getProperty("access_token", accessTokenAsJson);
+		String responseAsString = EntityUtils
+				.toString(httpResponse.getEntity());
+		return JsonUtils.getProperty(KEY_ACCESS_TOKEN, responseAsString);
 	}
 
 }

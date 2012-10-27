@@ -29,11 +29,12 @@ public class BingTranslationServiceTest {
 		assertThat(language, is("en"));
 	}
 
+	// FIXME: 번역 쿼리를 Ajax에서 서버로.
 	@Test
-	public void getAccessTokenAsJson() throws UnsupportedEncodingException,
+	public void getAccessToken() throws UnsupportedEncodingException,
 			ClientProtocolException, IOException {
-		String accessTokenAsJson = translationService.getAccessTokenAsJson();
-		System.out.println(accessTokenAsJson);
+		String accessToken = translationService.getAccessToken();
+		System.out.println(accessToken);
 	}
 
 }
