@@ -89,4 +89,10 @@ public class BingTranslationService implements TranslationService {
 		return JsonUtils.getProperty(KEY_ACCESS_TOKEN, responseAsString);
 	}
 
+	@Override
+	public String translate(String text) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

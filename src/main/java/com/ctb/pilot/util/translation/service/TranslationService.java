@@ -4,4 +4,6 @@ public interface TranslationService {
 
 	String detectLanguage(String text);
 
+	String translate(String text);
+
 }
