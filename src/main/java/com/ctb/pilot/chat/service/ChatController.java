@@ -48,7 +48,7 @@ public class ChatController {
 	@RequestMapping("/services/chat/messages.do")
 	public void getRecentMessages(HttpServletRequest req,
 			HttpServletResponse resp) throws IOException {
-		List<Message> messages = chatService.getMessages(PAGE_SIZE, 0);
+		List<Message> messages = chatService.getMessages(PAGE_SIZE, 1);
 		resp.setCharacterEncoding("utf8");
 		PrintWriter out = resp.getWriter();
 		String json = JsonUtils.toJson(messages);
