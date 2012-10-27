@@ -83,7 +83,7 @@ public class JdbcMessageDao implements MessageDao {
 	}
 
 	@Override
-	public void insertMessage(int userSequence, String message) {
+	public void insertMessage(int userSequence, String message, String language) {
 		Connection con = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;

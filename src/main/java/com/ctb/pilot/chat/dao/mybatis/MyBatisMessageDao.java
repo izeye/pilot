@@ -23,9 +23,9 @@ public class MyBatisMessageDao implements MessageDao {
 	}
 
 	@Override
-	public void insertMessage(int userSequence, String message) {
+	public void insertMessage(int userSequence, String message, String language) {
 		MessageMapper mapper = sessionTemplate.getMapper(MessageMapper.class);
-		mapper.insertMessage(userSequence, message);
+		mapper.insertMessage(userSequence, message, language);
 	}
 
 	@Override

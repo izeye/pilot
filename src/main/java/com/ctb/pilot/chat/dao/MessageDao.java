@@ -8,7 +8,7 @@ public interface MessageDao {
 
 	List<Message> getMessages(int pageSize, int pageNo);
 
-	void insertMessage(int userSequence, String message);
+	void insertMessage(int userSequence, String message, String language);
 
 	long getAllMessageCount();
 

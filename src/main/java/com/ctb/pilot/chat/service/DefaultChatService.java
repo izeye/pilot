@@ -20,8 +20,8 @@ public class DefaultChatService implements ChatService {
 	}
 
 	@Override
-	public void insertMessage(int userSequence, String message) {
-		messageDao.insertMessage(userSequence, message);
+	public void insertMessage(int userSequence, String message, String language) {
+		messageDao.insertMessage(userSequence, message, language);
 	}
 
 	@Override

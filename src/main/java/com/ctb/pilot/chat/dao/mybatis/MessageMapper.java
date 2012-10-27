@@ -12,7 +12,7 @@ public interface MessageMapper {
 			@Param("offset") int offset);
 
 	void insertMessage(@Param("userSequence") int userSequence,
-			@Param("message") String message);
+			@Param("message") String message, @Param("language") String language);
 
 	long getAllMessageCount();
 
