@@ -1,12 +1,14 @@
 package com.ctb.pilot.common.util.translation;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.catalina.util.URLEncoder;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
@@ -15,6 +17,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
+import com.ctb.pilot.chat.model.Message;
 import com.ctb.pilot.common.util.JsonUtils;
 
 public class TranslationUtils {
@@ -54,6 +57,28 @@ public class TranslationUtils {
 		return accessToken;
 	}
 
+	public static String getJsonToAccessToken() throws ParseException,
+			IOException {
+		DefaultHttpClient client = new DefaultHttpClient();
+
+		HttpPost post = new HttpPost(
+				"https://datamarket.accesscontrol.windows.net/v2/OAuth2-13");
+
+		List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+		parameters.add(new BasicNameValuePair("client_id", "jpmlyr"));
+		parameters.add(new BasicNameValuePair("client_secret",
+				"h5UfkHjJy/KWKk4KCF0FkJBI4RGnkWx/b1VvEM1rJDc="));
+		parameters.add(new BasicNameValuePair("scope",
+				"http://api.microsofttranslator.com"));
+		parameters.add(new BasicNameValuePair("grant_type",
+				"client_credentials"));
+		post.setEntity(new UrlEncodedFormEntity(parameters));
+		HttpResponse httpResponse = client.execute(post);
+		String temp = EntityUtils.toString(httpResponse.getEntity());
+
+		return temp;
+	}
+
 	public static boolean getCheckLanguage(String text, String localeStr)
 			throws ClientProtocolException, IOException {
 		String detectedText = TranslationUtils.getDetect(
@@ -61,8 +86,24 @@ public class TranslationUtils {
 
 		return !detectedText.equals(localeStr);
 	}
-	
-	public static List makeCheckedList(List list){
-		return null;
+
+	public static String getLanguage(String text)
+			throws ClientProtocolException, IOException {
+		String detectedText = TranslationUtils.getDetect(
+				TranslationUtils.getAccessToken(), text);
+		return detectedText;
+	}
+
+	public static List makeCheckedList(List list)
+			throws ClientProtocolException, IOException {
+		Message message;
+		for (int i = 0; i < list.size(); i++) {
+			message = (Message) list.get(i);
+			message.setCheckedText(TranslationUtils.getCheckLanguage(
+					message.getMessage(), "ko"));
+			list.set(i, message);
+		}
+
+		return list;
 	}
 }

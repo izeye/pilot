@@ -10,9 +10,27 @@ public class Message {
 	private int userSequence;
 	private String nickname;
 	private String message;
+	private boolean checkedText;
+    private String language;
+	
+	public String getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
+	}
 
 	public int getSequence() {
 		return sequence;
+	}
+
+	public boolean isCheckedText() {
+		return checkedText;
+	}
+
+	public void setCheckedText(boolean checkedText) {
+		this.checkedText = checkedText;
 	}
 
 	public void setSequence(int sequence) {

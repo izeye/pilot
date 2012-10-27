@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ctb.pilot.chat.model.Message;
 import com.ctb.pilot.common.util.JsonUtils;
+import com.ctb.pilot.common.util.translation.TranslationUtils;
 import com.ctb.pilot.user.model.User;
 import com.ctb.pilot.user.service.UserService;
 
@@ -49,6 +50,7 @@ public class ChatController {
 	public void getRecentMessages(HttpServletRequest req,
 			HttpServletResponse resp) throws IOException {
 		List<Message> messages = chatService.getMessages(PAGE_SIZE, 1);
+//		TranslationUtils.makeCheckedList(messages);
 		resp.setCharacterEncoding("utf8");
 		PrintWriter out = resp.getWriter();
 		String json = JsonUtils.toJson(messages);
@@ -98,8 +100,8 @@ public class ChatController {
 		if (message == null || message.isEmpty()) {
 			throw new ServletException("Message is null or empty.");
 		}
-
-		chatService.insertMessage(userSequence, message);
+		String language = TranslationUtils.getLanguage(message);
+		chatService.insertMessage(userSequence, message, language);
 
 		// Eliza works.
 		if (message.startsWith(elizaPrefix)) {
@@ -115,9 +117,10 @@ public class ChatController {
 			}
 
 			message = message.substring(elizaPrefix.length());
+			language = TranslationUtils.getLanguage(message);
 			String reply = "@" + user.getNickname() + " "
 					+ eliza.processInput(message);
-			chatService.insertMessage(elizaUser.getSequence(), reply);
+			chatService.insertMessage(elizaUser.getSequence(), reply, language);
 		}
 	}
 

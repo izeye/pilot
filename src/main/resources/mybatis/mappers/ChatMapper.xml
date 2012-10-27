@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ctb.pilot.chat.dao.mybatis.MessageMapper">
 	<select id="getMessages" resultType="Message">
-		SELECT cm.seq sequence, cm.created_time, cm.user_seq user_sequence, u.nickname, cm.message
+		SELECT cm.seq sequence, cm.created_time, cm.user_seq user_sequence, u.nickname, cm.message, cm.language
 			FROM tb_chat_message cm, tb_user u
 			WHERE cm.user_seq = u.seq order by cm.seq DESC LIMIT #{pageSize} OFFSET #{offset}
 	</select>
 	<insert id="insertMessage">
-		INSERT INTO tb_chat_message (created_time, user_seq, message) values (now(), #{userSequence}, #{message})
+		INSERT INTO tb_chat_message (created_time, user_seq, message,language) values (now(), #{userSequence}, #{message}, #{language})
 	</insert>
 	<select id="getAllMessageCount" resultType="long">
 		SELECT count(1) FROM tb_chat_message

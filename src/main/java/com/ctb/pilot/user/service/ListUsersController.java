@@ -16,7 +16,7 @@ public class ListUsersController {
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping("/services/admin/user/list_users_view.do")
+	@RequestMapping("/services/admin/user/list_users_view2.do")
 	public String listUsers(HttpServletRequest request) {
 		List<User> allUsers = userService.getAllUsers();
 		request.setAttribute("users", allUsers);

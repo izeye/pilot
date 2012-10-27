@@ -1,3 +1,5 @@
+var tableSeq;
+
 var emptyChk = function() {
 	if (message.value == "") {
 		alert("Empty field!");
@@ -13,6 +15,40 @@ $(function() {
 	},10000);
 });
 
+var ajax = function(text,seq){
+	$.ajax({
+		type:"GET",
+		url:"/services/translation/accessToken.do",
+		dataType:"json",
+	    error:function(xhr,status,e){
+	    	alert("errors :  " + status);
+	    },
+		success:function(msg){
+			var json = msg;
+			tableSeq = seq;
+			translator(json.access_token,"en","ko",text);
+		}
+	});	
+};
+ 
+ var translator = function(accessToken,from,to,text){
+	 //var from = "en", to = "ko", text = "studing is hard.";
+
+     var s = document.createElement("script");
+     s.src = "http://api.microsofttranslator.com/V2/Ajax.svc/Translate" +
+         "?appId=Bearer " + encodeURIComponent(accessToken) +
+         "&from=" + encodeURIComponent(from) +
+         "&to=" + encodeURIComponent(to) +
+         "&text=" + encodeURIComponent(text) +
+         "&oncomplete=mycallback";
+     document.body.appendChild(s);
+ };
+
+ function mycallback(response)
+ {
+     $('#translate'+tableSeq).text(response);
+ }
+
 var getMessages = function(){
 	$.getJSON('/services/chat/messages.do',{just:new Date().getTime()},	function(data){
 		$('#output').empty();
@@ -20,7 +56,17 @@ var getMessages = function(){
 		var header = '<tr><td width="200">TIME</td><td width="100">NICKNAME</td><td width="700">MESSAGE</td></tr>';
 		$(header).appendTo('#output');
 		$.each(data,function(index,item){
-			var output = '<tr><td>'+item.formattedCreatedTime+'</td><td>'+item.nickname+'</td><td>'+item.message+'</td></tr>';
+			var output = '';
+			if(item.language == 'ko'){
+				output = '<tr><td>'+item.formattedCreatedTime+'</td><td>'+item.nickname+'</td><td>'
+				+item.message+'</td></tr>';
+			}else{
+				output = '<tr><td>'+item.formattedCreatedTime+'</td><td>'+item.nickname+'</td><td>'
+				+item.message +
+				'<div id="translate'+item.sequence+'">' +
+				'<a href="#" onclick="ajax(\''+item.message+'\','+item.sequence+')">번역하기</a>'
+				+'</div></td></tr>';
+			}
 			$(output).appendTo('#output');
 		});
 		
