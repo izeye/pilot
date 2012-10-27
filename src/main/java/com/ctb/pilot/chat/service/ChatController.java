@@ -22,9 +22,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ctb.pilot.chat.model.Message;
 import com.ctb.pilot.common.util.JsonUtils;
-import com.ctb.pilot.common.util.translation.TranslationUtils;
 import com.ctb.pilot.user.model.User;
 import com.ctb.pilot.user.service.UserService;
+import com.ctb.pilot.util.translation.service.TranslationService;
 
 import eliza.Eliza;
 
@@ -39,6 +39,9 @@ public class ChatController {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private TranslationService translationService;
+
 	@Value("classpath:service/chat/ai/eliza/script")
 	private Resource elizaScript;
 
@@ -50,7 +53,7 @@ public class ChatController {
 	public void getRecentMessages(HttpServletRequest req,
 			HttpServletResponse resp) throws IOException {
 		List<Message> messages = chatService.getMessages(PAGE_SIZE, 1);
-//		TranslationUtils.makeCheckedList(messages);
+		// TranslationUtils.makeCheckedList(messages);
 		resp.setCharacterEncoding("utf8");
 		PrintWriter out = resp.getWriter();
 		String json = JsonUtils.toJson(messages);
@@ -100,7 +103,7 @@ public class ChatController {
 		if (message == null || message.isEmpty()) {
 			throw new ServletException("Message is null or empty.");
 		}
-		String language = TranslationUtils.getLanguage(message);
+		String language = translationService.detectLanguage(message);
 		chatService.insertMessage(userSequence, message, language);
 
 		// Eliza works.
@@ -117,7 +120,7 @@ public class ChatController {
 			}
 
 			message = message.substring(elizaPrefix.length());
-			language = TranslationUtils.getLanguage(message);
+			language = translationService.detectLanguage(message);
 			String reply = "@" + user.getNickname() + " "
 					+ eliza.processInput(message);
 			chatService.insertMessage(elizaUser.getSequence(), reply, language);
