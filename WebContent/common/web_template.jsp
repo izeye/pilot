@@ -96,6 +96,11 @@
 								<ul class="dropdown-menu">
 									<li><a href="/common/web_template.jsp?body_path=/services/admin/user/list_users_view.do">Users</a></li>
 									<li><a href="/common/web_template.jsp?body_path=/services/admin/stat/list_daily_visit_logs.do">Visit Statistics</a></li>
+									<li>
+										<a href="/common/web_template.jsp?body_path=/services/qrcode/qrcode_history.do">
+											QR Code Generation History
+										</a>
+									</li>
 								</ul>
 							</li>
 						</c:if>

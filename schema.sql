@@ -42,6 +42,7 @@ insert into tb_user (user_id, password, nickname, join_date) values ('oasishun@g
 insert into tb_user (user_id, password, nickname, join_date) values ('eliza@eliza.com', '1234', 'Eliza', now());
 
 update tb_user set role='staff' where nickname in ('izeye', 'icpu', 'toujour19', 'enosent7', 'oasishun');
+update tb_user set role='staff' where nickname in ('Hanael');
 
 create table tb_visit_log (
 	seq INT AUTO_INCREMENT,
@@ -50,5 +51,16 @@ create table tb_visit_log (
 	uri VARCHAR(100) not null,
 	referer VARCHAR(1000),
 	user_agent VARCHAR(1000) not null,
+	PRIMARY KEY (seq)
+);
+
+DROP TABLE tb_qrcode_history;
+CREATE TABLE tb_qrcode_history (
+	seq INT AUTO_INCREMENT,
+	text VARCHAR(1000) NOT NULL,
+	width INT NOT NULL,
+	height INT NOT NULL,
+	created_time DATETIME NOT NULL,
+	ip VARCHAR(100) NOT NULL,
 	PRIMARY KEY (seq)
 );
