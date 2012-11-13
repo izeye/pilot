@@ -13,7 +13,8 @@
 		</tr>
 		<c:forEach var="qrCodeGenerationLog" items="${qrCodeGenerationLogs}">
 			<tr>
-				<td>${qrCodeGenerationLog.createdTime}</td>
+				<td><fmt:formatDate value="${qrCodeGenerationLog.createdTime}" type="both"
+						pattern="yyyy-MM-dd HH:mm:ss" /></td>
 				<td>${qrCodeGenerationLog.text}</td>
 				<td>${qrCodeGenerationLog.width}</td>
 				<td>${qrCodeGenerationLog.height}</td>
