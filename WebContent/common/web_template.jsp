@@ -121,6 +121,17 @@
 								<jsp:include page="/services/user/login/logout_window.jsp" />
 							</c:otherwise>
 						</c:choose>
+						<p>
+						<b>Temporarily for mobile devices</b>
+						<ul>
+							<li><a href="/common/web_template.jsp?body_path=/services/chat/chat_view.jsp">Chat</a></li>
+							<li><a href="/common/web_template.jsp?body_path=/services/chat/history.do">Chat History</a></li>
+							<li><a href="/common/web_template.jsp?body_path=/services/utilities/qrcode/text2qrcode.html">Text to QR Code</a></li>
+							<li><a href="/common/web_template.jsp?body_path=/services/games/slot/slot-iframe-wrapper.html">Slot Machine</a>
+							<li><a href="/common/web_template.jsp?body_path=/services/ip/what_is_my_ip.do">What is my IP?</a></li>
+							<li><a href="/common/web_template.jsp?body_path=/services/clock/world_clock.do">World Clock</a></li>
+						</ul>
+						</p>
 					</div>
 				</div>
 				<div class="span9">
