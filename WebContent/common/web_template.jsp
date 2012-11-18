@@ -4,8 +4,6 @@
 	<head>
 		<title>CTB Research Group</title>
 		<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-		<link href="/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
-		
 		<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 		
 		<script src="/common/js/common.js"></script>
