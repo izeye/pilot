@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="initial-scale=1,minimum-scale=1, maximum-scale=1">
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript" src="/kakao/kakao.link.js"></script>
+<script type="text/javascript">
+function sendMessage()
+{
+	var message = jQuery('#message').val();
+    kakao.link("talk").send({
+        msg : message,
+        url : "http://ctbrg.cafe24.com",
+        appid : "ctbrg.cafe24.com",
+        appver : "1.0",
+        appname : "CTB-RG",
+        type : "link"
+    });
+
+}
+</script>
+</head>
+<body>
+	<label for="message">Message</label>
+	<input type="text" id="message" name="message">
+	<button type="button" onclick="javascript:sendMessage()">Send</button>
+</body>
+
+</html>
