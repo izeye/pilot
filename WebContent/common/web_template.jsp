@@ -5,7 +5,7 @@
 		<title>CTB Research Group</title>
 		<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 		<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-		<script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
+		 <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script> 
 		<script src="/common/js/common.js"></script>
 		<script src="/services/user/login/login.js"></script>
 		<script type="text/javascript">
