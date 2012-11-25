@@ -20,17 +20,16 @@
 </head>
 <body>
 	<h3>Chat</h3>
-	<form method="post" class="row-fluid" action="/services/chat/send-message.do" name="chat" id="chat"
+	<form method="post"  action="/services/chat/send-message.do" name="chat" id="chat"
 		onsubmit="return emptyChk()">
 				<span class="span1">
-					${message}:
+					<label class="label"><h6>${message}:</h6></label>
 				</span>
-				<span class="row-fluid">
-					<span class="span7">
-						<input class="input-block-level" type="text" name="message" id="message" size=100 x-webkit-speech />
-					</span>
-				</span>
-				<input type="submit" value="Send" />
+				<span class="span5">
+					<input class="input-block-level" type="text" name="message" id="message" size=100 x-webkit-speech />
+			    </span>
+				<span class="span"></span>
+				<input type="submit" class="btn" value="Send" />
 	</form>
 	<br>
 	<table id="output" class="table table-striped table-bordered table-hover table-condensed">
