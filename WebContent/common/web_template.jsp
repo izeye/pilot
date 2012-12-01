@@ -79,6 +79,7 @@
 								<li><a href="/common/web_template.jsp?body_path=/services/games/slot/slot-iframe-wrapper.html">Slot Machine</a>
 								<li><a href="/common/web_template.jsp?body_path=/services/ip/what_is_my_ip.do">What is my IP?</a></li>
 								<li><a href="/common/web_template.jsp?body_path=/services/clock/world_clock.do">World Clock</a></li>
+								<li><a href="/common/web_template.jsp?body_path=/services/utilities/facebook/like.html">Facebook Like</a></li>
 							</ul>
 						</li>
 						<!--
@@ -134,6 +135,7 @@
 							<li><a href="/common/web_template.jsp?body_path=/services/games/slot/slot-iframe-wrapper.html">Slot Machine</a>
 							<li><a href="/common/web_template.jsp?body_path=/services/ip/what_is_my_ip.do">What is my IP?</a></li>
 							<li><a href="/common/web_template.jsp?body_path=/services/clock/world_clock.do">World Clock</a></li>
+							<li><a href="/common/web_template.jsp?body_path=/services/utilities/facebook/like.html">Facebook Like</a></li>
 						</ul>
 						</p>
 					</div>
