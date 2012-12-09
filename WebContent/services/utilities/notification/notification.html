@@ -1,0 +1,33 @@
+<html>
+<head>
+	<meta charset="utf8">
+</head>
+<body>
+<button id="show_button">Show Notification</button>
+<script type="text/javascript">
+if (window.webkitNotifications) {
+	console.log("Notifications are supported!");
+	
+	document.querySelector('#show_button').addEventListener('click', function () {
+		var permission = window.webkitNotifications.checkPermission();
+		console.log(permission);
+		if (permission == 0) {
+			var notification_test = window.webkitNotifications.createNotification(
+					'icon.png', 'Notification title', 'Notification content...');
+			notification_test.ondisplay = function () {
+				console.log('ondisplay');
+			};
+			notification_test.onclose = function () {
+				console.log('onclose');
+			};
+			notification_test.show();
+		} else {
+			window.webkitNotifications.requestPermission();
+		}
+	}, false);
+} else {
+	console.log("Notifications are not supported for this Browser/OS version yet.");
+}
+</script>
+</body>
+</html>
