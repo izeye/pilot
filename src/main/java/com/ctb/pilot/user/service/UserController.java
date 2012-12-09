@@ -15,7 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ctb.pilot.common.model.Multipart;
 import com.ctb.pilot.user.model.User;
@@ -115,6 +117,22 @@ public class UserController {
 		List<User> allStaff = userService.getAllStaff();
 		model.addAttribute("staff", allStaff);
 		return "/view/jsp/about_us_view";
+	}
+	
+	@RequestMapping(value="/services/user/sign-up-new.do",method=RequestMethod.POST)
+	public String signUp(
+			@RequestParam("user_id") String userId,
+			@RequestParam("password") String password,
+			@RequestParam("nickname") String nickName,
+			@RequestParam("imageFile") MultipartFile multipartFile,
+			Model model) throws IOException{
+		System.out.println("multipartFileSize :: "+multipartFile.getSize());
+		model.addAttribute("userId", userId);
+		
+		InputStream image = multipartFile.getInputStream();
+		userService.signUp(userId, password, nickName, image);
+		image.close();
+		return "redirect:/common/web_template.jsp?body_path=/services/user/sign_up/sign_up_result.jsp";
 	}
 
 }

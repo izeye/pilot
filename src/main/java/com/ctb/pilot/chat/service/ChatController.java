@@ -48,7 +48,7 @@ public class ChatController {
 	private Map<Integer, Eliza> elizaMap = new HashMap<Integer, Eliza>();
 	private User elizaUser;
 	private String elizaPrefix;
-
+	
 	@RequestMapping("/services/chat/messages.do")
 	public void getRecentMessages(HttpServletRequest req,
 			HttpServletResponse resp) throws IOException {
@@ -57,7 +57,6 @@ public class ChatController {
 		resp.setCharacterEncoding("utf8");
 		PrintWriter out = resp.getWriter();
 		String json = JsonUtils.toJson(messages);
-		System.out.println(json);
 		out.print(json);
 		out.flush();
 		out.close();

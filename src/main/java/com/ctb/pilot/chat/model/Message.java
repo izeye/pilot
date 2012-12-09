@@ -1,5 +1,6 @@
 package com.ctb.pilot.chat.model;
 
+import java.util.Arrays;
 import java.util.Date;
 
 public class Message {
@@ -74,4 +75,5 @@ public class Message {
 				+ ", message=" + message + ", language=" + language + "]";
 	}
 
+		
 }

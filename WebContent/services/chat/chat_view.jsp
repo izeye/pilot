@@ -37,6 +37,7 @@
 			<th width="200">${time}</th>
 			<th width="100">${nickname}</th>
 			<th width="700">${message}</th>
+			<th width="100">IMAGE</th>
 		</tr>
 	</table>
 </body>
