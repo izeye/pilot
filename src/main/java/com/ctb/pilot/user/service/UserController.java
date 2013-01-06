@@ -14,6 +14,7 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -133,6 +134,28 @@ public class UserController {
 		userService.signUp(userId, password, nickName, image);
 		image.close();
 		return "redirect:/common/web_template.jsp?body_path=/services/user/sign_up/sign_up_result.jsp";
+	}
+	
+	@RequestMapping(value="/services/user/edit_profile.do", method=RequestMethod.POST)
+	public String editProfile(
+			@ModelAttribute User user 
+			){
+//			@RequestParam("user_id") String userId,
+//			@RequestParam("current_password") String currentPassword,
+//			@RequestParam("new_password") String newPassword,
+//			@RequestParam("confirm_new_password") String confirmNewPassword,
+//			@RequestParam("nickname") String nickname
+//			){
+//	    System.out.println("이리로 들어오니?");
+//	    System.out.println("userId : " + userId);
+//	    System.out.println("currentPassword : " + currentPassword);
+//	    System.out.println("newPassword : " + newPassword);
+//	    System.out.println("confirmNewPassword" + confirmNewPassword);
+//	    System.out.println("nickname : " + nickname);
+		
+		System.out.println("여기로");
+		System.out.println("user.getUserId() :: "+user.getUserId());
+		return "redirect:/common/web_template.jsp?body_path=/services/user/profile/edit_profile_result.jsp";
 	}
 
 }

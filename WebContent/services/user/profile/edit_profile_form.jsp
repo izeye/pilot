@@ -6,7 +6,7 @@
 </head>
 <body>
 	<h3>Edit Profile</h3>
-	<form id="edit_profile" name="edit_profile" action="/services/user/profile/edit_profile.jsp">
+	<form id="edit_profile" method="post" name="edit_profile" action="/services/user/edit_profile.do">
 		<table>
 			<tr>
 				<td>User ID (Email) :</td>
