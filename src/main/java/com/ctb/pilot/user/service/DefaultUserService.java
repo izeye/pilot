@@ -24,7 +24,7 @@ public class DefaultUserService implements UserService {
 	public User getUserBySequence(int sequence) {
 		return userDao.getUserBySequence(sequence);
 	}
-
+	
 	@Override
 	public void signUp(String userId, String password, String nickname,
 			InputStream image) {
@@ -44,6 +44,12 @@ public class DefaultUserService implements UserService {
 	@Override
 	public List<User> getAllStaff() {
 		return userDao.getAllStaff();
+	}
+
+	@Override
+	public User getUserByFacebookUsername(String facebookUsername) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -14,12 +14,14 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.jdbc.datasource.init.DatabasePopulator;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
+import org.springframework.stereotype.Controller;
 
 @Configuration
 @ImportResource("classpath:applicationContext.xml")
-@ComponentScan(basePackages = "com.ctb.pilot", excludeFilters = { @Filter(Configuration.class) })
-@PropertySource("classpath:com/ctb/pilot/config/application.properties")
-// @PropertySource("classpath:com/ctb/pilot/config/application.local.properties")
+@ComponentScan(basePackages = "com.ctb.pilot", excludeFilters = {
+		@Filter(Configuration.class), @Filter(Controller.class) })
+// @PropertySource("classpath:com/ctb/pilot/config/application.properties")
+@PropertySource("classpath:com/ctb/pilot/config/application.local.properties")
 public class MainConfig {
 
 	@Bean(destroyMethod = "shutdown")

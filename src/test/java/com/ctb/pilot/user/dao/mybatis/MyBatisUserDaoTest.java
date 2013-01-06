@@ -13,14 +13,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.ctb.pilot.config.MainConfig;
 import com.ctb.pilot.config.SocialConfig;
-import com.ctb.pilot.config.WebMvcConfig;
 import com.ctb.pilot.user.dao.UserDao;
 import com.ctb.pilot.user.model.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 // @ContextConfiguration(locations = "/applicationContext.xml")
-@ContextConfiguration(classes = { MainConfig.class, WebMvcConfig.class,
-		SocialConfig.class })
+@ContextConfiguration(classes = { MainConfig.class, SocialConfig.class })
 public class MyBatisUserDaoTest {
 
 	@Autowired
