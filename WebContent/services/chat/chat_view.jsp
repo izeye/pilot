@@ -15,8 +15,8 @@
 <meta http-equiv="refresh" content="10">
 -->
 <title>${title}</title>
-<script src="/services/chat/chat.js"></script>
-<link rel="stylesheet" type="text/css" href="/common/css/common.css" />
+<script src="/resources/services/chat/js/chat.js"></script>
+<link rel="stylesheet" type="text/css" href="/resources/common/css/common.css" />
 </head>
 <body>
 	<h3>Chat</h3>

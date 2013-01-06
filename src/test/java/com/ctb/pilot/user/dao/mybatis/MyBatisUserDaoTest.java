@@ -11,11 +11,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.ctb.pilot.config.MainConfig;
+import com.ctb.pilot.config.SocialConfig;
+import com.ctb.pilot.config.WebMvcConfig;
 import com.ctb.pilot.user.dao.UserDao;
 import com.ctb.pilot.user.model.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "/applicationContext.xml")
+// @ContextConfiguration(locations = "/applicationContext.xml")
+@ContextConfiguration(classes = { MainConfig.class, WebMvcConfig.class,
+		SocialConfig.class })
 public class MyBatisUserDaoTest {
 
 	@Autowired
@@ -70,6 +75,14 @@ public class MyBatisUserDaoTest {
 	public void getAllStaff() {
 		List<User> allStaff = userDao.getAllStaff();
 		System.out.println(allStaff);
+	}
+
+	@Test
+	public void signUpByFacebook() {
+		String userId = "userId";
+		String nickname = "nickname";
+		String facebookUsername = "facebookUsername";
+		userDao.signUpByFacebook(userId, nickname, facebookUsername);
 	}
 
 }

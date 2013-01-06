@@ -239,4 +239,10 @@ public class JdbcUserDao implements UserDao {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public void signUpByFacebook(String userId, String nickname,
+			String facebookUsername) {
+		throw new UnsupportedOperationException();
+	}
+
 }

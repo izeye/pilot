@@ -14,10 +14,13 @@ public interface UserDao {
 	void signUp(String userId, String password, String nickname,
 			InputStream image);
 
+	void signUpByFacebook(String userId, String nickname,
+			String facebookUsername);
+
 	void update(User user);
 
 	List<User> getAllUsers();
-	
+
 	List<User> getAllStaff();
 
 }

@@ -15,6 +15,10 @@
 		insert into tb_user (user_id, password, nickname, image, join_date)
 				values (#{userId}, #{password}, #{nickname}, #{image}, now())
 	</insert>
+	<insert id="signUpByFacebook">
+		insert into tb_user (user_id, nickname, facebook_username, join_date)
+				values (#{userId}, #{nickname}, #{facebookUsername}, now())
+	</insert>
 	<update id="update">
 		update tb_user set password=#{password}, nickname=#{nickname} where seq=#{sequence}
 	</update>

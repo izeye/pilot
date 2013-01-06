@@ -56,4 +56,11 @@ public class MyBatisUserDao implements UserDao {
 		return userMapper.getAllStaff();
 	}
 
+	@Override
+	public void signUpByFacebook(String userId, String nickname,
+			String facebookUsername) {
+		UserMapper userMapper = sessionTemplate.getMapper(UserMapper.class);
+		userMapper.signUpByFacebook(userId, nickname, facebookUsername);
+	}
+
 }

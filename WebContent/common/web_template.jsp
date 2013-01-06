@@ -3,11 +3,11 @@
 <html>
 	<head>
 		<title>CTB Research Group</title>
-		<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 		<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-		 <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script> 
-		<script src="/common/js/common.js"></script>
-		<script src="/services/user/login/login.js"></script>
+		 <script type="text/javascript" src="/resources/bootstrap/js/bootstrap.js"></script> 
+		<script src="/resources/common/js/common.js"></script>
+		<script src="/resources/services/user/login/js/login.js"></script>
 		<script type="text/javascript">
 		
 		  var _gaq = _gaq || [];
@@ -81,6 +81,7 @@
 								<li><a href="/common/web_template.jsp?body_path=/services/clock/world_clock.do">World Clock</a></li>
 								<li><a href="/common/web_template.jsp?body_path=/services/utilities/facebook/like.html">Facebook Like</a></li>
 								<li><a href="/common/web_template.jsp?body_path=/services/utilities/facebook/like_in_javascript.html">Facebook Like in JavaScript</a></li>
+								<li><a href="/common/web_template.jsp?body_path=/services/facebook/friend_list.do">Facebook Friend List</a></li>
 							</ul>
 						</li>
 						<!--
@@ -138,6 +139,7 @@
 							<li><a href="/common/web_template.jsp?body_path=/services/clock/world_clock.do">World Clock</a></li>
 							<li><a href="/common/web_template.jsp?body_path=/services/utilities/facebook/like.html">Facebook Like</a></li>
 							<li><a href="/common/web_template.jsp?body_path=/services/utilities/facebook/like_in_javascript.html">Facebook Like in JavaScript</a></li>
+							<li><a href="/common/web_template.jsp?body_path=/services/facebook/friend_list.do">Facebook Friend List</a></li>
 						</ul>
 						</p>
 					</div>

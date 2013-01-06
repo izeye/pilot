@@ -8,5 +8,6 @@
 	</label>
 	<button type="submit" class="btn">Sign in</button>
 	<input type="hidden" name="current_url">
-	<a href="/common/web_template.jsp?body_path=/services/user/sign_up/sign_up_form.jsp">Sign up</a>
+	<a href="/common/web_template.jsp?body_path=/services/user/sign_up/sign_up_form.jsp">Sign up</a><br>
+	<a href="/signin">Login with facebook</a>
 </form>
