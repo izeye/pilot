@@ -35,9 +35,9 @@
 	<table id="output" class="table table-striped table-bordered table-hover table-condensed">
 		<tr>
 			<th width="100">IMAGE</th>
-			<th width="200">${time}</th>
 			<th width="100">${nickname}</th>
 			<th width="700">${message}</th>
+			<th width="200">${time}</th>
 		</tr>
 	</table>
 </body>

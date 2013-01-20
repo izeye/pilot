@@ -52,7 +52,7 @@ var getMessages = function(){
 	$.getJSON('/services/chat/messages.do',{just:new Date().getTime()},	function(data){
 		$('#output').empty();
 
-		var header = '<tr><td width="100">IMAGE</td><td width="200">TIME</td><td width="100">NICKNAME</td><td width="700">MESSAGE</td></tr>';
+		var header = '<tr><td width="100">IMAGE</td><td width="100">NICKNAME</td><td width="700">MESSAGE</td><td width="200">TIME</td></tr>';
 		$(header).appendTo('#output');
 		$.each(data,function(index,item){
 			var output = '';
@@ -65,16 +65,23 @@ var getMessages = function(){
 			}
 			
 			if(item.language == 'ko'){				
-				output = '<tr><td>'+image+'</td><td>'
-				+item.formattedCreatedTime+'</td><td>'+item.nickname+'</td><td>'
-				+item.message+'</td></tr>';
+				output = '<tr>'
+					+'<td>'+image+'</td>'
+					+'<td>'+item.nickname+'</td>'
+					+'<td>'+item.message+'</td>'
+					+'<td>'+item.formattedCreatedTime+'</td>'
+					+'</tr>';
 			}else{
-				output = '<tr><td>'+image+'</td><td>'
-				+item.formattedCreatedTime+'</td><td>'+item.nickname+'</td><td>'
-				+item.message +
-				'<div id="translate'+item.sequence+'">' +
-				'<a href="#" onclick="ajax(\''+item.message+'\','+item.sequence+')">번역하기</a>'
-				+'</div></td></tr>';
+				output = '<tr>'
+					+'<td>'+image+'</td>'
+					+'<td>'+item.nickname+'</td>'
+					+'<td>'+item.message
+						+'<div id="translate'+item.sequence+'">' 
+						+'<a href="#" onclick="ajax(\''+item.message+'\','+item.sequence+')">번역하기</a>'
+						+'</div>'
+					+'</td>'
+					+'<td>'+item.formattedCreatedTime+'</td>'
+				    +'</tr>';
 			}
 			$(output).appendTo('#output');
 		});
