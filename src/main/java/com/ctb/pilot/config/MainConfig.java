@@ -20,8 +20,8 @@ import org.springframework.stereotype.Controller;
 @ImportResource("classpath:applicationContext.xml")
 @ComponentScan(basePackages = "com.ctb.pilot", excludeFilters = {
 		@Filter(Configuration.class), @Filter(Controller.class) })
-// @PropertySource("classpath:com/ctb/pilot/config/application.properties")
-@PropertySource("classpath:com/ctb/pilot/config/application.local.properties")
+@PropertySource("classpath:com/ctb/pilot/config/application.properties")
+//@PropertySource("classpath:com/ctb/pilot/config/application.local.properties")
 public class MainConfig {
 
 	@Bean(destroyMethod = "shutdown")

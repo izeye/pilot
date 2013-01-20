@@ -52,19 +52,29 @@ var getMessages = function(){
 	$.getJSON('/services/chat/messages.do',{just:new Date().getTime()},	function(data){
 		$('#output').empty();
 
-		var header = '<tr><td width="200">TIME</td><td width="100">NICKNAME</td><td width="700">MESSAGE</td><td width="100">IMAGE</td></tr>';
+		var header = '<tr><td width="100">IMAGE</td><td width="200">TIME</td><td width="100">NICKNAME</td><td width="700">MESSAGE</td></tr>';
 		$(header).appendTo('#output');
 		$.each(data,function(index,item){
 			var output = '';
-			if(item.language == 'ko'){
-				output = '<tr><td>'+item.formattedCreatedTime+'</td><td>'+item.nickname+'</td><td>'
-				+item.message+'</td><td><img src="/services/image/image.do?userSeq='+item.userSequence+'"'+'/></td></tr>';
+			var image = '';
+			
+			if(item.facebookUsername != ''){
+				image = '<img src="https://graph.facebook.com/'+item.facebookUsername+'/picture"/>';
 			}else{
-				output = '<tr><td>'+item.formattedCreatedTime+'</td><td>'+item.nickname+'</td><td>'
+				image = '<img src="/services/image/image.do?userSeq='+item.userSequence+'"'+'/>';
+			}
+			
+			if(item.language == 'ko'){				
+				output = '<tr><td>'+image+'</td><td>'
+				+item.formattedCreatedTime+'</td><td>'+item.nickname+'</td><td>'
+				+item.message+'</td></tr>';
+			}else{
+				output = '<tr><td>'+image+'</td><td>'
+				+item.formattedCreatedTime+'</td><td>'+item.nickname+'</td><td>'
 				+item.message +
 				'<div id="translate'+item.sequence+'">' +
 				'<a href="#" onclick="ajax(\''+item.message+'\','+item.sequence+')">번역하기</a>'
-				+'</div></td><td><img src="/services/image/image.do?userSeq='+item.userSequence+'"'+'/></td></tr>';
+				+'</div></td></tr>';
 			}
 			$(output).appendTo('#output');
 		});

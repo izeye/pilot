@@ -12,6 +12,7 @@ public class Message {
 	private String nickname;
 	private String message;
 	private String language;
+	private String facebookUsername;
 
 	public String getLanguage() {
 		return language;
@@ -67,13 +68,21 @@ public class Message {
 		this.message = message;
 	}
 
+	public String getFacebookUsername() {
+		return facebookUsername;
+	}
+
+	public void setFacebookUsername(String facebookUsername) {
+		this.facebookUsername = facebookUsername;
+	}
+
 	@Override
 	public String toString() {
 		return "Message [sequence=" + sequence + ", createdTime=" + createdTime
 				+ ", formattedCreatedTime=" + formattedCreatedTime
 				+ ", userSequence=" + userSequence + ", nickname=" + nickname
-				+ ", message=" + message + ", language=" + language + "]";
+				+ ", message=" + message + ", language=" + language
+				+ ", facebookUsername=" + facebookUsername + "]";
 	}
 
-		
 }
