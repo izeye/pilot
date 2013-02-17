@@ -43,7 +43,7 @@ public class SessionFromCookieHandlerInterceptor implements HandlerInterceptor {
 		User user = (User) session.getAttribute("user");
 		if (user == null) {
 			String sequenceInCookie = HttpUtils.getCookie(httpRequest, "seq");
-			if (sequenceInCookie != null) {
+			if (sequenceInCookie != null && !sequenceInCookie.isEmpty()) {
 				Integer userSequence = Integer.valueOf(sequenceInCookie);
 				user = userDao.getUserBySequence(userSequence);
 				session.setAttribute("user", user);

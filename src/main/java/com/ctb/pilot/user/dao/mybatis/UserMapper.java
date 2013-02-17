@@ -14,6 +14,8 @@ public interface UserMapper {
 
 	User getUserBySequence(int sequence);
 
+	User getUserByFacebookUsername(String facebookUsername);
+
 	void signUp(@Param("userId") String userId,
 			@Param("password") String password,
 			@Param("nickname") String nickname,

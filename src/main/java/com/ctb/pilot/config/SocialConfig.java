@@ -14,6 +14,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.security.crypto.encrypt.Encryptors;
 import org.springframework.social.connect.ConnectionFactoryLocator;
 import org.springframework.social.connect.ConnectionRepository;
+import org.springframework.social.connect.ConnectionSignUp;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
 import org.springframework.social.connect.support.ConnectionFactoryRegistry;
@@ -21,9 +22,8 @@ import org.springframework.social.connect.web.ProviderSignInController;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.connect.FacebookConnectionFactory;
 
+import com.ctb.pilot.user.facebook.PilotSignInAdapter;
 import com.ctb.pilot.user.facebook.SecurityContext;
-import com.ctb.pilot.user.facebook.SimpleConnectionSignUp;
-import com.ctb.pilot.user.facebook.SimpleSignInAdapter;
 import com.ctb.pilot.user.facebook.User;
 
 @Configuration
@@ -36,6 +36,9 @@ public class SocialConfig {
 
 	@Resource(name = "h2DataSource")
 	private DataSource dataSource;
+
+	@Resource
+	private ConnectionSignUp connectionSignUp;
 
 	@Bean
 	public ConnectionFactoryLocator connectionFactoryLocator() {
@@ -50,7 +53,7 @@ public class SocialConfig {
 	public UsersConnectionRepository usersConnectionRepository() {
 		JdbcUsersConnectionRepository repository = new JdbcUsersConnectionRepository(
 				dataSource, connectionFactoryLocator(), Encryptors.noOpText());
-		repository.setConnectionSignUp(new SimpleConnectionSignUp());
+		repository.setConnectionSignUp(connectionSignUp);
 		return repository;
 	}
 
@@ -73,7 +76,7 @@ public class SocialConfig {
 	@Bean
 	public ProviderSignInController providerSignInController() {
 		return new ProviderSignInController(connectionFactoryLocator(),
-				usersConnectionRepository(), new SimpleSignInAdapter());
+				usersConnectionRepository(), new PilotSignInAdapter());
 	}
 
 }

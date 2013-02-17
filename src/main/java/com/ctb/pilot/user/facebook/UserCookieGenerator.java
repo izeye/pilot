@@ -11,7 +11,7 @@ public class UserCookieGenerator {
 	private final CookieGenerator userCookieGenerator = new CookieGenerator();
 
 	public UserCookieGenerator() {
-		userCookieGenerator.setCookieName("facebook_user");
+		userCookieGenerator.setCookieName("seq");
 	}
 
 	public void addCookie(String userId, HttpServletResponse response) {

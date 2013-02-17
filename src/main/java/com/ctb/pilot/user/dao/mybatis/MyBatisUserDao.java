@@ -29,6 +29,12 @@ public class MyBatisUserDao implements UserDao {
 	}
 
 	@Override
+	public User getUserByFacebookUsername(String facebookUsername) {
+		UserMapper userMapper = sessionTemplate.getMapper(UserMapper.class);
+		return userMapper.getUserByFacebookUsername(facebookUsername);
+	}
+
+	@Override
 	public void signUp(String userId, String password, String nickname,
 			InputStream image) {
 		UserMapper userMapper = sessionTemplate.getMapper(UserMapper.class);

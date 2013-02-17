@@ -11,6 +11,9 @@
 	<select id="getUserBySequence" parameterType="java.lang.Integer" resultMap="userResultMap">
 		select * from tb_user where seq=#{sequence}
 	</select>
+	<select id="getUserByFacebookUsername" parameterType="java.lang.String" resultMap="userResultMap">
+		select * from tb_user where facebook_username=#{facebookUsername}
+	</select>
 	<insert id="signUp">
 		insert into tb_user (user_id, password, nickname, image, join_date)
 				values (#{userId}, #{password}, #{nickname}, #{image}, now())

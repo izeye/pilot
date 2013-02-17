@@ -7,6 +7,8 @@ import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -24,6 +26,8 @@ public class MyBatisUserDaoTest {
 	@Autowired
 	private UserDao userDao;
 
+	private final Logger log = LoggerFactory.getLogger(getClass());
+
 	@Test
 	public void login() {
 		String userId = "izeye@naver.com";
@@ -37,6 +41,13 @@ public class MyBatisUserDaoTest {
 		int sequence = 1;
 		User user = userDao.getUserBySequence(sequence);
 		System.out.println(user);
+	}
+
+	@Test
+	public void getUserByFacebookUser() {
+		String facebookUsername = "facebookUsername";
+		User user = userDao.getUserByFacebookUsername(facebookUsername);
+		log.debug("user: " + user);
 	}
 
 	@Test

@@ -1,6 +1,6 @@
 package com.ctb.pilot.user.facebook;
 
-import java.util.concurrent.atomic.AtomicLong;
+import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,12 +8,18 @@ import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionSignUp;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.FacebookProfile;
+import org.springframework.stereotype.Component;
 
-public class SimpleConnectionSignUp implements ConnectionSignUp {
+import com.ctb.pilot.user.dao.UserDao;
+import com.ctb.pilot.user.model.User;
 
-	private final AtomicLong userIdSequence = new AtomicLong();
+@Component("connectionSignUp")
+public class PilotConnectionSignUp implements ConnectionSignUp {
 
 	private final Logger log = LoggerFactory.getLogger(getClass());
+
+	@Resource
+	private UserDao userDao;
 
 	@Override
 	public String execute(Connection<?> connection) {
@@ -26,7 +32,10 @@ public class SimpleConnectionSignUp implements ConnectionSignUp {
 
 		log.debug("username: " + username);
 
-		return Long.toString(userIdSequence.incrementAndGet());
+		userDao.signUpByFacebook(email, name, username);
+		User user = userDao.getUserByFacebookUsername(username);
+
+		return Long.toString(user.getSequence());
 	}
 
 }
