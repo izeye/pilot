@@ -1,0 +1,29 @@
+<html>
+	<head>
+		<title>JavaScript Test</title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//a = 'test';
+			v = {
+				that: this,
+				another: function () {
+					console.log(this);
+				},
+				a: 'test2',
+				yet_another: function () {
+					return {
+						//a: 1,
+						//b: a,
+						c: this.a
+					};
+				}()
+			};
+			console.log(v.that);
+			v.another();
+			console.log(v.yet_another.a);
+			console.log(v.yet_another.b);
+			console.log(v.yet_another.c);
+		</script>
+	</body>
+</html>
