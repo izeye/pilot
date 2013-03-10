@@ -9,8 +9,23 @@
 	bat.x = 0;
 	bat.y = canvas.height - bat.height;
 	bat.color = 'yellow';
+	bat.step = 30;
 	bat.init = function () {
-		bat.x = canvas.width / 2 - bat.width / 2;
+		this.x = canvas.width / 2 - this.width / 2;
+	};
+	bat.moveLeft = function () {
+		if (bat.x - bat.step >= 0) {
+			bat.x -= bat.step;
+		} else {
+			bat.x = 0;
+		}
+	};
+	bat.moveRight = function () {
+		if (bat.x + bat.width + bat.step <= canvas.width) {
+			bat.x += bat.step;
+		} else {
+			bat.x = canvas.width - bat.width;
+		}
 	};
 	
 	var ball = {};
@@ -21,8 +36,8 @@
 	ball.dy = -4;
 	ball.color = '#000';
 	ball.init = function () {
-		ball.x = bat.x + bat.width / 2 - ball.radius;
-		ball.y = canvas.height - bat.height - ball.radius;
+		this.x = bat.x + bat.width / 2;
+		this.y = canvas.height - bat.height - this.radius;
 	};
 	
 	level = 1;
@@ -42,11 +57,11 @@
 				var key = e.charCode ? e.charCode : e.keyCode ? e.keyCode : 0;
 				switch (key) {
 					case 37: // arrow left
-						console.log('arrow left');
+						bat.moveLeft();
 						break;
 						
 					case 39: // arrow right
-						console.log('arrow right');
+						bat.moveRight();
 						break;
 				}
 			};
@@ -68,7 +83,6 @@
 			
 			window.setTimeout(function () {
 				timer_id = window.setInterval(function () {
-					console.log(self);
 					self.refreshFrames.call(self);
 				}, 10);
 			}, 2000);
@@ -92,6 +106,19 @@
 			
 			self.drawBall();
 			self.drawBat();
+			
+			if (ball.x + ball.dx > canvas.width || ball.x + ball.dx < 0) {
+				ball.dx = -ball.dx;
+			}
+			if (ball.y + ball.dy < 0) {
+				ball.dy = -ball.dy;
+			}
+			if (ball.y + ball.dy > canvas.height) {
+				self.die();
+			}
+			
+			ball.x += ball.dx;
+			ball.y += ball.dy;
 		},
 		drawBall: function () {
 //			context.strokeStyle = ball.color;
@@ -108,6 +135,11 @@
 			context.rect(bat.x, bat.y, bat.width, bat.height);
 			context.closePath();
 			context.fill();
+		},
+		die: function () {
+			var self = this;
+			
+			self.print('Game Over');
 		}
 	};
 	
