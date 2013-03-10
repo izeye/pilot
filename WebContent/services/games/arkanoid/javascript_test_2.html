@@ -1,0 +1,19 @@
+<html>
+	<body>
+		<script type="text/javascript">
+			var a = {
+				b: "test",
+				bb: function () {
+					return this;
+				}
+			};
+			
+			var c = {
+				d: a.b
+			};
+			
+			console.log(c.d);
+			console.log(a.bb());
+		</script>
+	</body>
+</html>
