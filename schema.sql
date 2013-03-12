@@ -67,6 +67,7 @@ CREATE TABLE tb_qrcode_history (
 	PRIMARY KEY (seq)
 );
 
+-- For gamification
 DROP TABLE tb_reward;
 CREATE TABLE tb_reward (
 	seq INT AUTO_INCREMENT,
@@ -79,3 +80,5 @@ CREATE TABLE tb_reward (
 
 INSERT INTO tb_reward (name, alias, description, point) VALUES ('Login Reward', 'LOGIN', 'Reward by login', 1);
 INSERT INTO tb_reward (name, alias, description, point) VALUES ('Chat Reward', 'CHAT', 'Reward by chat', 2);
+
+ALTER TABLE tb_user ADD COLUMN point INT DEFAULT 0;

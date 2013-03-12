@@ -140,6 +140,7 @@
 							<li><a href="/common/web_template.jsp?body_path=/services/utilities/facebook/like.html">Facebook Like</a></li>
 							<li><a href="/common/web_template.jsp?body_path=/services/utilities/facebook/like_in_javascript.html">Facebook Like in JavaScript</a></li>
 							<li><a href="/common/web_template.jsp?body_path=/services/facebook/friend_list.do">Facebook Friend List</a></li>
+							<li><a href="/common/web_template.jsp?body_path=/services/games/leaderboard.do">Leaderboard</a></li>
 						</ul>
 						</p>
 					</div>
