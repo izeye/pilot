@@ -66,3 +66,16 @@ CREATE TABLE tb_qrcode_history (
 	ip VARCHAR(100) NOT NULL,
 	PRIMARY KEY (seq)
 );
+
+DROP TABLE tb_reward;
+CREATE TABLE tb_reward (
+	seq INT AUTO_INCREMENT,
+	name VARCHAR(100) NOT NULL,
+	alias VARCHAR(100) NOT NULL,
+	description VARCHAR(1000) NOT NULL,
+	point INT,
+	PRIMARY KEY (seq)
+);
+
+INSERT INTO tb_reward (name, alias, description, point) VALUES ('Login Reward', 'LOGIN', 'Reward by login', 1);
+INSERT INTO tb_reward (name, alias, description, point) VALUES ('Chat Reward', 'CHAT', 'Reward by chat', 2);

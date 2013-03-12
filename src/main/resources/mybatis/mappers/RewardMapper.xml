@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ctb.pilot.gamification.dao.mybatis.RewardMapper">
+	<resultMap id="rewardResultMap" type="Reward">
+		<id property="sequence" column="seq"/>
+	</resultMap>
+	<select id="getAllRewards" resultMap="rewardResultMap">
+		SELECT * FROM tb_reward
+	</select>
+</mapper>
