@@ -3,6 +3,17 @@
 	canvas = document.getElementById('canvas');
 	context = canvas.getContext('2d');
 	
+	var maps = [
+	    [],
+		[
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+		]
+	];
+	
+	var map;
+	
 	var bat = {};
 	bat.width = 80;
 	bat.height = 20;
@@ -32,15 +43,22 @@
 	ball.radius = 10;
 	ball.x = 0;
 	ball.y = 0;
-	ball.dx = -2;
-	ball.dy = -4;
+	ball.dx = -1;
+	ball.dy = -2;
 	ball.color = '#000';
 	ball.init = function () {
 		this.x = bat.x + bat.width / 2;
-		this.y = canvas.height - bat.height - this.radius;
+		// Add extra radius gap to y of ball to prevent from re-bouncing.
+		this.y = canvas.height - bat.height - this.radius * 2;
 	};
 	
+	var tile = {};
+	tile.width = 79;
+	tile.height = 40;
+	tile.color = '#F00';
+	
 	level = 1;
+	score = 0;
 	
 	timer_id = 0;
 	
@@ -65,6 +83,10 @@
 						break;
 				}
 			};
+			canvas.onmousemove = function (e) {
+//				console.log(e);
+				bat.x = e.pageX - canvas.offsetLeft - bat.width / 2;
+			};
 		},
 		start: function () {
 			var self = this;
@@ -72,26 +94,33 @@
 			console.log('start');
 			
 			// FIXME: doesn't appear.
-			self.print('Arkanoid');
+			self.printCenter('Arkanoid');
 			
 			self.clearScreen();
 
 			bat.init();
 			ball.init();
 			
-			self.print('Level ' + level);
+			self.printCenter('Level ' + level);
+			
+			map = jQuery.extend(true, [], maps[level]);
 			
 			window.setTimeout(function () {
 				timer_id = window.setInterval(function () {
 					self.refreshFrames.call(self);
-				}, 10);
+				}, 1);
 			}, 2000);
 		},
-		print: function(text) {
+		print: function(text, x, y, width) {
 			context.textAlign = 'center';
 			context.font = 'bold 20px sans-serif';
 			context.fillStyle = '#000';
-			context.fillText(text, canvas.width / 2, canvas.height / 2, canvas.width);
+			context.fillText(text, x, y, width);
+		},
+		printCenter: function (text) {
+			var self = this;
+			
+			self.print(text, canvas.width / 2, canvas.height / 2, canvas.width);
 		},
 		clearScreen: function () {
 //			context.clearRect(0, 0, canvas.width, canvas.height);
@@ -116,9 +145,59 @@
 			if (ball.y + ball.dy > canvas.height) {
 				self.die();
 			}
+			// Check collision with bat.
+			if (self.collide(bat.x, bat.y, bat.width, bat.height)) {
+				// Hit the left-side of bat.
+				if (ball.x < bat.x + bat.width / 2) {
+					if (ball.dx > 0) {
+						ball.dx = -ball.dx;
+					}
+				// Hit the right-side of bat.
+				} else {
+					if (ball.dx < 0) {
+						ball.dx = -ball.dx;
+					}
+				}
+				ball.dy = -ball.dy;
+			}
+			
+			var x = 0;
+			var y = 0;
+			for (var row = 0, rows = map.length; row < rows; row++) {
+				x = 0;
+				for (var col = 0, cols = map[row].length; col < cols; col++) {
+					if (map[row][col] == 1 && self.collide(x + 1, y + 1, tile.width, tile.height)) {
+						ball.dx = -ball.dx;
+						ball.dy = -ball.dy;
+						map[row][col] = 0;
+						
+						score += 10;
+					}
+					x += tile.width + 1;
+				}
+				y += tile.height + 1;
+			}
 			
 			ball.x += ball.dx;
 			ball.y += ball.dy;
+			
+			var x = 0;
+			var y = 0;
+			for (var row = 0, rows = map.length; row < rows; row++) {
+				x = 0;
+				for (var col = 0, cols = map[row].length; col < cols; col++) {
+//					console.log(row + ", " + col);
+//					console.log(x + ", " + y);
+					
+					if (map[row][col] == 1) {
+						self.drawTile(x + 1, y + 1);
+					}
+					x += tile.width + 1;
+				}
+				y += tile.height + 1;
+			}
+			
+			self.drawStatus();
 		},
 		drawBall: function () {
 //			context.strokeStyle = ball.color;
@@ -136,10 +215,38 @@
 			context.closePath();
 			context.fill();
 		},
+		drawTile: function (x, y) {
+			context.fillStyle = tile.color;
+			context.beginPath();
+			context.rect(x, y, tile.width, tile.height);
+			context.closePath();
+			context.fill();
+		},
+		drawStatus: function () {
+			var self = this;
+			
+			self.print('Score: ' + score, 700, 500, 100);
+		},
 		die: function () {
 			var self = this;
 			
-			self.print('Game Over');
+			window.clearInterval(timer_id);
+			
+			self.printCenter('Game Over');
+		},
+		collide: function (squareX, squareY, width, height) {
+			var distance = 0;
+			if (ball.x < squareX) {
+				distance += Math.pow(ball.x - squareX, 2);
+			} else if (ball.x > squareX + width) {
+				distance += Math.pow(ball.x - squareX - width, 2);
+			}	
+			if (ball.y < squareY) {
+				distance += Math.pow(ball.y - squareY, 2);
+			} else if (ball.y > squareY + height) {
+				distance += Math.pow(ball.y - squareY - height, 2);
+			}	
+			return distance <= Math.pow(ball.radius, 2);
 		}
 	};
 	

@@ -1,0 +1,19 @@
+<html>
+	<head>
+		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var arr = [[1, 2, 3]];
+			var arr2 = arr.slice(0);
+			var arr3 = jQuery.extend(true, [], arr);
+			
+			arr[0][0] = 10;
+			arr.push([]);
+			
+			console.log(arr);
+			console.log(arr2);
+			console.log(arr3);
+		</script>
+	</body>
+</html>
