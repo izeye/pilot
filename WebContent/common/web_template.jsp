@@ -128,7 +128,7 @@
 						<p>
 						<b>Temporarily for mobile devices</b>
 						<ul>
-							<li><a href="/common/web_template.jsp?body_path=/services/games/arkanoid.html">Arkanoid</a></li>
+							<li><a href="/common/web_template.jsp?body_path=/services/games/arkanoid/arkanoid.html">Arkanoid</a></li>
 							<li><a href="/common/web_template.jsp?body_path=/services/chat/chat_view.jsp">Chat</a></li>
 							<li><a href="/common/web_template.jsp?body_path=/services/chat/history.do">Chat History</a></li>
 							<li><a href="/common/web_template.jsp?body_path=/services/utilities/qrcode/text2qrcode.html">Text to QR Code</a></li>
