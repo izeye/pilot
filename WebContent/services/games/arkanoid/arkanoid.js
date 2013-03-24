@@ -6,8 +6,6 @@
 	var maps = [
 	    [],
 		[
-			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 		]
 	];
@@ -19,7 +17,8 @@
 	bat.height = 20;
 	bat.x = 0;
 	bat.y = canvas.height - bat.height;
-	bat.color = 'yellow';
+	bat.centerColor = 'yellow';
+	bat.edgeColor = 'red';
 	bat.step = 30;
 	bat.init = function () {
 		this.x = canvas.width / 2 - this.width / 2;
@@ -147,15 +146,37 @@
 			}
 			// Check collision with bat.
 			if (self.collide(bat.x, bat.y, bat.width, bat.height)) {
+				var quater = bat.width / 4;
+				
+				var temp = ball.dx;
+				
+				// Hit the leftmost-side of bat.
+				if (ball.x < bat.x + quater) {
+					if (ball.dx > 0) {
+						ball.dx = -ball.dy;
+						ball.dy = Math.abs(temp);
+					} else { // ball.dx < 0
+						ball.dx = -ball.dy;
+						ball.dy = Math.abs(temp);
+					}
 				// Hit the left-side of bat.
-				if (ball.x < bat.x + bat.width / 2) {
+				} else if (ball.x < bat.x + quater * 2) {
 					if (ball.dx > 0) {
 						ball.dx = -ball.dx;
 					}
 				// Hit the right-side of bat.
-				} else {
+				} else if (ball.x < bat.x + quater * 3) {
 					if (ball.dx < 0) {
 						ball.dx = -ball.dx;
+					}
+				// Hit the rightmost-side of bat.
+				} else {
+					if (ball.dx < 0) {
+						ball.dx = ball.dy;
+						ball.dy = Math.abs(temp);
+					} else { // ball.dx > 0
+						ball.dx = ball.dy;
+						ball.dy = Math.abs(temp);
 					}
 				}
 				ball.dy = -ball.dy;
@@ -209,9 +230,22 @@
 			context.fill();
 		},
 		drawBat: function () {
-			context.fillStyle = bat.color;
+			var quarter = bat.width / 4;
+			
+			context.fillStyle = bat.edgeColor;
 			context.beginPath();
-			context.rect(bat.x, bat.y, bat.width, bat.height);
+			context.rect(bat.x, bat.y, quarter, bat.height);
+			context.closePath();
+			context.fill();
+
+			context.beginPath();
+			context.rect(bat.x + quarter * 3, bat.y, quarter, bat.height);
+			context.closePath();
+			context.fill();
+			
+			context.fillStyle = bat.centerColor;
+			context.beginPath();
+			context.rect(bat.x + quarter, bat.y, quarter * 2, bat.height);
 			context.closePath();
 			context.fill();
 		},
