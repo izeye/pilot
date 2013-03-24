@@ -1,11 +1,15 @@
 (function () {
-	document = window.document;
-	canvas = document.getElementById('canvas');
-	context = canvas.getContext('2d');
+	var document = window.document;
+	var canvas = document.getElementById('canvas');
+	var context = canvas.getContext('2d');
 	
 	var maps = [
 	    [],
 		[
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 		]
 	];
@@ -56,10 +60,13 @@
 	tile.height = 40;
 	tile.color = '#F00';
 	
-	level = 1;
-	score = 0;
+	var level = 1;
+	var score = 0;
 	
-	timer_id = 0;
+	var timer_id = 0;
+	
+	var max_score = 500;
+//	var max_score = 100;
 	
 	ARKANOID = {
 		init: function () {
@@ -219,6 +226,10 @@
 			}
 			
 			self.drawStatus();
+			
+			if (score == max_score) {
+				self.clearGame();
+			}
 		},
 		drawBall: function () {
 //			context.strokeStyle = ball.color;
@@ -267,6 +278,17 @@
 			window.clearInterval(timer_id);
 			
 			self.printCenter('Game Over');
+			
+			// Send score.
+		},
+		clearGame: function () {
+			var self = this;
+			
+			window.clearInterval(timer_id);
+			
+			self.printCenter('Game Clear');
+			
+			// Send socre.
 		},
 		collide: function (squareX, squareY, width, height) {
 			var distance = 0;
