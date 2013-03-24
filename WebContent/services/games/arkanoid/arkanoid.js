@@ -13,7 +13,7 @@
 	var map;
 	
 	var bat = {};
-	bat.width = 80;
+	bat.width = 160;
 	bat.height = 20;
 	bat.x = 0;
 	bat.y = canvas.height - bat.height;
