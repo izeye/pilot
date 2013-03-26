@@ -279,7 +279,7 @@
 			
 			self.printCenter('Game Over');
 			
-			// Send score.
+			jQuery.post('/services/game/score/record.do', 'game_sequence=1&score=' + score);
 		},
 		clearGame: function () {
 			var self = this;
@@ -288,7 +288,7 @@
 			
 			self.printCenter('Game Clear');
 			
-			// Send socre.
+			jQuery.post('/services/game/score/record.do', 'game_sequence=1&score=' + score);
 		},
 		collide: function (squareX, squareY, width, height) {
 			var distance = 0;

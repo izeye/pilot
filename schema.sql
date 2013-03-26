@@ -82,3 +82,11 @@ INSERT INTO tb_reward (name, alias, description, point) VALUES ('Login Reward', 
 INSERT INTO tb_reward (name, alias, description, point) VALUES ('Chat Reward', 'CHAT', 'Reward by chat', 2);
 
 ALTER TABLE tb_user ADD COLUMN point INT DEFAULT 0;
+
+DROP TABLE tb_game_score;
+CREATE TABLE tb_game_score (
+	game_seq INT,
+	user_seq INT,
+	score INT,
+	play_time DATETIME
+);
