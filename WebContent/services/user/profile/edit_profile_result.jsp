@@ -1,1 +1,1 @@
-Completed!
+${param.result}

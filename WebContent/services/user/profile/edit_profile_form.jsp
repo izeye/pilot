@@ -1,3 +1,7 @@
+<%@page import="com.ctb.pilot.common.util.CountryUtils" %>
+<%@page import="java.util.List" %>
+<%@page import="com.ctb.pilot.common.model.Country" %>
+<%@page import="com.ctb.pilot.user.model.User" %>
 <html>
 <head>
 <title>Edit Profile</title>
@@ -32,6 +36,23 @@
 			<tr>
 				<td>Nickname :</td>
 				<td><input type="text" id="nickname" name="nickname" value="${sessionScope.user.nickname}"/></td>
+			</tr>
+			<tr>
+				<td>Country :</td>
+				<td>
+					<select id="country_code" name="country_code">
+						<option value="">Select</option>
+<%
+	User user = (User) session.getAttribute("user");
+	List<Country> countries = CountryUtils.getCountries();
+	for (Country country : countries) {
+		out.print("<option value='" + country.getCode() + "'" +
+				(user.getCountryCode().equals(country.getCode()) ? " selected" : "") +
+				">" + country.getName() + "</option>");
+	}
+%>
+					</select>
+				</td>
 			</tr>
 			<tr>
 				<td><input type="button" value="Edit"

@@ -36,9 +36,9 @@ public class MyBatisUserDao implements UserDao {
 
 	@Override
 	public void signUp(String userId, String password, String nickname,
-			InputStream image) {
+			String countryCode, InputStream image) {
 		UserMapper userMapper = sessionTemplate.getMapper(UserMapper.class);
-		userMapper.signUp(userId, password, nickname, image);
+		userMapper.signUp(userId, password, nickname, countryCode, image);
 	}
 
 	@Override
@@ -47,7 +47,8 @@ public class MyBatisUserDao implements UserDao {
 		int sequence = user.getSequence();
 		String password = user.getPassword();
 		String nickname = user.getNickname();
-		userMapper.update(sequence, password, nickname);
+		String countryCode = user.getCountryCode();
+		userMapper.update(sequence, password, nickname, countryCode);
 	}
 
 	@Override

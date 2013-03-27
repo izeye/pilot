@@ -14,7 +14,7 @@ public interface UserService {
 	User getUserByFacebookUsername(String facebookUsername);
 
 	void signUp(String userId, String password, String nickname,
-			InputStream image);
+			String countryCode, InputStream image);
 
 	void update(User user);
 

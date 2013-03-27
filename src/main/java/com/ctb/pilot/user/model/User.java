@@ -8,6 +8,7 @@ public class User {
 	private String userId;
 	private String password;
 	private String nickname;
+	private String countryCode;
 	private String role;
 	private Date joinDate;
 	private boolean deleted;
@@ -44,6 +45,14 @@ public class User {
 		this.nickname = nickname;
 	}
 
+	public String getCountryCode() {
+		return countryCode;
+	}
+
+	public void setCountryCode(String countryCode) {
+		this.countryCode = countryCode;
+	}
+
 	public String getRole() {
 		return role;
 	}
@@ -72,8 +81,8 @@ public class User {
 	public String toString() {
 		return "User [sequence=" + sequence + ", userId=" + userId
 				+ ", password=" + password + ", nickname=" + nickname
-				+ ", role=" + role + ", joinDate=" + joinDate + ", deleted="
-				+ deleted + "]";
+				+ ", countryCode=" + countryCode + ", role=" + role
+				+ ", joinDate=" + joinDate + ", deleted=" + deleted + "]";
 	}
 
 }

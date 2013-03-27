@@ -35,6 +35,7 @@ public class JdbcUserDao implements UserDao {
 				user.setUserId(rs.getString("user_id"));
 				user.setPassword(rs.getString("password"));
 				user.setNickname(rs.getString("nickname"));
+				user.setCountryCode(rs.getString("country_code"));
 				user.setRole(rs.getString("role"));
 				user.setJoinDate(rs.getTimestamp("join_date"));
 				user.setDeleted(rs.getInt("del_yn") == 1);
@@ -83,7 +84,7 @@ public class JdbcUserDao implements UserDao {
 
 	@Override
 	public void signUp(String userId, String password, String nickname,
-			InputStream image) {
+			String countryCode, InputStream image) {
 		Connection con = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -92,11 +93,12 @@ public class JdbcUserDao implements UserDao {
 
 			con = DriverManager.getConnection(CONNECTION_URL);
 			stmt = con
-					.prepareStatement("insert into tb_user (user_id, password, nickname, image, join_date) values (?, ?, ?, ?, now())");
+					.prepareStatement("insert into tb_user (user_id, password, nickname, country_code, image, join_date) values (?, ?, ?, ?, ?, now())");
 			stmt.setString(1, userId);
 			stmt.setString(2, password);
 			stmt.setString(3, nickname);
-			stmt.setBinaryStream(4, image);
+			stmt.setString(4, countryCode);
+			stmt.setBinaryStream(5, image);
 			stmt.executeUpdate();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -132,6 +134,7 @@ public class JdbcUserDao implements UserDao {
 		int sequence = user.getSequence();
 		String password = user.getPassword();
 		String nickname = user.getNickname();
+		String countryCode = user.getCountryCode();
 
 		Connection con = null;
 		PreparedStatement stmt = null;
@@ -141,10 +144,11 @@ public class JdbcUserDao implements UserDao {
 
 			con = DriverManager.getConnection(CONNECTION_URL);
 			stmt = con
-					.prepareStatement("update tb_user set password=?, nickname=? where seq=?");
+					.prepareStatement("update tb_user set password=?, nickname=?, country_code=? where seq=?");
 			stmt.setString(1, password);
 			stmt.setString(2, nickname);
-			stmt.setInt(3, sequence);
+			stmt.setString(3, countryCode);
+			stmt.setInt(4, sequence);
 			stmt.executeUpdate();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();

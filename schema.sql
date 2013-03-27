@@ -90,3 +90,5 @@ CREATE TABLE tb_game_score (
 	score INT,
 	play_time DATETIME
 );
+
+ALTER TABLE tb_user ADD COLUMN country_code CHAR(2) DEFAULT NULL;

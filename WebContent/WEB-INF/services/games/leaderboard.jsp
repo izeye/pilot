@@ -16,7 +16,9 @@
 				<c:forEach var="entry" items="${requestScope.entries}">
 					<tr>
 						<td>${entry.rank}</td>
-						<td>${entry.nickname}</td>
+						<td>
+							<img src="/resources/common/images/flags/${entry.countryCode}.png" width="20%" height="20%"/> ${entry.nickname}
+						</td>
 						<td>${entry.point}</td>
 					</tr>
 				</c:forEach>

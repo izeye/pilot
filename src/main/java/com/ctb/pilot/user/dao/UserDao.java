@@ -14,7 +14,7 @@ public interface UserDao {
 	User getUserByFacebookUsername(String facebookUsername);
 
 	void signUp(String userId, String password, String nickname,
-			InputStream image);
+			String countryCode, InputStream image);
 
 	void signUpByFacebook(String userId, String nickname,
 			String facebookUsername);

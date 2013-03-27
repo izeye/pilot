@@ -19,6 +19,7 @@ public interface UserMapper {
 	void signUp(@Param("userId") String userId,
 			@Param("password") String password,
 			@Param("nickname") String nickname,
+			@Param("countryCode") String countryCode,
 			@Param("image") InputStream image);
 
 	void signUpByFacebook(@Param("userId") String userId,
@@ -27,7 +28,8 @@ public interface UserMapper {
 
 	void update(@Param("sequence") int sequence,
 			@Param("password") String password,
-			@Param("nickname") String nickname);
+			@Param("nickname") String nickname,
+			@Param("countryCode") String countryCode);
 
 	List<User> getAllUsers();
 

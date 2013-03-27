@@ -24,11 +24,11 @@ public class DefaultUserService implements UserService {
 	public User getUserBySequence(int sequence) {
 		return userDao.getUserBySequence(sequence);
 	}
-	
+
 	@Override
 	public void signUp(String userId, String password, String nickname,
-			InputStream image) {
-		userDao.signUp(userId, password, nickname, image);
+			String countryCode, InputStream image) {
+		userDao.signUp(userId, password, nickname, countryCode, image);
 	}
 
 	@Override

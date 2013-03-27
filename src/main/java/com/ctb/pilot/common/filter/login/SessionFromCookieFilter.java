@@ -35,6 +35,7 @@ public class SessionFromCookieFilter implements Filter {
 			if (sequenceInCookie != null && !sequenceInCookie.isEmpty()) {
 				Integer userSequence = Integer.valueOf(sequenceInCookie);
 				user = userDao.getUserBySequence(userSequence);
+				System.out.println(user);
 				session.setAttribute("user", user);
 			}
 		}

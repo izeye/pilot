@@ -14,7 +14,6 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -79,10 +78,11 @@ public class UserController {
 			String userId = multipart.getParameter("user_id");
 			String password = multipart.getParameter("password");
 			String nickname = multipart.getParameter("nickname");
+			String countryCode = multipart.getParameter("country_code");
 
 			if (userId == null || password == null || nickname == null
 					|| userId.isEmpty() || password.isEmpty()
-					|| nickname.isEmpty()) {
+					|| nickname.isEmpty() || countryCode.isEmpty()) {
 				throw new ServletException("Some field is null or empty.");
 			}
 
@@ -93,7 +93,7 @@ public class UserController {
 
 			InputStream image = multipart.getInputStream("imageFile");
 
-			userService.signUp(userId, password, nickname, image);
+			userService.signUp(userId, password, nickname, countryCode, image);
 		} catch (FileUploadException e) {
 			e.printStackTrace();
 			throw new ServletException(e);
@@ -119,43 +119,41 @@ public class UserController {
 		model.addAttribute("staff", allStaff);
 		return "/view/jsp/about_us_view";
 	}
-	
-	@RequestMapping(value="/services/user/sign-up-new.do",method=RequestMethod.POST)
-	public String signUp(
-			@RequestParam("user_id") String userId,
+
+	@RequestMapping(value = "/services/user/sign-up-new.do", method = RequestMethod.POST)
+	public String signUp(@RequestParam("user_id") String userId,
 			@RequestParam("password") String password,
 			@RequestParam("nickname") String nickName,
-			@RequestParam("imageFile") MultipartFile multipartFile,
-			Model model) throws IOException{
-		System.out.println("multipartFileSize :: "+multipartFile.getSize());
+			@RequestParam("country_code") String countryCode,
+			@RequestParam("imageFile") MultipartFile multipartFile, Model model)
+			throws IOException {
+		System.out.println("multipartFileSize :: " + multipartFile.getSize());
 		model.addAttribute("userId", userId);
-		
+
 		InputStream image = multipartFile.getInputStream();
-		userService.signUp(userId, password, nickName, image);
+		userService.signUp(userId, password, nickName, countryCode, image);
 		image.close();
 		return "redirect:/common/web_template.jsp?body_path=/services/user/sign_up/sign_up_result.jsp";
 	}
-	
-	@RequestMapping(value="/services/user/edit_profile.do", method=RequestMethod.POST)
-	public String editProfile(
-			@ModelAttribute User user 
-			){
-//			@RequestParam("user_id") String userId,
-//			@RequestParam("current_password") String currentPassword,
-//			@RequestParam("new_password") String newPassword,
-//			@RequestParam("confirm_new_password") String confirmNewPassword,
-//			@RequestParam("nickname") String nickname
-//			){
-//	    System.out.println("이리로 들어오니?");
-//	    System.out.println("userId : " + userId);
-//	    System.out.println("currentPassword : " + currentPassword);
-//	    System.out.println("newPassword : " + newPassword);
-//	    System.out.println("confirmNewPassword" + confirmNewPassword);
-//	    System.out.println("nickname : " + nickname);
-		
-		System.out.println("여기로");
-		System.out.println("user.getUserId() :: "+user.getUserId());
-		return "redirect:/common/web_template.jsp?body_path=/services/user/profile/edit_profile_result.jsp";
-	}
 
+	@RequestMapping(value = "/services/user/edit_profile.do", method = RequestMethod.POST)
+	public String editProfile(@RequestParam("user_id") String userId,
+			@RequestParam("current_password") String currentPassword,
+			@RequestParam("new_password") String newPassword,
+			@RequestParam("nickname") String nickname,
+			@RequestParam("country_code") String countryCode,
+			HttpServletRequest req) {
+		User user = (User) req.getSession().getAttribute("user");
+		if (currentPassword.equals(user.getPassword())) {
+			if (!newPassword.isEmpty()) {
+				user.setPassword(newPassword);
+			}
+			user.setNickname(nickname);
+			user.setCountryCode(countryCode);
+			userService.update(user);
+			return "redirect:/common/web_template.jsp?body_path=/services/user/profile/edit_profile_result.jsp?result=success";
+		} else {
+			return "redirect:/common/web_template.jsp?body_path=/services/user/profile/edit_profile_result.jsp?result=failure";
+		}
+	}
 }

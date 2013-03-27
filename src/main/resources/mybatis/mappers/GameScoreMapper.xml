@@ -6,14 +6,15 @@
 		VALUES (#{gameSequence}, #{userSequence}, #{score}, now())
 	</insert>
 	<select id="getLeaderboard" resultType="LeaderboardEntry">
-		SELECT @rn:=@rn+1 AS rank, nickname, point
+		SELECT @rn:=@rn+1 AS rank, nickname, country_code, point
 		FROM
 			(
 				SELECT
-					(SELECT nickname FROM tb_user WHERE seq = user_seq) AS nickname,
+					nickname,
+					country_code,
 					MAX(score) AS point
-				FROM tb_game_score
-				WHERE game_seq = #{gameSequence} GROUP BY user_seq ORDER BY point DESC, nickname ASC
+				FROM tb_game_score, tb_user
+				WHERE game_seq = #{gameSequence} AND seq = user_seq GROUP BY user_seq ORDER BY point DESC, nickname ASC
 			) t1,
 			(SELECT @rn:=0) t2;
 	</select>

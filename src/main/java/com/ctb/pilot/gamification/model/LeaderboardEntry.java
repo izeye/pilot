@@ -5,6 +5,7 @@ public class LeaderboardEntry {
 	private int rank;
 	private String nickname;
 	private int point;
+	private String countryCode;
 
 	public LeaderboardEntry() {
 	}
@@ -15,6 +16,14 @@ public class LeaderboardEntry {
 
 	public void setRank(int rank) {
 		this.rank = rank;
+	}
+
+	public void setCountryCode(String countryCode) {
+		this.countryCode = countryCode;
+	}
+
+	public String getCountryCode() {
+		return countryCode;
 	}
 
 	public String getNickname() {
@@ -36,7 +45,7 @@ public class LeaderboardEntry {
 	@Override
 	public String toString() {
 		return "LeaderboardEntry [rank=" + rank + ", nickname=" + nickname
-				+ ", point=" + point + "]";
+				+ ", point=" + point + ", countryCode=" + countryCode + "]";
 	}
 
 }

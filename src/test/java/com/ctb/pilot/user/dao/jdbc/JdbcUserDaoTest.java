@@ -39,21 +39,25 @@ public class JdbcUserDaoTest {
 		String userId = "jsp@naver.com";
 		String password = "1234";
 		String nickname = "jsp";
-		InputStream iamge = new FileInputStream(
+		String countryCode = "KR";
+		InputStream image = new FileInputStream(
 				"src/test/resources/samples/images/cushion_1.gif");
-		userDao.signUp(userId, password, nickname, iamge);
+		userDao.signUp(userId, password, nickname, countryCode, image);
 	}
 
 	@Test
-	public void testUpdate() {
-		int sequence = 1;
+	public void update() {
+		// int sequence = 1;
+		int sequence = 2;
 		String password = "12345";
 		String nickname = "Johnny";
+		String countryCode = "FR";
 
 		User user = new User();
 		user.setSequence(sequence);
 		user.setPassword(password);
 		user.setNickname(nickname);
+		user.setCountryCode(countryCode);
 
 		userDao.update(user);
 	}

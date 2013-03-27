@@ -15,6 +15,8 @@
 	}
 	String nickname = request.getParameter("nickname");
 	user.setNickname(nickname);
+	String countryCode = request.getParameter("country_code");
+	user.setCountryCode(countryCode);
 	
 	UserDao userDao = new JdbcUserDao();
 	userDao.update(user);

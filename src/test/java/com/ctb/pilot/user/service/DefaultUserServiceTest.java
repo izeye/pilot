@@ -11,10 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.ctb.pilot.config.MainConfig;
+import com.ctb.pilot.config.SocialConfig;
 import com.ctb.pilot.user.model.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "/applicationContext.xml")
+@ContextConfiguration(classes = { MainConfig.class, SocialConfig.class })
 public class DefaultUserServiceTest {
 
 	@Autowired
@@ -40,9 +42,10 @@ public class DefaultUserServiceTest {
 		String userId = "jsp@naver.com";
 		String password = "1234";
 		String nickname = "jsp";
-		InputStream iamge = new FileInputStream(
+		String countryCode = "KR";
+		InputStream image = new FileInputStream(
 				"src/test/resources/samples/images/cushion_1.gif");
-		userService.signUp(userId, password, nickname, iamge);
+		userService.signUp(userId, password, nickname, countryCode, image);
 	}
 
 	@Test

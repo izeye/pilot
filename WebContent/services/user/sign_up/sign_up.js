@@ -1,6 +1,6 @@
 var checkValidation = function() {
 	if (sign_up_user_id.value == "" || sign_up_password.value == ""
-			|| confirm_password.value == "" || nickname.value == "") {
+			|| confirm_password.value == "" || nickname.value == "" || country_code.value == "") {
 		alert("Empty field!");
 		return false;
 	}
