@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ctb.pilot.gamification.dao.mybatis.GameScoreMapper">
+	<resultMap id="leaderboardEntry" type="LeaderboardEntry">
+		<id column="seq" property="userSequence" />
+	</resultMap>
 	<insert id="insertScore">
 		INSERT INTO tb_game_score (game_seq, user_seq, score, play_time)
 		VALUES (#{gameSequence}, #{userSequence}, #{score}, now())
 	</insert>
-	<select id="getLeaderboard" resultType="LeaderboardEntry">
-		SELECT @rn:=@rn+1 AS rank, nickname, country_code, point
+	<select id="getLeaderboard" resultMap="leaderboardEntry">
+		SELECT @rn:=@rn+1 AS rank, seq, nickname, country_code, point
 		FROM
 			(
 				SELECT
+					seq,
 					nickname,
 					country_code,
 					MAX(score) AS point
@@ -17,5 +21,10 @@
 				WHERE game_seq = #{gameSequence} AND seq = user_seq GROUP BY user_seq ORDER BY point DESC, nickname ASC
 			) t1,
 			(SELECT @rn:=0) t2;
+	</select>
+	<select id="getGameLogs" resultType="GameLog">
+		SELECT * FROM tb_game_score
+		WHERE game_seq = #{gameSequence} AND user_seq = #{userSequence}
+		ORDER BY play_time DESC
 	</select>
 </mapper>

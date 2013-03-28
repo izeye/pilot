@@ -17,12 +17,16 @@
 					<tr>
 						<td>${entry.rank}</td>
 						<td>
-							<img src="/resources/common/images/flags/${entry.countryCode}.png" width="20%" height="20%"/> ${entry.nickname}
+							<img src="/resources/common/images/flags/${entry.countryCode}.png" width="20%" height="20%"/>
+							<a href="/services/game/score/history.do?game_sequence=${requestScope.gameSequence}&user_sequence=${entry.userSequence}&nickname=${entry.nickname}" target="game_history">
+								${entry.nickname}
+							</a>
 						</td>
 						<td>${entry.point}</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
+		<iframe id="game_history" width="400" height="300"></iframe>
 	</body>
 </html>

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ctb.pilot.gamification.dao.GameScoreDao;
+import com.ctb.pilot.gamification.model.GameLog;
 import com.ctb.pilot.gamification.model.Leaderboard;
 import com.ctb.pilot.gamification.model.LeaderboardEntry;
 
@@ -30,6 +31,13 @@ public class GameScoreDaoMyBatis implements GameScoreDao {
 		List<LeaderboardEntry> leaderboardEntries = mapper
 				.getLeaderboard(gameSequence);
 		return new Leaderboard(leaderboardEntries);
+	}
+
+	@Override
+	public List<GameLog> getGameLogs(int gameSequence, int userSequence) {
+		GameScoreMapper mapper = sessionTemplate
+				.getMapper(GameScoreMapper.class);
+		return mapper.getGameLogs(gameSequence, userSequence);
 	}
 
 }

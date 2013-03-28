@@ -1,5 +1,7 @@
 package com.ctb.pilot.gamification.dao;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.ctb.pilot.config.MainConfig;
 import com.ctb.pilot.config.SocialConfig;
 import com.ctb.pilot.gamification.model.GameDefinition;
+import com.ctb.pilot.gamification.model.GameLog;
 import com.ctb.pilot.gamification.model.Leaderboard;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -31,6 +34,15 @@ public class GameScoreDaoTest {
 		int gameSequence = GameDefinition.ARKANOID.getSequence();
 		Leaderboard leaderboard = gameScoreDao.getLeaderboard(gameSequence);
 		System.out.println(leaderboard);
+	}
+
+	@Test
+	public void getGameLogs() {
+		int gameSequence = GameDefinition.ARKANOID.getSequence();
+		int userSequence = 21;
+		List<GameLog> gameLogs = gameScoreDao.getGameLogs(gameSequence,
+				userSequence);
+		System.out.println(gameLogs);
 	}
 
 }

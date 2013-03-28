@@ -3,6 +3,7 @@ package com.ctb.pilot.gamification.model;
 public class LeaderboardEntry {
 
 	private int rank;
+	private int userSequence;
 	private String nickname;
 	private int point;
 	private String countryCode;
@@ -16,6 +17,14 @@ public class LeaderboardEntry {
 
 	public void setRank(int rank) {
 		this.rank = rank;
+	}
+
+	public int getUserSequence() {
+		return userSequence;
+	}
+
+	public void setUserSequence(int userSequence) {
+		this.userSequence = userSequence;
 	}
 
 	public void setCountryCode(String countryCode) {
@@ -44,8 +53,9 @@ public class LeaderboardEntry {
 
 	@Override
 	public String toString() {
-		return "LeaderboardEntry [rank=" + rank + ", nickname=" + nickname
-				+ ", point=" + point + ", countryCode=" + countryCode + "]";
+		return "LeaderboardEntry [rank=" + rank + ", userSequence="
+				+ userSequence + ", nickname=" + nickname + ", point=" + point
+				+ ", countryCode=" + countryCode + "]";
 	}
 
 }

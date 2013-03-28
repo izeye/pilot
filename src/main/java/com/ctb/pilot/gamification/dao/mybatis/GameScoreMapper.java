@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.ctb.pilot.gamification.model.GameLog;
 import com.ctb.pilot.gamification.model.LeaderboardEntry;
 
 public interface GameScoreMapper {
@@ -13,5 +14,8 @@ public interface GameScoreMapper {
 
 	List<LeaderboardEntry> getLeaderboard(
 			@Param("gameSequence") int gameSequence);
+
+	List<GameLog> getGameLogs(@Param("gameSequence") int gameSequence,
+			@Param("userSequence") int userSequence);
 
 }

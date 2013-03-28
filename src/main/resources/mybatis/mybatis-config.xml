@@ -11,5 +11,6 @@
 		<typeAlias alias="QRCodeGenerationLog" type="com.ctb.pilot.util.qrcode.model.QRCodeGenerationLog" />
 		<typeAlias alias="Reward" type="com.ctb.pilot.gamification.model.Reward" />
 		<typeAlias alias="LeaderboardEntry" type="com.ctb.pilot.gamification.model.LeaderboardEntry" />
+		<typeAlias alias="GameLog" type="com.ctb.pilot.gamification.model.GameLog" />
 	</typeAliases>
 </configuration>
