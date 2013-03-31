@@ -27,6 +27,6 @@
 				</c:forEach>
 			</tbody>
 		</table>
-		<iframe id="game_history" width="400" height="300"></iframe>
+		<iframe id="game_history" name="game_history" width="400" height="300"></iframe>
 	</body>
 </html>
