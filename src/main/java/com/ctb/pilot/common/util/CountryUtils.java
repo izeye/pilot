@@ -21,7 +21,7 @@ public class CountryUtils {
 			try {
 				String iso = locale.getISO3Country();
 				String code = locale.getCountry();
-				String name = locale.getDisplayCountry();
+				String name = locale.getDisplayCountry(Locale.US);
 				if (iso.isEmpty() || code.isEmpty() || name.isEmpty()
 						|| codeAndNameMap.get(code) != null) {
 					continue;

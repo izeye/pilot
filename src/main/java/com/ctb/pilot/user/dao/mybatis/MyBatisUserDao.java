@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ctb.pilot.user.dao.UserDao;
 import com.ctb.pilot.user.model.User;
+import com.ctb.pilot.util.image.model.Image;
 
 @Repository("userDao")
 public class MyBatisUserDao implements UserDao {
@@ -68,6 +69,12 @@ public class MyBatisUserDao implements UserDao {
 			String facebookUsername) {
 		UserMapper userMapper = sessionTemplate.getMapper(UserMapper.class);
 		userMapper.signUpByFacebook(userId, nickname, facebookUsername);
+	}
+
+	@Override
+	public List<Image> getImage(String userSeq) {
+		UserMapper mapper = sessionTemplate.getMapper(UserMapper.class);
+		return mapper.getImage(userSeq);
 	}
 
 }

@@ -32,4 +32,10 @@
 	<select id="getAllStaff" resultMap="userResultMap">
 		select * from tb_user where role = "staff";
 	</select>
+	
+	<select id="getImage" resultType="Image">
+		select image
+		from tb_user
+		where seq = #{userSeq}
+	</select>
 </mapper>

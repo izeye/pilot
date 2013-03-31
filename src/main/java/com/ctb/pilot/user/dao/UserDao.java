@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.util.List;
 
 import com.ctb.pilot.user.model.User;
+import com.ctb.pilot.util.image.model.Image;
 
 public interface UserDao {
 
@@ -24,5 +25,7 @@ public interface UserDao {
 	List<User> getAllUsers();
 
 	List<User> getAllStaff();
+
+	List<Image> getImage(String userSeq);
 
 }

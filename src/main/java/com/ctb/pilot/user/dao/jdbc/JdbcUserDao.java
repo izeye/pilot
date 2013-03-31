@@ -14,6 +14,7 @@ import java.util.List;
 
 import com.ctb.pilot.user.dao.UserDao;
 import com.ctb.pilot.user.model.User;
+import com.ctb.pilot.util.image.model.Image;
 
 public class JdbcUserDao implements UserDao {
 
@@ -251,6 +252,11 @@ public class JdbcUserDao implements UserDao {
 
 	@Override
 	public User getUserByFacebookUsername(String facebookUsername) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public List<Image> getImage(String userSeq) {
 		throw new UnsupportedOperationException();
 	}
 

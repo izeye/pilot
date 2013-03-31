@@ -92,3 +92,34 @@ CREATE TABLE tb_game_score (
 );
 
 ALTER TABLE tb_user ADD COLUMN country_code CHAR(2) DEFAULT NULL;
+
+DROP TABLE tb_image;
+CREATE TABLE tb_image (
+	seq INT AUTO_INCREMENT,
+	type INT,
+	name VARCHAR(100),
+	PRIMARY KEY (seq)
+);
+
+INSERT INTO tb_image (type, name) VALUES (1, 'amulet');
+INSERT INTO tb_image (type, name) VALUES (1, 'cake');
+INSERT INTO tb_image (type, name) VALUES (1, 'keyboard_1');
+INSERT INTO tb_image (type, name) VALUES (1, 'keyboard_2');
+INSERT INTO tb_image (type, name) VALUES (1, 'keyboard_3');
+INSERT INTO tb_image (type, name) VALUES (1, 'knob_1');
+INSERT INTO tb_image (type, name) VALUES (1, 'knob_2');
+INSERT INTO tb_image (type, name) VALUES (1, 'mouse');
+INSERT INTO tb_image (type, name) VALUES (1, 'stairs');
+INSERT INTO tb_image (type, name) VALUES (1, 'switch');
+INSERT INTO tb_image (type, name) VALUES (2, 'elevator_led_3');
+INSERT INTO tb_image (type, name) VALUES (2, 'elevator_led_5');
+INSERT INTO tb_image (type, name) VALUES (2, 'elevator_led_8');
+INSERT INTO tb_image (type, name) VALUES (2, 'elevator_led_12');
+INSERT INTO tb_image (type, name) VALUES (2, 'elevator_led_13');
+INSERT INTO tb_image (type, name) VALUES (2, 'elevator_led_14');
+INSERT INTO tb_image (type, name) VALUES (2, 'elevator_led_15');
+INSERT INTO tb_image (type, name) VALUES (2, 'elevator_led_16');
+INSERT INTO tb_image (type, name) VALUES (2, 'elevator_led_17');
+INSERT INTO tb_image (type, name) VALUES (2, 'elevator_led_18');
+
+

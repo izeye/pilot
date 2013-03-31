@@ -17,7 +17,9 @@ public class CountryUtilsTest {
 	@Test
 	public void getCountryByCode() {
 		// String countryCode = "KR";
-		String countryCode = "CS";
+		// String countryCode = "CS";
+		// String countryCode = "LB";
+		String countryCode = "ZA";
 		Country country = CountryUtils.getCountryByCode(countryCode);
 		System.out.println(country);
 	}

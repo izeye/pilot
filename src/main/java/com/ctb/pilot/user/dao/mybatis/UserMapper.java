@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.ctb.pilot.user.model.User;
+import com.ctb.pilot.util.image.model.Image;
 
 public interface UserMapper {
 
@@ -34,5 +35,7 @@ public interface UserMapper {
 	List<User> getAllUsers();
 
 	List<User> getAllStaff();
+
+	List<Image> getImage(String userSeq);
 
 }
