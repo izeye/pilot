@@ -6,11 +6,11 @@
 	var maps = [
 	    [],
 		[
-			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+			[0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+			[0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 		],
 		[
 			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -19,6 +19,20 @@
 			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 		]
+//		[
+//			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+//			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+//			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+//			[1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+//			[1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+//		],
+//		[
+//			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+//			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+//			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+//			[1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+//			[1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+//		]
 	];
 	
 	var map;
@@ -53,8 +67,10 @@
 	ball.radius = 10;
 	ball.x = 0;
 	ball.y = 0;
-	ball.dx = -1;
-	ball.dy = -2;
+	ball.initialDx = -1;
+	ball.initialDy = -2;
+	ball.dx = ball.initialDx;
+	ball.dy = ball.initialDy;
 	ball.color = '#000';
 	ball.init = function () {
 		this.x = bat.x + bat.width / 2;
@@ -72,8 +88,8 @@
 	
 	var timer_id = 0;
 	
-	var max_score = 500;
-//	var max_score = 100;
+//	var max_score = 500;
+	var max_score = 20;
 	
 	ARKANOID = {
 		init: function () {
@@ -109,8 +125,13 @@
 			// FIXME: doesn't appear.
 			self.printCenter('Arkanoid');
 			
+			self.startLevel();
+		},
+		startLevel: function () {
+			var self = this;
+			
 			self.clearScreen();
-
+			
 			bat.init();
 			ball.init();
 			
@@ -206,7 +227,7 @@
 						ball.dy = -ball.dy;
 						map[row][col] = 0;
 						
-						score += 10;
+						score += 10 * level;
 					}
 					x += tile.width + 1;
 				}
@@ -234,8 +255,21 @@
 			
 			self.drawStatus();
 			
-			if (score == max_score) {
-				self.clearGame();
+			var levelCleared = true;
+			for (var row = 0, rows = map.length; row < rows; row++) {
+				for (var col = 0, cols = map[row].length; col < cols; col++) {
+					if (map[row][col] == 1) {
+						levelCleared = false;
+						break;
+					}
+				}
+				if (!levelCleared) {
+					break;
+				}
+			}
+			
+			if (levelCleared) {
+				self.clearLevel();
 			}
 		},
 		drawBall: function () {
@@ -288,11 +322,32 @@
 			
 			jQuery.post('/services/game/score/record.do', 'game_sequence=1&score=' + score);
 		},
+		clearLevel: function () {
+			var self = this;
+			
+			window.clearInterval(timer_id);
+			
+			self.printCenter('Level Clear');
+			
+			window.setTimeout(function () {
+				level++;
+				ball.dx = ball.initialDx * 1.5;
+				ball.dy = ball.initialDy * 1.5;
+				console.log(ball.dx);
+				console.log(ball.dy);
+				if (maps[level]) {
+					self.startLevel();
+				} else {
+					self.clearGame();
+				}
+			}, 2000);
+		},
 		clearGame: function () {
 			var self = this;
 			
 			window.clearInterval(timer_id);
 			
+			self.clearScreen();
 			self.printCenter('Game Clear');
 			
 			jQuery.post('/services/game/score/record.do', 'game_sequence=1&score=' + score);
