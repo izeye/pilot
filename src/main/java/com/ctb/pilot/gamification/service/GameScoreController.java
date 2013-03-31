@@ -15,12 +15,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.ctb.pilot.gamification.model.GameLog;
 import com.ctb.pilot.gamification.model.Leaderboard;
 import com.ctb.pilot.user.model.User;
+import com.ctb.pilot.user.service.UserService;
 
 @Controller
 public class GameScoreController {
 
 	@Autowired
 	private GameScoreService gameScoreService;
+
+	@Autowired
+	private UserService userService;
 
 	@RequestMapping("/services/game/score/leaderboard.do")
 	public String showLeaderboard(HttpServletRequest req, Model model) {
@@ -35,7 +39,8 @@ public class GameScoreController {
 	public String showHistory(HttpServletRequest req, Model model) {
 		int gameSequence = Integer.parseInt(req.getParameter("game_sequence"));
 		int userSequence = Integer.parseInt(req.getParameter("user_sequence"));
-		String nickname = req.getParameter("nickname");
+		User user = userService.getUserBySequence(userSequence);
+		String nickname = user.getNickname();
 		List<GameLog> history = gameScoreService.getHistory(gameSequence,
 				userSequence);
 		model.addAttribute("nickname", nickname);

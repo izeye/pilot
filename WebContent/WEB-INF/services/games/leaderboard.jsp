@@ -18,7 +18,7 @@
 						<td>${entry.rank}</td>
 						<td>
 							<img src="/resources/common/images/flags/${entry.countryCode}.png" width="20%" height="20%"/>
-							<a href="/services/game/score/history.do?game_sequence=${requestScope.gameSequence}&user_sequence=${entry.userSequence}&nickname=${entry.nickname}" target="game_history">
+							<a href="/services/game/score/history.do?game_sequence=${requestScope.gameSequence}&user_sequence=${entry.userSequence}" target="game_history">
 								${entry.nickname}
 							</a>
 						</td>
