@@ -7,6 +7,13 @@
 	    [],
 		[
 			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		],
+		[
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 			[0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
 			[0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
 			[0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
@@ -87,9 +94,6 @@
 	var score = 0;
 	
 	var timer_id = 0;
-	
-//	var max_score = 500;
-	var max_score = 20;
 	
 	ARKANOID = {
 		init: function () {
@@ -331,8 +335,8 @@
 			
 			window.setTimeout(function () {
 				level++;
-				ball.dx = ball.initialDx * 1.5;
-				ball.dy = ball.initialDy * 1.5;
+				ball.dx = ball.initialDx * (1 + 0.5 * (level - 1));
+				ball.dy = ball.initialDy * (1 + 0.5 * (level - 1));
 				console.log(ball.dx);
 				console.log(ball.dy);
 				if (maps[level]) {
