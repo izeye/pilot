@@ -1,4 +1,10 @@
 (function () {
+	Array.prototype.removeAt = function (index) {
+		this.splice(index, 1);
+	};
+	
+	var ITEM_TYPE_GUN = 1;
+	
 	var document = window.document;
 	var canvas = document.getElementById('canvas');
 	var context = canvas.getContext('2d');
@@ -79,7 +85,7 @@
 	ball.radius = 10;
 	ball.x = 0;
 	ball.y = 0;
-	ball.initialSpeed = 2;
+	ball.initialSpeed = 4;
 	ball.speed = ball.initialSpeed;
 	ball.initialDx = ball.speed * Math.cos(SIN45);
 	ball.initialDy = -ball.speed * Math.sin(SIN45);
@@ -97,24 +103,31 @@
 	tile.height = 40;
 	tile.color = '#F00';
 	
-	//item: itemTile
-	var itemTile = {};
-	itemTile.color = '#FFD9EC';
-	
 	//총알을 담을 배열
 	var bullets = null;
 	
 	//아이템볼을 담는 배열
-	var itemBalls = null;
+	var items = null;
 	
 	//아이템 이벤트 시간누적 변수
 	var itemEventTime = 0;
-	
 	
 	var level = 1;
 	var score = 0;
 	
 	var timer_id = 0;
+	
+	var item_meta = {
+		radius : 30,
+		speed : 2, 
+		color : '#1DDB16'
+	};
+	
+	var bullet_meta = {
+		radius : 5,
+		speed : 5, 
+		color : '#FFBB00'
+	};
 	
 	ARKANOID = {
 		init: function () {
@@ -146,7 +159,7 @@
 				//총알이벤트 발생하면 눌러진다.
 				
 				if(itemEventTime > 0){
-					self.setBullets();
+					self.fireBullet();
 				}
 			} );
 		},
@@ -181,8 +194,8 @@
 			var self = this;
 			
 			itemEventTime = 0;
-			bullets = new Array();
-			itemBalls = new Array();
+			bullets = [];
+			items = [];
 			
 			self.clearScreen();
 			
@@ -199,7 +212,7 @@
 			window.setTimeout(function () {
 				timer_id = window.setInterval(function () {
 					self.refreshFrames.call(self);
-				}, 1);
+				}, 10);
 			}, 2000);
 		},
 		print: function(text, x, y, width) {
@@ -249,17 +262,17 @@
 				self.die();
 			}
 			// Check collision with bat.
-			if (self.collide(bat.x, bat.y, bat.width, bat.height)) {
+			if (self.isCollidedBetweenBallAndBat()) {
 //				self.collideBetweenBallAndBat();
 				self.collideBetweenBallAndBatV2();
 			}
 			
-			
 			//아이템볼과 배트의 충돌 검사
-			for(var i=0;i<itemBalls.length;i++){
-				if(self.itemBallCollide(itemBalls[i], bat.x, bat.y, bat.width, bat.height)){
-					itemBalls[i].visible = false;
-					itemEventTime += 2;
+			for (var i = 0; i < items.length; i++) {
+				if (self.isCollidedBetweenBatAndItem(items[i])) {
+					items[i].visible = false;
+					items.removeAt(i);
+					itemEventTime += 180;
 				}
 			}
 			
@@ -268,70 +281,35 @@
 			for (var row = 0, rows = map.length; row < rows; row++) {
 				x = 0;
 				for (var col = 0, cols = map[row].length; col < cols; col++) {
-					if (map[row][col] == 1 && self.collide(x + 1, y + 1, tile.width, tile.height)) {
-						ball.dx = -ball.dx;
-						ball.dy = -ball.dy;
-						map[row][col] = 0;
+					if (map[row][col] == 1) {
+						var collided = false;
+						if (self.isCollidedBetweenBallAndSquare(x + 1, y + 1, tile.width, tile.height)) {
+							collided = true;
+						}
 						
-						score += 10 * level;
+						for (var i = 0; i < bullets.length; i++){
+							if (self.isCollidedBetweenBulletAndTile(bullets[i], x + 1, y + 1, tile.width, tile.height)) {
+								collided = true;
+								bullets.removeAt(i);
+								break;
+							}
+						}
 						
-						document.getElementById("explosion").play();
-					}else if (map[row][col] == 2 && self.collide(x + 1, y + 1, tile.width, tile.height)){  //item충돌
-						ball.dx = -ball.dx;
-						ball.dy = -ball.dy;
-						map[row][col] = 0;
-						score += 10 * level;
-						//item : 이부분에서 아이템 볼을 떨어뜨려 준다.
-						//itemBall.x 를 결정해 준다.
-						//itemBall객체를 생성해서 itemBals배열에 넣는다.
-						var tempItemBall = {
-							x : x+1+tile.width/2,
-							y : y+1+tile.height, 
-							radius : 30,
-							visible : true,
-							speed : 1, 
-							color : '#1DDB16'
-			            };
-						itemBalls.push(tempItemBall);
-						
-						document.getElementById("explosion").play();
-					}
-					x += tile.width + 1;
-				}
-				y += tile.height + 1;
-			}
-			
-			//총알과 블럭의 충돌을 검사
-			var x = 0;
-			var y = 0;
-			for (var row = 0, rows = map.length; row < rows; row++) {
-				x = 0;
-				for (var col = 0, cols = map[row].length; col < cols; col++) {
-					for(var i=0;i<bullets.length;i++){
-						if (map[row][col] == 1 && self.bulletsCollide(bullets[i],x + 1, y + 1, tile.width, tile.height)) {
+						if (collided) {
+							ball.dx = -ball.dx;
+							ball.dy = -ball.dy;
 							map[row][col] = 0;
-							bullets[i].visible = false;
-						
-							score += 10 * level;
-						
-							document.getElementById("explosion").play();
-						}else if (map[row][col] == 2 && self.bulletsCollide(bullets[i],x + 1, y + 1, tile.width, tile.height)){  //item충돌
-							map[row][col] = 0;
-							bullets[i].visible = false;
 							
 							score += 10 * level;
 							
-							//item : 이부분에서 아이템 볼을 떨어뜨려 준다.
-							//itemBall.x 를 결정해 준다.
-							var tempItemBall = {
-								x : x+1+tile.width/2,
-								y : y+1+tile.height, 
-								radius : 30,
-								visible : true,
-								speed : 1, 
-								color : '#1DDB16'
-				            };
-							itemBalls.push(tempItemBall);
+							// Check item block.
+							for (var i = 0; i < items.length; i++) {
+								if (items[i].row == row && items[i].column == col) {
+									items[i].x = x + tile.width / 2;
+									items[i].y = y + tile.height;
+									items[i].visible = true;
+								}
+							}
 							
 							document.getElementById("explosion").play();
 						}
@@ -340,24 +318,28 @@
 				}
 				y += tile.height + 1;
 			}
-
 			
 			ball.x += ball.dx;
 			ball.y += ball.dy;
 			
 			//item: 아이템을 내려오게 한다.
-			for(var i=0;i<itemBalls.length;i++){
-				if(itemBalls[i].visible){
-					self.drawItemBall(itemBalls[i]);
-					itemBalls[i].y+=itemBalls[i].speed;
+			for (var i = 0; i < items.length; i++) {
+				if (items[i].visible) {
+					self.drawItem(items[i]);
+					items[i].y += item_meta.speed;
+					if (items[i].y > canvas.height) {
+						items.removeAt(i);
+					}
 				}
 			}
 			
 			//총알을 그린다.
-			for(var i=0;i<bullets.length;i++){
-				if(bullets[i].visible == true){
-					self.drawBullets(bullets[i]);
-					bullets[i].y -= bullets[i].speed; 										
+			for (var i = 0; i < bullets.length; i++){
+				console.dir(bullets);
+				self.drawBullet(bullets[i]);
+				bullets[i].y -= bullet_meta.speed;
+				if (bullets[i].y < 0) {
+					bullets.removeAt(i);
 				}
 			}
 			
@@ -369,10 +351,8 @@
 //					console.log(row + ", " + col);
 //					console.log(x + ", " + y);
 					
-					if (map[row][col] == 1) {
+					if (map[row][col] & 1 == 1) {
 						self.drawTile(x + 1, y + 1);
-					}else if(map[row][col] == 2){  //item
-						self.drawItemTile(x +1, y + 1);
 					}
 					x += tile.width + 1;
 				}
@@ -477,24 +457,17 @@
 			context.closePath();
 			context.fill();
 		},
-		drawItemTile: function(x, y){  //item
-			context.fillStyle = itemTile.color;
+		drawItem: function (item){  //item: 아이템볼을 그려준다.
+			context.fillStyle = item_meta.color;
 			context.beginPath();
-			context.rect(x, y, tile.width, tile.height);
+			context.arc(item.x, item.y, item_meta.radius, 0, Math.PI * 2, true);
 			context.closePath();
 			context.fill();
 		},
-		drawItemBall: function(itemBall){  //item: 아이템볼을 그려준다.
-			context.fillStyle = itemBall.color;
-			context.beginPath();
-			context.arc(itemBall.x, itemBall.y, itemBall.radius, 0, Math.PI * 2, true);
-			context.closePath();
-			context.fill();
-		},
-		drawBullets: function(bullet){
+		drawBullet: function (bullet) {
 			context.fillStyle = bullet.color;
 			context.beginPath();
-			context.arc(bullet.x, bullet.y, bullet.radius, 0, Math.PI * 2, true);
+			context.arc(bullet.x, bullet.y, bullet_meta.radius, 0, Math.PI * 2, true);
 			context.closePath();
 			context.fill();
 		},
@@ -569,70 +542,64 @@
 			
 			jQuery.post('/services/game/score/record.do', 'game_sequence=1&score=' + score);
 		},
-		collide: function (squareX, squareY, width, height) {
+		isCollided: function (circleX, circleY, radius, squareX, squareY, width, height) {
 			var distance = 0;
-			if (ball.x < squareX) {
-				distance += Math.pow(ball.x - squareX, 2);
-			} else if (ball.x > squareX + width) {
-				distance += Math.pow(ball.x - squareX - width, 2);
+			if (circleX < squareX) {
+				distance += Math.pow(circleX - squareX, 2);
+			} else if (circleX > squareX + width) {
+				distance += Math.pow(circleX - squareX - width, 2);
 			}	
-			if (ball.y < squareY) {
-				distance += Math.pow(ball.y - squareY, 2);
-			} else if (ball.y > squareY + height) {
-				distance += Math.pow(ball.y - squareY - height, 2);
+			if (circleY < squareY) {
+				distance += Math.pow(circleY - squareY, 2);
+			} else if (circleY > squareY + height) {
+				distance += Math.pow(circleY - squareY - height, 2);
 			}	
-			return distance <= Math.pow(ball.radius, 2);
+			return distance <= Math.pow(radius, 2);
 		},
-		itemBallCollide: function(itemBall, squareX, squareY, width, height){
-			var distance = 0;
-			if (itemBall.x < squareX) {
-				distance += Math.pow(itemBall.x - squareX, 2);
-			} else if (itemBall.x > squareX + width) {
-				distance += Math.pow(itemBall.x - squareX - width, 2);
-			}	
-			if (itemBall.y < squareY) {
-				distance += Math.pow(itemBall.y - squareY, 2);
-			} else if (ball.y > squareY + height) {
-				distance += Math.pow(itemBall.y - squareY - height, 2);
-			}	
-			return distance <= Math.pow(itemBall.radius, 2);
+		isCollidedBetweenBallAndSquare: function (squareX, squareY, width, height) {
+			var self = this;
+			
+			return self.isCollided(ball.x, ball.y, ball.radius, squareX, squareY, width, height);
 		},
-		bulletsCollide: function(bullet, squareX, squareY, width, height){ //블럭과 총알의 충돌을 검사
-			var distance = 0;
-			if (bullet.x < squareX) {
-				distance += Math.pow(bullet.x - squareX, 2);
-			} else if (bullet.x > squareX + width) {
-				distance += Math.pow(bullet.x - squareX - width, 2);
-			}	
-			if (bullet.y < squareY) {
-				distance += Math.pow(bullet.y - squareY, 2);
-			} else if (bullet.y > squareY + height) {
-				distance += Math.pow(bullet.y - squareY - height, 2);
-			}	
-			return distance <= Math.pow(bullet.radius, 2);
+		isCollidedBetweenBallAndBat: function () {
+			var self = this;
+			
+			return self.isCollided(ball.x, ball.y, ball.radius, bat.x, bat.y, bat.width, bat.height);
 		},
-		setItems: function(map){
+		isCollidedBetweenBatAndItem: function (item) {
+			var self = this;
+			
+			return self.isCollided(item.x, item.y, item_meta.radius, bat.x, bat.y, bat.width, bat.height);
+		},
+		isCollidedBetweenBulletAndTile: function (bullet, tileX, tileY, width, height) {
+			var self = this;
+			
+			return self.isCollided(bullet.x, bullet.y, bullet_meta.radius, tileX, tileY, width, height);
+		},
+		setItems: function (map){
 			var count = 0;
-			while(count < 3){
+			while (count < level){
 				var i = Math.floor(Math.random() * map.length);
 				var j = Math.floor(Math.random() * map[0].length);
-				if(map[i][j] == 1){
-					map[i][j] = 2;
+				if (map[i][j] == 1) {
+					console.log("item is set at " + i + ", " + j);
+					items.push({
+						type: ITEM_TYPE_GUN,
+						row: i,
+						column: j,
+						x: 0,
+						y: 0,
+						visible: false
+					});
 					count++;
 				}
 			}
 		},
-		setBullets: function(){ 
-			var tempBullet = {
+		fireBullet: function(){ 
+			bullets.push({
 				x : bat.x + bat.width / 2,
-				y : canvas.height - bat.height - 5 * 2, 
-				radius : 5,
-				visible : true,
-				speed : 5, 
-				color : '#FFBB00'
-			};
-			bullets.push(tempBullet);
-			console.log("bullet.length : "+bullets.length);
+				y : canvas.height - bat.height - 5 * 2
+			});
 		}
 	};
 	
