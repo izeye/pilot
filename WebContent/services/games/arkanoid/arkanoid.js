@@ -72,12 +72,17 @@
 		}
 	};
 	
+	var SIN30 = Math.sin(Math.PI / 6);
+	var SIN45 = Math.sin(Math.PI / 4);
+	
 	var ball = {};
 	ball.radius = 10;
 	ball.x = 0;
 	ball.y = 0;
-	ball.initialDx = -1;
-	ball.initialDy = -2;
+	ball.initialSpeed = 2;
+	ball.speed = ball.initialSpeed;
+	ball.initialDx = ball.speed * Math.cos(SIN45);
+	ball.initialDy = -ball.speed * Math.sin(SIN45);
 	ball.dx = ball.initialDx;
 	ball.dy = ball.initialDy;
 	ball.color = '#000';
@@ -139,7 +144,8 @@
 			score = 0;
 			
 			level = 1;
-			
+
+			ball.speed = ball.initialSpeed;
 			ball.dx = ball.initialDx;
 			ball.dy = ball.initialDy;
 		},
@@ -203,42 +209,8 @@
 			}
 			// Check collision with bat.
 			if (self.collide(bat.x, bat.y, bat.width, bat.height)) {
-				var quater = bat.width / 4;
-				
-				var temp = ball.dx;
-				
-				// Hit the leftmost-side of bat.
-				if (ball.x < bat.x + quater) {
-					if (ball.dx > 0) {
-						ball.dx = -ball.dy;
-						ball.dy = Math.abs(temp);
-					} else { // ball.dx < 0
-						ball.dx = -ball.dy;
-						ball.dy = Math.abs(temp);
-					}
-				// Hit the left-side of bat.
-				} else if (ball.x < bat.x + quater * 2) {
-					if (ball.dx > 0) {
-						ball.dx = -ball.dx;
-					}
-				// Hit the right-side of bat.
-				} else if (ball.x < bat.x + quater * 3) {
-					if (ball.dx < 0) {
-						ball.dx = -ball.dx;
-					}
-				// Hit the rightmost-side of bat.
-				} else {
-					if (ball.dx < 0) {
-						ball.dx = ball.dy;
-						ball.dy = Math.abs(temp);
-					} else { // ball.dx > 0
-						ball.dx = ball.dy;
-						ball.dy = Math.abs(temp);
-					}
-				}
-				ball.dy = -ball.dy;
-				
-				document.getElementById("jump").play();
+//				self.collideBetweenBallAndBat();
+				self.collideBetweenBallAndBatV2();
 			}
 			
 			var x = 0;
@@ -297,6 +269,49 @@
 			if (levelCleared) {
 				self.clearLevel();
 			}
+		},
+		collideBetweenBallAndBat: function () {
+			var quater = bat.width / 4;
+			
+			var temp = ball.dx;
+			
+			// Hit the leftmost-side of bat.
+			if (ball.x < bat.x + quater) {
+				if (ball.dx > 0) {
+					ball.dx = -ball.dy;
+					ball.dy = Math.abs(temp);
+				} else { // ball.dx < 0
+					ball.dx = -ball.dy;
+					ball.dy = Math.abs(temp);
+				}
+			// Hit the left-side of bat.
+			} else if (ball.x < bat.x + quater * 2) {
+				if (ball.dx > 0) {
+					ball.dx = -ball.dx;
+				}
+			// Hit the right-side of bat.
+			} else if (ball.x < bat.x + quater * 3) {
+				if (ball.dx < 0) {
+					ball.dx = -ball.dx;
+				}
+			// Hit the rightmost-side of bat.
+			} else {
+				if (ball.dx < 0) {
+					ball.dx = ball.dy;
+					ball.dy = Math.abs(temp);
+				} else { // ball.dx > 0
+					ball.dx = ball.dy;
+					ball.dy = Math.abs(temp);
+				}
+			}
+			ball.dy = -ball.dy;
+			
+			document.getElementById("jump").play();
+		},
+		collideBetweenBallAndBatV2: function () {
+			var angle = (bat.x - ball.x) / bat.width * Math.PI;
+			ball.dx = -ball.speed * Math.cos(angle);
+			ball.dy = ball.speed * Math.min(Math.sin(angle), -SIN30);
 		},
 		drawBall: function () {
 //			context.strokeStyle = ball.color;
@@ -382,10 +397,12 @@
 			
 			window.setTimeout(function () {
 				level++;
-				ball.dx = ball.initialDx * (1 + 0.5 * (level - 1));
-				ball.dy = ball.initialDy * (1 + 0.5 * (level - 1));
-				console.log(ball.dx);
-				console.log(ball.dy);
+//				ball.dx = ball.initialDx * (1 + 0.5 * (level - 1));
+//				ball.dy = ball.initialDy * (1 + 0.5 * (level - 1));
+//				console.log(ball.dx);
+//				console.log(ball.dy);
+//				ball.speed *= 1.5; // Too fast.
+				ball.speed *= 1.3;
 				if (maps[level]) {
 					self.startLevel();
 				} else {
