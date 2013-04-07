@@ -2,6 +2,8 @@
 	var document = window.document;
 	var canvas = document.getElementById('canvas');
 	var context = canvas.getContext('2d');
+	var pauseAndResume = document.getElementById('pause_and_resume');
+	var paused = false;
 	
 	var maps = [
 	    [],
@@ -320,6 +322,31 @@
 			var self = this;
 			
 			self.print('Score: ' + score, 700, 500, 100);
+		},
+		pauseAndResume: function () {
+			console.log(paused);
+			var self = this;
+			
+			if (paused) {
+				self.resume();
+				pauseAndResume.setAttribute("value", "Pause");
+			} else {
+				self.pause();
+				pauseAndResume.setAttribute("value", "Resume");
+			}
+			paused = !paused;
+		},
+		pause: function () {
+			console.log('paused');
+			window.clearInterval(timer_id);
+		},
+		resume: function () {
+			console.log('resumed');
+			var self = this;
+			
+			timer_id = window.setInterval(function () {
+				self.refreshFrames.call(self);
+			}, 1);
 		},
 		die: function () {
 			var self = this;
