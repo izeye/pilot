@@ -219,6 +219,8 @@
 					}
 				}
 				ball.dy = -ball.dy;
+				
+				document.getElementById("jump").play();
 			}
 			
 			var x = 0;
@@ -232,6 +234,8 @@
 						map[row][col] = 0;
 						
 						score += 10 * level;
+						
+						document.getElementById("explosion").play();
 					}
 					x += tile.width + 1;
 				}
