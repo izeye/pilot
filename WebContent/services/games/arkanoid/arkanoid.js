@@ -133,6 +133,22 @@
 			
 			self.startLevel();
 		},
+		reset: function () {
+			window.clearInterval(timer_id);
+			
+			score = 0;
+			
+			level = 1;
+			
+			ball.dx = ball.initialDx;
+			ball.dy = ball.initialDy;
+		},
+		restart: function () {
+			var self = this;
+			
+			self.reset();
+			self.start();
+		},
 		startLevel: function () {
 			var self = this;
 			
