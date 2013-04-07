@@ -187,7 +187,13 @@
 		clearScreen: function () {
 //			context.clearRect(0, 0, canvas.width, canvas.height);
 			
-			context.fillStyle = '#CCC';
+//			context.fillStyle = '#CCC';
+//			context.fillRect(0, 0, canvas.width, canvas.height);
+			
+			var grd = context.createLinearGradient(0, 0, 0, canvas.height);
+			grd.addColorStop(0, '#004CB3');
+			grd.addColorStop(1, '#8ED6FF');
+			context.fillStyle = grd;
 			context.fillRect(0, 0, canvas.width, canvas.height);
 		},
 		refreshFrames: function () {
