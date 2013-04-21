@@ -53,8 +53,8 @@
 	var map;
 	
 	var bat = {};
-	bat.width = 160;
-	bat.height = 20;
+	bat.width = 80;
+	bat.height = 10;
 	bat.x = 0;
 	bat.y = canvas.height - bat.height;
 	bat.centerColor = 'yellow';
@@ -82,7 +82,7 @@
 	var SIN45 = Math.sin(Math.PI / 4);
 	
 	var ball = {};
-	ball.radius = 10;
+	ball.radius = 5;
 	ball.x = 0;
 	ball.y = 0;
 	ball.initialSpeed = 4;
@@ -99,8 +99,8 @@
 	};
 	
 	var tile = {};
-	tile.width = 79;
-	tile.height = 40;
+	tile.width = 39;
+	tile.height = 20;
 	tile.color = '#F00';
 	
 	//총알을 담을 배열
@@ -236,7 +236,7 @@
 			grd.addColorStop(0, '#004CB3');
 			grd.addColorStop(1, '#8ED6FF');
 			context.fillStyle = grd;
-			context.fillRect(0, 0, canvas.width, canvas.height);
+			context.fillRect(10, 10, canvas.width-80, canvas.height-20);
 		},
 		refreshFrames: function () {
 			
