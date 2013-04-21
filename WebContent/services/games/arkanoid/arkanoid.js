@@ -16,7 +16,7 @@
 		[
 			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+			[0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
 			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 		],
@@ -26,6 +26,13 @@
 			[0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
 			[0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
 			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		],
+		[
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 		],
 		[
 			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -118,7 +125,7 @@
 	var timer_id = 0;
 	
 	var item_meta = {
-		radius : 30,
+		radius : 15,
 		speed : 2, 
 		color : '#1DDB16'
 	};
@@ -236,7 +243,7 @@
 			grd.addColorStop(0, '#004CB3');
 			grd.addColorStop(1, '#8ED6FF');
 			context.fillStyle = grd;
-			context.fillRect(10, 10, canvas.width-80, canvas.height-20);
+			context.fillRect(0, 0, canvas.width, canvas.height);
 		},
 		refreshFrames: function () {
 			
@@ -526,7 +533,8 @@
 //				console.log(ball.dx);
 //				console.log(ball.dy);
 //				ball.speed *= 1.5; // Too fast.
-				ball.speed *= 1.3;
+//				ball.speed *= 1.3;
+				ball.speed *= 1.2;
 				ball.dx = ball.initialDx;
 				ball.dy = ball.initialDy;
 				if (maps[level]) {
