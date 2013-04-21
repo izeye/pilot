@@ -285,6 +285,8 @@
 						var collided = false;
 						if (self.isCollidedBetweenBallAndSquare(x + 1, y + 1, tile.width, tile.height)) {
 							collided = true;
+							ball.dx = -ball.dx;
+							ball.dy = -ball.dy;
 						}
 						
 						for (var i = 0; i < bullets.length; i++){
@@ -296,8 +298,6 @@
 						}
 						
 						if (collided) {
-							ball.dx = -ball.dx;
-							ball.dy = -ball.dy;
 							map[row][col] = 0;
 							
 							score += 10 * level;
@@ -420,6 +420,8 @@
 			var angle = (bat.x - ball.x) / bat.width * Math.PI;
 			ball.dx = -ball.speed * Math.cos(angle);
 			ball.dy = ball.speed * Math.min(Math.sin(angle), -SIN30);
+			
+			document.getElementById("jump").play();
 		},
 		drawBall: function () {
 //			context.strokeStyle = ball.color;
@@ -525,6 +527,8 @@
 //				console.log(ball.dy);
 //				ball.speed *= 1.5; // Too fast.
 				ball.speed *= 1.3;
+				ball.dx = ball.initialDx;
+				ball.dy = ball.initialDy;
 				if (maps[level]) {
 					self.startLevel();
 				} else {
