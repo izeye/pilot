@@ -483,7 +483,7 @@
 		drawStatus: function () {
 			var self = this;
 			
-			self.print('Score: ' + score, 700, 500, 100);
+			self.print('Score: ' + score, 400, 300, 100);
 		},
 		pauseAndResume: function () {
 			console.log(paused);
