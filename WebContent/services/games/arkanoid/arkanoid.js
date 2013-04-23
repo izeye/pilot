@@ -11,6 +11,28 @@
 	var pauseAndResume = document.getElementById('pause_and_resume');
 	var paused = false;
 	
+	function preventBehavior(e) {
+		e.preventDefault();
+	}
+	
+	canvas.addEventListener('mousedown', preventBehavior, false);
+	
+	canvas.addEventListener('touchmove', preventBehavior, false);
+	canvas.addEventListener('touchstart', preventBehavior, false);
+	
+//	canvas.width = window.innerWidth;
+//	canvas.height = window.innerHeight;
+	
+//	function fullscreen() {
+//		if (canvas.webkitRequestFullScreen) {
+//			canvas.webkitRequestFullScreen();
+//		} else {
+//			canvas.mozRequestFullScreen();
+//		}
+//	}
+//	fullscreen();
+//	canvas.addEventListener('click', fullscreen);
+	
 	var maps = [
 	    [],
 		[
@@ -63,7 +85,8 @@
 	bat.width = 80;
 	bat.height = 10;
 	bat.x = 0;
-	bat.y = canvas.height - bat.height;
+//	bat.y = canvas.height - bat.height;
+	bat.y = canvas.height - bat.height - 100;
 	bat.centerColor = 'yellow';
 	bat.edgeColor = 'red';
 	bat.step = 30;
@@ -84,6 +107,9 @@
 			bat.x = canvas.width - bat.width;
 		}
 	};
+	bat.move = function (e) {
+		bat.x = e.pageX - canvas.offsetLeft - bat.width / 2;
+	};
 	
 	var SIN30 = Math.sin(Math.PI / 6);
 	var SIN45 = Math.sin(Math.PI / 4);
@@ -102,7 +128,7 @@
 	ball.init = function () {
 		this.x = bat.x + bat.width / 2;
 		// Add extra radius gap to y of ball to prevent from re-bouncing.
-		this.y = canvas.height - bat.height - this.radius * 2;
+		this.y = canvas.height - bat.height - this.radius * 2 - 100;
 	};
 	
 	var tile = {};
@@ -136,6 +162,15 @@
 		color : '#FFBB00'
 	};
 	
+	function fireBullet() { 
+		if (itemEventTime > 0) {
+			bullets.push({
+				x : bat.x + bat.width / 2,
+				y : canvas.height - bat.height - 5 * 2 - 100
+			});
+		}
+	}
+	
 	ARKANOID = {
 		init: function () {
 			var self = this;
@@ -158,17 +193,10 @@
 						break;
 				}
 			};
-			canvas.onmousemove = function (e) {
-//				console.log(e);
-				bat.x = e.pageX - canvas.offsetLeft - bat.width / 2;
-			};
-			canvas.addEventListener("mousedown", function() {
-				//총알이벤트 발생하면 눌러진다.
-				
-				if(itemEventTime > 0){
-					self.fireBullet();
-				}
-			} );
+			canvas.onmousemove = bat.move;
+			canvas.ontouchmove = bat.move;
+			canvas.onmousedown = fireBullet;
+			canvas.ontouchstart = fireBullet;
 		},
 		start: function () {
 			var self = this;
@@ -606,12 +634,6 @@
 					count++;
 				}
 			}
-		},
-		fireBullet: function(){ 
-			bullets.push({
-				x : bat.x + bat.width / 2,
-				y : canvas.height - bat.height - 5 * 2
-			});
 		}
 	};
 	
