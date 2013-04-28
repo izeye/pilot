@@ -173,6 +173,19 @@
 		}
 	}
 	
+	var jewel_meta = {
+		radius: 10,
+		speed: 2,
+		color: 'yellow'
+	};
+	
+	var bullets = [];
+	var items = [];
+	var jewels = [];
+	
+	var block_score = 10;
+	var jewel_score = 20;
+	
 	ARKANOID = {
 		init: function () {
 			var self = this;
@@ -233,8 +246,6 @@
 			var self = this;
 			
 			itemEventTime = 0;
-			bullets = [];
-			items = [];
 			
 			self.clearScreen();
 			
@@ -309,9 +320,15 @@
 			//아이템볼과 배트의 충돌 검사
 			for (var i = 0; i < items.length; i++) {
 				if (self.isCollidedBetweenBatAndItem(items[i])) {
-					items[i].visible = false;
 					items.removeAt(i);
 					itemEventTime += 180;
+				}
+			}
+			
+			for (var i = 0; i < jewels.length; i++) {
+				if (self.isCollidedBetweenBatAndItem(jewels[i])) {
+					jewels.removeAt(i);
+					score += jewel_score * level;
 				}
 			}
 			
@@ -339,7 +356,7 @@
 						if (collided) {
 							map[row][col] = 0;
 							
-							score += 10 * level;
+							score += block_score * level;
 							
 							// Check item block.
 							for (var i = 0; i < items.length; i++) {
@@ -351,6 +368,11 @@
 							}
 							
 							document.getElementById("explosion").play();
+							
+							jewels.push({
+								x: x + tile.width / 2,
+								y: y + tile.height,
+							});
 						}
 					}
 					x += tile.width + 1;
@@ -369,6 +391,14 @@
 					if (items[i].y > canvas.height) {
 						items.removeAt(i);
 					}
+				}
+			}
+			
+			for (var i = 0; i < jewels.length; i++) {
+				self.drawJewel(jewels[i]);
+				jewels[i].y += jewel_meta.speed;
+				if (jewels[i].y > canvas.height) {
+					jewels.removeAt(i);
 				}
 			}
 			
@@ -498,10 +528,17 @@
 			context.closePath();
 			context.fill();
 		},
-		drawItem: function (item){  //item: 아이템볼을 그려준다.
+		drawItem: function (item) {  //item: 아이템볼을 그려준다.
 			context.fillStyle = item_meta.color;
 			context.beginPath();
 			context.arc(item.x, item.y, item_meta.radius, 0, Math.PI * 2, true);
+			context.closePath();
+			context.fill();
+		},
+		drawJewel: function (jewel) {
+			context.fillStyle = jewel_meta.color;
+			context.beginPath();
+			context.arc(jewel.x, jewel.y, jewel_meta.radius, 0, Math.PI * 2, true);
 			context.closePath();
 			context.fill();
 		},
