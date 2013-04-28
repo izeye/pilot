@@ -88,7 +88,7 @@
 //	bat.y = canvas.height - bat.height;
 	bat.y = canvas.height - bat.height - 100;
 	bat.centerColor = 'yellow';
-	bat.edgeColor = 'red';
+	bat.edgeColor = 'yellow';
 	bat.step = 30;
 	bat.init = function () {
 		this.x = canvas.width / 2 - this.width / 2;
@@ -162,6 +162,8 @@
 		color : '#FFBB00'
 	};
 	
+	var is_playing = false;
+	
 	function fireBullet() { 
 		if (itemEventTime > 0) {
 			bullets.push({
@@ -202,6 +204,8 @@
 			var self = this;
 			
 			console.log('start');
+			
+			is_playing = true;
 			
 			// FIXME: doesn't appear.
 			self.printCenter('Arkanoid');
@@ -517,6 +521,10 @@
 			console.log(paused);
 			var self = this;
 			
+			if (!is_playing) {
+				return;
+			}
+			
 			if (paused) {
 				self.resume();
 				pauseAndResume.setAttribute("value", "Pause");
@@ -546,6 +554,8 @@
 			self.printCenter('Game Over');
 			
 			jQuery.post('/services/game/score/record.do', 'game_sequence=1&score=' + score);
+			
+			is_playing = false;
 		},
 		clearLevel: function () {
 			var self = this;
@@ -581,6 +591,8 @@
 			self.printCenter('Game Clear');
 			
 			jQuery.post('/services/game/score/record.do', 'game_sequence=1&score=' + score);
+			
+			is_playing = false;
 		},
 		isCollided: function (circleX, circleY, radius, squareX, squareY, width, height) {
 			var distance = 0;
