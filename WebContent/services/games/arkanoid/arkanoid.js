@@ -6,6 +6,7 @@
 	var ITEM_TYPE_GUN = 1;
 	
 	var document = window.document;
+	var image = document.getElementById('image');
 	var canvas = document.getElementById('canvas');
 	var context = canvas.getContext('2d');
 	var pauseAndResume = document.getElementById('pause_and_resume');
@@ -524,7 +525,8 @@
 		drawTile: function (x, y) {
 			context.fillStyle = tile.color;
 			context.beginPath();
-			context.rect(x, y, tile.width, tile.height);
+//			context.rect(x, y, tile.width, tile.height);
+			context.drawImage(image, 0, 220, 80, 35, x, y, tile.width, tile.height);
 			context.closePath();
 			context.fill();
 		},
