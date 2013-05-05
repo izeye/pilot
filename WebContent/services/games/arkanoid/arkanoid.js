@@ -79,17 +79,19 @@
 //			[1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 //		]
 	];
-	
+
 	var map;
 	
 	var bat = {};
-	bat.width = 80;
-	bat.height = 10;
+	bat.imageX = 665;
+	bat.imageY = 646;
+	bat.imageWidth = 115;
+	bat.imageHeight = 25;
+	bat.width = bat.imageWidth / 5 * 2.5;
+	bat.height = bat.imageHeight / 5 * 2.5;
 	bat.x = 0;
 //	bat.y = canvas.height - bat.height;
 	bat.y = canvas.height - bat.height - 100;
-	bat.centerColor = 'yellow';
-	bat.edgeColor = 'yellow';
 	bat.step = 30;
 	bat.init = function () {
 		this.x = canvas.width / 2 - this.width / 2;
@@ -116,7 +118,12 @@
 	var SIN45 = Math.sin(Math.PI / 4);
 	
 	var ball = {};
-	ball.radius = 5;
+	ball.imageX = 200;
+	ball.imageY = 540;
+	ball.imageRadius = 20;
+	ball.imageDiameter = ball.imageRadius * 2;
+	ball.radius = ball.imageRadius / 5 * 2.5;
+	ball.diameter = ball.radius * 2;
 	ball.x = 0;
 	ball.y = 0;
 	ball.initialSpeed = 4;
@@ -131,11 +138,14 @@
 		// Add extra radius gap to y of ball to prevent from re-bouncing.
 		this.y = canvas.height - bat.height - this.radius * 2 - 100;
 	};
-	
+
 	var tile = {};
-	tile.width = 39;
-	tile.height = 20;
-	tile.color = '#F00';
+	tile.imageX = 0;
+	tile.imageY = 220;
+	tile.imageWidth = 80;
+	tile.imageHeight = 35;
+	tile.width = tile.imageWidth / 5 * 2.5;
+	tile.height = tile.imageHeight / 5 * 2.5;
 	
 	//총알을 담을 배열
 	var bullets = null;
@@ -495,40 +505,22 @@
 		},
 		drawBall: function () {
 //			context.strokeStyle = ball.color;
-			context.fillStyle = ball.color;
-			context.beginPath();
-			context.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2, true);
-			context.closePath();
+//			context.fillStyle = ball.color;
+//			context.beginPath();
+//			context.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2, true);
+//			context.closePath();
 //			context.stroke();
-			context.fill();
+//			context.fill();
+			context.drawImage(image, ball.imageX, ball.imageY, ball.imageDiameter, ball.imageDiameter,
+					ball.x, ball.y, ball.diameter, ball.diameter);
 		},
 		drawBat: function () {
-			var quarter = bat.width / 4;
-			
-			context.fillStyle = bat.edgeColor;
-			context.beginPath();
-			context.rect(bat.x, bat.y, quarter, bat.height);
-			context.closePath();
-			context.fill();
-
-			context.beginPath();
-			context.rect(bat.x + quarter * 3, bat.y, quarter, bat.height);
-			context.closePath();
-			context.fill();
-			
-			context.fillStyle = bat.centerColor;
-			context.beginPath();
-			context.rect(bat.x + quarter, bat.y, quarter * 2, bat.height);
-			context.closePath();
-			context.fill();
+			context.drawImage(image, bat.imageX, bat.imageY, bat.imageWidth, bat.imageHeight,
+					bat.x, bat.y, bat.width, bat.height);
 		},
 		drawTile: function (x, y) {
-			context.fillStyle = tile.color;
-			context.beginPath();
-//			context.rect(x, y, tile.width, tile.height);
-			context.drawImage(image, 0, 220, 80, 35, x, y, tile.width, tile.height);
-			context.closePath();
-			context.fill();
+			context.drawImage(image, tile.imageX, tile.imageY, tile.imageWidth, tile.imageHeight,
+					x, y, tile.width, tile.height);
 		},
 		drawItem: function (item) {  //item: 아이템볼을 그려준다.
 			context.fillStyle = item_meta.color;
