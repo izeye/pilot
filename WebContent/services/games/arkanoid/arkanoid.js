@@ -132,12 +132,38 @@
 	ball.initialDy = -ball.speed * Math.sin(SIN45);
 	ball.dx = ball.initialDx;
 	ball.dy = ball.initialDy;
-	ball.color = '#000';
 	ball.init = function () {
 		this.x = bat.x + bat.width / 2;
 		// Add extra radius gap to y of ball to prevent from re-bouncing.
 		this.y = canvas.height - bat.height - this.radius * 2 - 100;
 	};
+
+	var TILE_TYPE_NORMAL = 1;
+	var TILE_TYPE_HARD = 2;
+	var TILE_TYPE_UNBREAKABLE = 3;
+	
+	var TILE_COLOR_PURPLE = 1;
+	var TILE_COLOR_ORANGE = 2;
+	var TILE_COLOR_BLUE = 3;
+	var TILE_COLOR_RED = 4;
+	var TILE_COLOR_YELLOW = 5;
+	var TILE_COLOR_GREEN = 6;
+	
+	var tileTypes = [TILE_TYPE_NORMAL, TILE_TYPE_HARD, TILE_TYPE_UNBREAKABLE];
+	var tileColors = [
+		TILE_COLOR_PURPLE,
+		TILE_COLOR_ORANGE,
+		TILE_COLOR_BLUE,
+		TILE_COLOR_RED,
+		TILE_COLOR_YELLOW,
+		TILE_COLOR_GREEN];
+//	var tileDefinitions = [
+//	    {
+//	    	color: TILE_COLOR_PURPLE,
+//	    	imageX: ,
+//	    	imageY: ,
+//	    }
+//	];
 
 	var tile = {};
 	tile.imageX = 0;
