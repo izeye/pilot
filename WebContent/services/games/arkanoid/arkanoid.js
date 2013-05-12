@@ -21,63 +21,91 @@
 	canvas.addEventListener('touchmove', preventBehavior, false);
 	canvas.addEventListener('touchstart', preventBehavior, false);
 	
-//	canvas.width = window.innerWidth;
-//	canvas.height = window.innerHeight;
+// canvas.width = window.innerWidth;
+// canvas.height = window.innerHeight;
 	
-//	function fullscreen() {
-//		if (canvas.webkitRequestFullScreen) {
-//			canvas.webkitRequestFullScreen();
-//		} else {
-//			canvas.mozRequestFullScreen();
-//		}
-//	}
-//	fullscreen();
-//	canvas.addEventListener('click', fullscreen);
+// function fullscreen() {
+// if (canvas.webkitRequestFullScreen) {
+// canvas.webkitRequestFullScreen();
+// } else {
+// canvas.mozRequestFullScreen();
+// }
+// }
+// fullscreen();
+// canvas.addEventListener('click', fullscreen);
 	
 	var maps = [
 	    [],
+//		[
+//			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+//			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+//			[0, 1, 2, 3, 4, 5, 6, 0, 0, 0],
+//			[0, 7, 8, 9, 10, 11, 12, 13, 0, 0],
+//			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+//		],
 		[
 			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 3, 3, 3, 3, 3, 3, 3, 3, 0],
+			[0, 2, 2, 2, 2, 2, 2, 2, 2, 0],
 			[0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 		],
 		[
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
-			[0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
-			[0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-		],
-		[
-			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
+			[4, 4, 4, 4, 4, 4, 4, 4, 4, 4],
+			[3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+			[2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
 			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 		],
 		[
-			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 3, 3, 3, 3, 3, 3, 3, 3, 0],
+			[0, 2, 2, 2, 2, 2, 2, 2, 2, 0],
+			[0, 7, 7, 7, 7, 7, 7, 7, 7, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		],
+		[
+			[5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
+			[4, 4, 4, 4, 4, 4, 4, 4, 4, 4],
+			[3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+			[2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+			[7, 7, 7, 7, 7, 7, 7, 7, 7, 7]
+		],
+		[
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 3, 3, 3, 13, 13, 3, 3, 3, 0],
+			[0, 2, 2, 2, 13, 13, 2, 2, 2, 0],
+			[0, 7, 7, 7, 13, 13, 7, 7, 7, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		],
+		[
+			[5, 5, 5, 5, 13, 13, 5, 5, 5, 5],
+			[4, 4, 4, 4, 13, 13, 4, 4, 4, 4],
+			[3, 3, 3, 3, 13, 13, 3, 3, 3, 3],
+			[2, 2, 2, 2, 13, 13, 2, 2, 2, 2],
+			[7, 7, 7, 7, 13, 13, 7, 7, 7, 7]
 		]
 //		[
-//			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//			[1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//			[1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+//			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+//			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+//			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+//			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+//			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 //		],
-//		[
-//			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//			[1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//			[1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//		]
+// [
+// [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+// [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+// [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+// [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+// [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+// ],
+// [
+// [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+// [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+// [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+// [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+// [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+// ]
 	];
 
 	var map;
@@ -90,7 +118,7 @@
 	bat.width = bat.imageWidth / 5 * 2.5;
 	bat.height = bat.imageHeight / 5 * 2.5;
 	bat.x = 0;
-//	bat.y = canvas.height - bat.height;
+// bat.y = canvas.height - bat.height;
 	bat.y = canvas.height - bat.height - 100;
 	bat.step = 30;
 	bat.init = function () {
@@ -126,7 +154,7 @@
 	ball.diameter = ball.radius * 2;
 	ball.x = 0;
 	ball.y = 0;
-	ball.initialSpeed = 4;
+	ball.initialSpeed = 3.5;
 	ball.speed = ball.initialSpeed;
 	ball.initialDx = ball.speed * Math.cos(SIN45);
 	ball.initialDy = -ball.speed * Math.sin(SIN45);
@@ -138,9 +166,18 @@
 		this.y = canvas.height - bat.height - this.radius * 2 - 100;
 	};
 
-	var TILE_TYPE_NORMAL = 1;
-	var TILE_TYPE_HARD = 2;
-	var TILE_TYPE_UNBREAKABLE = 3;
+	var TILE_TYPE_BLANK = {
+		needHits: 0
+	};
+	var TILE_TYPE_NORMAL = {
+		needHits: 1
+	};
+	var TILE_TYPE_HARD = {
+		needHits: 3
+	};
+	var TILE_TYPE_UNBREAKABLE = {
+		needHits: -1
+	};
 	
 	var TILE_COLOR_PURPLE = 1;
 	var TILE_COLOR_ORANGE = 2;
@@ -157,29 +194,125 @@
 		TILE_COLOR_RED,
 		TILE_COLOR_YELLOW,
 		TILE_COLOR_GREEN];
-//	var tileDefinitions = [
-//	    {
-//	    	color: TILE_COLOR_PURPLE,
-//	    	imageX: ,
-//	    	imageY: ,
-//	    }
-//	];
-
-	var tile = {};
-	tile.imageX = 0;
-	tile.imageY = 220;
-	tile.imageWidth = 80;
-	tile.imageHeight = 35;
-	tile.width = tile.imageWidth / 5 * 2.5;
-	tile.height = tile.imageHeight / 5 * 2.5;
 	
-	//총알을 담을 배열
+	var TILE_IMAGE_WIDTH = 80;
+	var TILE_IMAGE_HEIGHT = 35;
+	
+	var TILE = {
+		imageWidth: TILE_IMAGE_WIDTH,
+		imageHeight: TILE_IMAGE_HEIGHT,
+		width: TILE_IMAGE_WIDTH / 5 * 2.5,
+		height: TILE_IMAGE_HEIGHT / 5 * 2.5,
+	};
+	
+	var TILE_BLANK = jQuery.extend(false, {
+		type: TILE_TYPE_BLANK
+	}, TILE);
+	
+	var TILE_NORMAL_PURPLE = jQuery.extend(false, {
+		type: TILE_TYPE_NORMAL,
+		color: TILE_COLOR_PURPLE,
+		imageX: 0,
+		imageY: 220
+	}, TILE);
+	var TILE_NORMAL_ORANGE = jQuery.extend(false, {
+		type: TILE_TYPE_NORMAL,
+		color: TILE_COLOR_ORANGE,
+		imageX: 130,
+		imageY: 220
+	}, TILE);
+	var TILE_NORMAL_BLUE = jQuery.extend(false, {
+		type: TILE_TYPE_NORMAL,
+		color: TILE_COLOR_BLUE,
+		imageX: 275,
+		imageY: 220
+	}, TILE);
+	var TILE_NORMAL_RED = jQuery.extend(false, {
+		type: TILE_TYPE_NORMAL,
+		color: TILE_COLOR_RED,
+		imageX: 425,
+		imageY: 220
+	}, TILE);
+	var TILE_NORMAL_YELLOW = jQuery.extend(false, {
+		type: TILE_TYPE_NORMAL,
+		color: TILE_COLOR_YELLOW,
+		imageX: 565,
+		imageY: 220
+	}, TILE);
+	var TILE_NORMAL_GREEN = jQuery.extend(false, {
+		type: TILE_TYPE_NORMAL,
+		color: TILE_COLOR_GREEN,
+		imageX: 705,
+		imageY: 220
+	}, TILE);
+	
+	var TILE_HARD_PURPLE = jQuery.extend(false, {
+		type: TILE_TYPE_HARD,
+		color: TILE_COLOR_PURPLE,
+		imageX: 0,
+		imageY: 147
+	}, TILE);
+	var TILE_HARD_ORANGE = jQuery.extend(false, {
+		type: TILE_TYPE_HARD,
+		color: TILE_COLOR_ORANGE,
+		imageX: 130,
+		imageY: 147
+	}, TILE);
+	var TILE_HARD_BLUE = jQuery.extend(false, {
+		type: TILE_TYPE_HARD,
+		color: TILE_COLOR_BLUE,
+		imageX: 275,
+		imageY: 147
+	}, TILE);
+	var TILE_HARD_RED = jQuery.extend(false, {
+		type: TILE_TYPE_HARD,
+		color: TILE_COLOR_RED,
+		imageX: 425,
+		imageY: 147
+	}, TILE);
+	var TILE_HARD_YELLOW = jQuery.extend(false, {
+		type: TILE_TYPE_HARD,
+		color: TILE_COLOR_YELLOW,
+		imageX: 565,
+		imageY: 147
+	}, TILE);
+	var TILE_HARD_GREEN = jQuery.extend(false, {
+		type: TILE_TYPE_HARD,
+		color: TILE_COLOR_GREEN,
+		imageX: 705,
+		imageY: 147
+	}, TILE);
+	
+	var TILE_UNBREAKABLE = jQuery.extend(false, {
+		type: TILE_TYPE_UNBREAKABLE,
+		imageX: 707,
+		imageY: 387
+	}, TILE);
+	
+	var tileDefinitions = [
+	    TILE_BLANK, // 0
+	    TILE_NORMAL_PURPLE, // 1
+	    TILE_NORMAL_ORANGE, // 2
+	    TILE_NORMAL_BLUE, // 3
+	    TILE_NORMAL_RED, // 4
+	    TILE_NORMAL_YELLOW, // 5
+	    TILE_NORMAL_GREEN, // 6
+	    TILE_HARD_PURPLE, // 7
+	    TILE_HARD_ORANGE, // 8
+	    TILE_HARD_BLUE, // 9
+	    TILE_HARD_RED, // 10
+	    TILE_HARD_YELLOW, // 11
+	    TILE_HARD_GREEN, // 12
+	    TILE_UNBREAKABLE // 13
+	];
+	
+	// 총알을 담을 배열
 	var bullets = null;
 	
-	//아이템볼을 담는 배열
+	// 아이템볼을 담는 배열
 	var items = null;
 	
-	//아이템 이벤트 시간누적 변수
+	// 아이템 이벤트 시간누적 변수
 	var itemEventTime = 0;
 	
 	var level = 1;
@@ -291,15 +424,29 @@
 			
 			self.printCenter('Level ' + level);
 			
-			map = jQuery.extend(true, [], maps[level]);
+			map = [];
+			for (var i = 0; i < maps[level].length; i++) {
+				var row = [];
+				map.push(row);
+				for (var j = 0; j < maps[level][i].length; j++) {
+					var tileDefinition = tileDefinitions[maps[level][i][j]];
+					var tile = jQuery.extend(
+							false,
+							{needCurrentHits: tileDefinition.type.needHits},
+							tileDefinition);
+					row.push(tile);
+				}
+			}
 			
-			//item : map에 item을 랜덤적용
-			self.setItems(map);
+			// item : map에 item을 랜덤적용
+//			self.setItems(map);
 			
 			window.setTimeout(function () {
 				timer_id = window.setInterval(function () {
 					self.refreshFrames.call(self);
 				}, 10);
+//				}, 100);
+//				}, 1000);
 			}, 2000);
 		},
 		print: function(text, x, y, width) {
@@ -314,10 +461,10 @@
 			self.print(text, canvas.width / 2, canvas.height / 2, canvas.width);
 		},
 		clearScreen: function () {
-//			context.clearRect(0, 0, canvas.width, canvas.height);
+// context.clearRect(0, 0, canvas.width, canvas.height);
 			
-//			context.fillStyle = '#CCC';
-//			context.fillRect(0, 0, canvas.width, canvas.height);
+// context.fillStyle = '#CCC';
+// context.fillRect(0, 0, canvas.width, canvas.height);
 			
 			var grd = context.createLinearGradient(0, 0, 0, canvas.height);
 			grd.addColorStop(0, '#004CB3');
@@ -327,7 +474,7 @@
 		},
 		refreshFrames: function () {
 			
-			//총쏘기 이벤트 시간 제어
+			// 총쏘기 이벤트 시간 제어
 			if(itemEventTime > 0){
 				itemEventTime--;
 			}
@@ -350,11 +497,11 @@
 			}
 			// Check collision with bat.
 			if (self.isCollidedBetweenBallAndBat()) {
-//				self.collideBetweenBallAndBat();
+// self.collideBetweenBallAndBat();
 				self.collideBetweenBallAndBatV2();
 			}
 			
-			//아이템볼과 배트의 충돌 검사
+			// 아이템볼과 배트의 충돌 검사
 			for (var i = 0; i < items.length; i++) {
 				if (self.isCollidedBetweenBatAndItem(items[i])) {
 					items.removeAt(i);
@@ -368,13 +515,15 @@
 					score += jewel_score * level;
 				}
 			}
-			
+
 			var x = 0;
 			var y = 0;
+			var tile;
 			for (var row = 0, rows = map.length; row < rows; row++) {
 				x = 0;
 				for (var col = 0, cols = map[row].length; col < cols; col++) {
-					if (map[row][col] == 1) {
+					tile = map[row][col];
+					if (tile.type != TILE_TYPE_BLANK) {
 						var collided = false;
 						if (self.isCollidedBetweenBallAndSquare(x + 1, y + 1, tile.width, tile.height)) {
 							collided = true;
@@ -391,9 +540,10 @@
 						}
 						
 						if (collided) {
-							map[row][col] = 0;
-							
-							score += block_score * level;
+							tile.needCurrentHits--;
+							if (tile.needCurrentHits == 0) {
+								map[row][col] = TILE_BLANK;
+							}
 							
 							// Check item block.
 							for (var i = 0; i < items.length; i++) {
@@ -406,21 +556,27 @@
 							
 							document.getElementById("explosion").play();
 							
-							jewels.push({
-								x: x + tile.width / 2,
-								y: y + tile.height,
-							});
+							if (tile.type != TILE_TYPE_UNBREAKABLE) {
+								score += block_score * level;
+								
+								if (tile.needCurrentHits == 0) {
+									jewels.push({
+										x: x + tile.width / 2,
+										y: y + tile.height,
+									});
+								}
+							}
 						}
 					}
 					x += tile.width + 1;
 				}
 				y += tile.height + 1;
 			}
-			
+
 			ball.x += ball.dx;
 			ball.y += ball.dy;
 			
-			//item: 아이템을 내려오게 한다.
+			// item: 아이템을 내려오게 한다.
 			for (var i = 0; i < items.length; i++) {
 				if (items[i].visible) {
 					self.drawItem(items[i]);
@@ -439,7 +595,7 @@
 				}
 			}
 			
-			//총알을 그린다.
+			// 총알을 그린다.
 			for (var i = 0; i < bullets.length; i++){
 				console.dir(bullets);
 				self.drawBullet(bullets[i]);
@@ -451,15 +607,13 @@
 			
 			var x = 0;
 			var y = 0;
+			var tile;
 			for (var row = 0, rows = map.length; row < rows; row++) {
 				x = 0;
 				for (var col = 0, cols = map[row].length; col < cols; col++) {
-//					console.log(row + ", " + col);
-//					console.log(x + ", " + y);
+					tile = map[row][col];
+					self.drawTile(tile, x + 1, y + 1);
 					
-					if (map[row][col] & 1 == 1) {
-						self.drawTile(x + 1, y + 1);
-					}
 					x += tile.width + 1;
 				}
 				y += tile.height + 1;
@@ -470,7 +624,8 @@
 			var levelCleared = true;
 			for (var row = 0, rows = map.length; row < rows; row++) {
 				for (var col = 0, cols = map[row].length; col < cols; col++) {
-					if (map[row][col] == 1) {
+					var tile = map[row][col];
+					if (tile.type != TILE_TYPE_BLANK && tile.type != TILE_TYPE_UNBREAKABLE) {
 						levelCleared = false;
 						break;
 					}
@@ -530,13 +685,13 @@
 			document.getElementById("jump").play();
 		},
 		drawBall: function () {
-//			context.strokeStyle = ball.color;
-//			context.fillStyle = ball.color;
-//			context.beginPath();
-//			context.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2, true);
-//			context.closePath();
-//			context.stroke();
-//			context.fill();
+// context.strokeStyle = ball.color;
+// context.fillStyle = ball.color;
+// context.beginPath();
+// context.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2, true);
+// context.closePath();
+// context.stroke();
+// context.fill();
 			context.drawImage(image, ball.imageX, ball.imageY, ball.imageDiameter, ball.imageDiameter,
 					ball.x, ball.y, ball.diameter, ball.diameter);
 		},
@@ -544,11 +699,16 @@
 			context.drawImage(image, bat.imageX, bat.imageY, bat.imageWidth, bat.imageHeight,
 					bat.x, bat.y, bat.width, bat.height);
 		},
-		drawTile: function (x, y) {
-			context.drawImage(image, tile.imageX, tile.imageY, tile.imageWidth, tile.imageHeight,
+		drawTile: function (tile, x, y) {
+			var imageY = tile.imageY;
+			if (tile.type == TILE_TYPE_HARD) {
+				imageY -= (TILE_TYPE_HARD.needHits - tile.needCurrentHits) * 75;
+				imageY = Math.max(imageY, 0);
+			}
+			context.drawImage(image, tile.imageX, imageY, tile.imageWidth, tile.imageHeight,
 					x, y, tile.width, tile.height);
 		},
-		drawItem: function (item) {  //item: 아이템볼을 그려준다.
+		drawItem: function (item) {  // item: 아이템볼을 그려준다.
 			context.fillStyle = item_meta.color;
 			context.beginPath();
 			context.arc(item.x, item.y, item_meta.radius, 0, Math.PI * 2, true);
@@ -623,13 +783,14 @@
 			
 			window.setTimeout(function () {
 				level++;
-//				ball.dx = ball.initialDx * (1 + 0.5 * (level - 1));
-//				ball.dy = ball.initialDy * (1 + 0.5 * (level - 1));
-//				console.log(ball.dx);
-//				console.log(ball.dy);
-//				ball.speed *= 1.5; // Too fast.
-//				ball.speed *= 1.3;
-				ball.speed *= 1.2;
+// ball.dx = ball.initialDx * (1 + 0.5 * (level - 1));
+// ball.dy = ball.initialDy * (1 + 0.5 * (level - 1));
+// console.log(ball.dx);
+// console.log(ball.dy);
+// ball.speed *= 1.5; // Too fast.
+// ball.speed *= 1.3;
+//				ball.speed *= 1.2;
+				ball.speed *= 1.1;
 				ball.dx = ball.initialDx;
 				ball.dy = ball.initialDy;
 				if (maps[level]) {
