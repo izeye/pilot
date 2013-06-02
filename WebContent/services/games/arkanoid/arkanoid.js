@@ -440,7 +440,7 @@
 			}
 			
 			// item : map에 item을 랜덤적용
-//			self.setItems(map);
+			self.setItems(map);
 			
 			window.setTimeout(function () {
 				timer_id = window.setInterval(function () {
@@ -863,7 +863,7 @@
 			while (count < level){
 				var i = Math.floor(Math.random() * map.length);
 				var j = Math.floor(Math.random() * map[0].length);
-				if (map[i][j] == 1) {
+				if (map[i][j] != 0) {
 					console.log("item is set at " + i + ", " + j);
 					items.push({
 						type: ITEM_TYPE_GUN,
