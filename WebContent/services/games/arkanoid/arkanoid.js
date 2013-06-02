@@ -344,9 +344,10 @@
 	}
 	
 	var jewel_meta = {
-		radius: 10,
+		radius: 8,
 		speed: 2,
-		color: 'yellow'
+		color: 'yellow',
+		border_color: 'orange'
 	};
 	
 	var bullets = [];
@@ -721,6 +722,17 @@
 			context.arc(jewel.x, jewel.y, jewel_meta.radius, 0, Math.PI * 2, true);
 			context.closePath();
 			context.fill();
+			
+			context.strokeStyle = jewel_meta.border_color;
+			context.beginPath();
+			context.arc(jewel.x, jewel.y, jewel_meta.radius, 0, Math.PI * 2, true);
+			context.closePath();
+			context.stroke();
+			
+			context.textAlign = 'center';
+			context.font = 'bold 15px sans-serif';
+			context.fillStyle = '#000';
+			context.fillText('$', jewel.x, jewel.y + 5, jewel_meta.radius * 2);
 		},
 		drawBullet: function (bullet) {
 			context.fillStyle = bullet.color;
