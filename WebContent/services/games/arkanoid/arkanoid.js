@@ -357,6 +357,8 @@
 	var block_score = 10;
 	var jewel_score = 20;
 	
+	var ITEM_RATIO = 10;
+	
 	ARKANOID = {
 		init: function () {
 			var self = this;
@@ -435,12 +437,17 @@
 							false,
 							{needCurrentHits: tileDefinition.type.needHits},
 							tileDefinition);
+					if (tileDefinition !== TILE_BLANK && tileDefinition !== TILE_UNBREAKABLE) {
+						if (Math.random() * 100 <= ITEM_RATIO) {
+							tile.item = true;
+							console.log('Set an item at (' + i + ', ' +  j + ')');
+						} else {
+							tile.jewel = true;
+						}
+					}
 					row.push(tile);
 				}
 			}
-			
-			// item : map에 item을 랜덤적용
-			self.setItems(map);
 			
 			window.setTimeout(function () {
 				timer_id = window.setInterval(function () {
@@ -546,13 +553,11 @@
 								map[row][col] = TILE_BLANK;
 							}
 							
-							// Check item block.
-							for (var i = 0; i < items.length; i++) {
-								if (items[i].row == row && items[i].column == col) {
-									items[i].x = x + tile.width / 2;
-									items[i].y = y + tile.height;
-									items[i].visible = true;
-								}
+							if (tile.item) {
+								items.push({
+									x: x + tile.width / 2,
+									y: y + tile.height
+								});
 							}
 							
 							document.getElementById("explosion").play();
@@ -561,10 +566,12 @@
 								score += block_score * level;
 								
 								if (tile.needCurrentHits == 0) {
-									jewels.push({
-										x: x + tile.width / 2,
-										y: y + tile.height,
-									});
+									if (tile.jewel) {
+										jewels.push({
+											x: x + tile.width / 2,
+											y: y + tile.height
+										});
+									}
 								}
 							}
 						}
@@ -579,12 +586,10 @@
 			
 			// item: 아이템을 내려오게 한다.
 			for (var i = 0; i < items.length; i++) {
-				if (items[i].visible) {
-					self.drawItem(items[i]);
-					items[i].y += item_meta.speed;
-					if (items[i].y > canvas.height) {
-						items.removeAt(i);
-					}
+				self.drawItem(items[i]);
+				items[i].y += item_meta.speed;
+				if (items[i].y > canvas.height) {
+					items.removeAt(i);
 				}
 			}
 			
@@ -686,13 +691,6 @@
 			document.getElementById("jump").play();
 		},
 		drawBall: function () {
-// context.strokeStyle = ball.color;
-// context.fillStyle = ball.color;
-// context.beginPath();
-// context.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2, true);
-// context.closePath();
-// context.stroke();
-// context.fill();
 			context.drawImage(image, ball.imageX, ball.imageY, ball.imageDiameter, ball.imageDiameter,
 					ball.x, ball.y, ball.diameter, ball.diameter);
 		},
@@ -857,25 +855,6 @@
 			var self = this;
 			
 			return self.isCollided(bullet.x, bullet.y, bullet_meta.radius, tileX, tileY, width, height);
-		},
-		setItems: function (map){
-			var count = 0;
-			while (count < level){
-				var i = Math.floor(Math.random() * map.length);
-				var j = Math.floor(Math.random() * map[0].length);
-				if (map[i][j] != 0) {
-					console.log("item is set at " + i + ", " + j);
-					items.push({
-						type: ITEM_TYPE_GUN,
-						row: i,
-						column: j,
-						x: 0,
-						y: 0,
-						visible: false
-					});
-					count++;
-				}
-			}
 		}
 	};
 	
