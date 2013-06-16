@@ -1,10 +1,10 @@
-<form>
+<form method="post" action="/services/study/algorithm_contest/addHistory.do">
 Contest:
-<select>
-	<option>Programming Challenge</option>
+<select name="contestSequence" id="contestSequence">
+	<option value="1">Programming Challenge</option>
 </select><br/>
-Problem ID: <input type="text" /><br/>
-Your submission history: <input type="text" size="50" /> <br/>
+Problem ID: <input type="text" name="problemId" id="problemId" /><br/>
+Your submission history: <input type="text" name="submissionHistory" id="submissionHistory" /> <br/>
 ex. 476006 	13/02/17 01:27 	Solved 	1.388 secs. 	JAVA<br> 
 <input type="submit" />
 </form>
