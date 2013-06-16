@@ -45,7 +45,7 @@ public class AlgorithmContestController {
 			@RequestParam String problemId,
 			@RequestParam String submissionHistory, HttpServletRequest req)
 			throws ParseException {
-		String[] splitSubmissionHistory = submissionHistory.split(" ");
+		String[] splitSubmissionHistory = submissionHistory.split("[\t ]+");
 		String submitId = splitSubmissionHistory[INDEX_SUBMIT_ID].trim();
 		Date submitTime = dateFormat.get().parse(
 				splitSubmissionHistory[INDEX_SUBMIT_DATE].trim() + " "
