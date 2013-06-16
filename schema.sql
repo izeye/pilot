@@ -144,6 +144,10 @@ CREATE TABLE tb_algorithm_contest_history (
 CREATE TABLE tb_algorithm_problem (
 	contest_seq INT,
 	-- 1: Programming Challenges
-	problem_id INT,
-	PRIMARY KEY (problem_id)
+	problem_id VARCHAR(128),
+	title VARCHAR(1024),
+	url VARCHAR(1024),
+	created_time DATETIME,
+	modified_time DATETIME,
+	PRIMARY KEY (contest_seq, problem_id)
 );
