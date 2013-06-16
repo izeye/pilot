@@ -21,8 +21,8 @@
 	
 	<select id="getAllProblems" resultType="algorithmProblem">
 		SELECT *
-		FROM TB_ALGORITHM_PROBLEM
-		ORDER BY PROBLEM_ID
+		FROM tb_algorithm_problem
+		ORDER BY problem_id
 	</select>
 	
 	<select id="getLeaderboard" resultType="LeaderboardEntry">
