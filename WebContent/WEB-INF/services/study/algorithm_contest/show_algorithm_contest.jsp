@@ -1,4 +1,5 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page contentType="text/html; charset=utf-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <form method="post" action="/services/study/algorithm_contest/addHistory.do">
 Contest:
@@ -13,10 +14,25 @@ ex. 476006 	13/02/17 01:27 	Solved 	1.388 secs. 	JAVA<br>
 
 <hr>
 <h1>Rank</h1>
-<table border="1">
-	<tr><th>Rank</th><th>Username</th><th>Solved Problem Count</th></tr>
-	<tr><td>1</td><td>izeye</td><td>1</td></tr>
-</table>
+		<table class="table table-striped table-bordered table-hover table-condensed">
+			<thead>
+				<tr>
+					<th>Rank</th><th>Nickname</th><th>Point</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="leaderboardEntry" items="${requestScope.leaderboardEntries}">
+					<tr>
+						<td>${leaderboardEntry.rank}</td>
+						<td>
+							<img src="/resources/common/images/flags/${leaderboardEntry.countryCode}.png" width="20%" height="20%"/>
+							${leaderboardEntry.nickname}
+						</td>
+						<td>${leaderboardEntry.point}</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
 <h1>Problems</h1>
 <table border="1">
 	<tr>

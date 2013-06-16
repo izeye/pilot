@@ -128,7 +128,7 @@
 						<p>
 						<b>Temporarily for mobile devices</b>
 						<ul>
-							<li><a href="/common/web_template.jsp?body_path=/services/study/algorithm_contest/index.html">Algorithm Contest</a></li>
+							<li><a href="/common/web_template.jsp?body_path=/services/study/algorithm_contest/show.do">Algorithm Contest</a></li>
 							<li><a href="/common/web_template.jsp?body_path=/services/games/arkanoid/arkanoid.html">Arkanoid</a></li>
 							<li><a href="/common/web_template.jsp?body_path=/services/game/score/leaderboard.do?game_sequence=1">Arkanoid Leaderboard</a></li>
 							<li><a href="/common/web_template.jsp?body_path=/services/games/remember_photos/remember_photos.html">Remember Photos</a></li>
