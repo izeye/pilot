@@ -7,6 +7,8 @@ import javax.annotation.Resource;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.ctb.pilot.gamification.model.Leaderboard;
+import com.ctb.pilot.gamification.model.LeaderboardEntry;
 import com.ctb.pilot.study.algorithm.dao.AlgorithmContestDao;
 import com.ctb.pilot.study.algorithm.model.AlgorithmContestHistory;
 import com.ctb.pilot.study.algorithm.model.AlgorithmProblem;
@@ -29,6 +31,14 @@ public class MyBatisAlgorithmContestDao implements AlgorithmContestDao {
 		AlgorithmContestMapper mapper = session
 				.getMapper(AlgorithmContestMapper.class);
 		return mapper.getAllProblems();
+	}
+
+	@Override
+	public Leaderboard getLeaderboard() {
+		AlgorithmContestMapper mapper = session
+				.getMapper(AlgorithmContestMapper.class);
+		List<LeaderboardEntry> leaderboardEntries = mapper.getLeaderboard();
+		return new Leaderboard(leaderboardEntries);
 	}
 
 }

@@ -9,9 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ctb.pilot.gamification.model.Leaderboard;
 import com.ctb.pilot.study.algorithm.model.AlgorithmContestHistory;
 import com.ctb.pilot.study.algorithm.model.ProgrammingLanguage;
 import com.ctb.pilot.study.algorithm.service.AlgorithmContestService;
@@ -66,7 +68,9 @@ public class AlgorithmContestController {
 	}
 
 	@RequestMapping("/services/study/algorithm_contest/show.do")
-	public String show() {
+	public String show(Model model) {
+		Leaderboard leaderboard = algorithmContestService.getLeaderboard();
+		model.addAttribute("leaderboardEntries", leaderboard.getEntries());
 		return "show_algorithm_contest";
 	}
 

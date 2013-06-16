@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.ctb.pilot.gamification.model.Leaderboard;
 import com.ctb.pilot.study.algorithm.dao.AlgorithmContestDao;
 import com.ctb.pilot.study.algorithm.model.AlgorithmContestHistory;
 
@@ -16,6 +17,11 @@ public class DefaultAlgorithmContestHistory implements AlgorithmContestService {
 	@Override
 	public void addhistory(AlgorithmContestHistory history) {
 		algorithmContestDao.insertHistory(history);
+	}
+
+	@Override
+	public Leaderboard getLeaderboard() {
+		return algorithmContestDao.getLeaderboard();
 	}
 
 }

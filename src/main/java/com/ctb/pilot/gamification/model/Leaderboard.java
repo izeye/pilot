@@ -24,7 +24,6 @@ public class Leaderboard {
 			previousScore = point;
 			previousRank = entry.getRank();
 		}
-
 	}
 
 	public List<LeaderboardEntry> getEntries() {

@@ -24,4 +24,24 @@
 		FROM TB_ALGORITHM_PROBLEM
 		ORDER BY PROBLEM_ID
 	</select>
+	
+	<select id="getLeaderboard" resultType="LeaderboardEntry">
+		SELECT
+			@rn:=@rn+1 AS rank, nickname, point
+		FROM
+			(
+				SELECT
+					nickname, COUNT(1) AS point
+				FROM
+					(SELECT user_seq, problem_id FROM tb_algorithm_contest_history GROUP BY user_seq, problem_id) t,
+					tb_user u
+				WHERE
+					t.user_seq = u.seq
+				GROUP BY
+					t.user_seq
+				ORDER BY
+					point DESC, nickname ASC
+			) t1,
+			(SELECT @rn:=0) t2;
+	</select>
 </mapper>

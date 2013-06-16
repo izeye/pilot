@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.ctb.pilot.config.MainConfig;
 import com.ctb.pilot.config.SocialConfig;
+import com.ctb.pilot.gamification.model.Leaderboard;
 import com.ctb.pilot.study.algorithm.model.AlgorithmContest;
 import com.ctb.pilot.study.algorithm.model.AlgorithmContestHistory;
 import com.ctb.pilot.study.algorithm.model.AlgorithmProblem;
@@ -46,6 +47,12 @@ public class AlgorithmContestDaoTest {
 		List<AlgorithmProblem> allProblems = algorithmContestDao
 				.getAllProblems();
 		System.out.println(allProblems);
+	}
+
+	@Test
+	public void getLeaderboard() {
+		Leaderboard leaderboard = algorithmContestDao.getLeaderboard();
+		System.out.println(leaderboard);
 	}
 
 }
