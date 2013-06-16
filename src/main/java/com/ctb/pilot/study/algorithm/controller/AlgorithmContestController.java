@@ -66,7 +66,7 @@ public class AlgorithmContestController {
 				userSequence, contestSequence, problemId, submitId, submitTime,
 				runtime, language.getSequence(), sourceUrl);
 		algorithmContestService.addhistory(history);
-		return "redirect:/common/web_template.jsp?body_path=/services/study/algorithm_contest/index.html";
+		return "redirect:/common/web_template.jsp?body_path=/services/study/algorithm_contest/show.do";
 	}
 
 	@RequestMapping("/services/study/algorithm_contest/show.do")
