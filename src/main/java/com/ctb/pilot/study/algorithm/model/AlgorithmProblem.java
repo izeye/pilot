@@ -10,6 +10,10 @@ public class AlgorithmProblem {
 	private String url;
 	private Date createdTime;
 	private Date modifiedTime;
+	
+	public AlgorithmProblem() {
+	}
+	
 
 	public AlgorithmProblem(int contestSequence, String problemId,
 			String title, String url, Date createdTime, Date modifiedTime) {
