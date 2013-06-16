@@ -1,6 +1,7 @@
 package com.ctb.pilot.study.algorithm.dao;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -13,6 +14,7 @@ import com.ctb.pilot.config.MainConfig;
 import com.ctb.pilot.config.SocialConfig;
 import com.ctb.pilot.study.algorithm.model.AlgorithmContest;
 import com.ctb.pilot.study.algorithm.model.AlgorithmContestHistory;
+import com.ctb.pilot.study.algorithm.model.AlgorithmProblem;
 import com.ctb.pilot.study.algorithm.model.ProgrammingLanguage;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -37,6 +39,13 @@ public class AlgorithmContestDaoTest {
 				userSequence, contestSequence, problemId, submitId, submitTime,
 				runtime, languageSequence, sourceUrl);
 		algorithmContestDao.insertHistory(history);
+	}
+
+	@Test
+	public void getAllProblems() {
+		List<AlgorithmProblem> allProblems = algorithmContestDao
+				.getAllProblems();
+		System.out.println(allProblems);
 	}
 
 }
