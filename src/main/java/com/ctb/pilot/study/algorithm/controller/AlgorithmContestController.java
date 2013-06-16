@@ -2,7 +2,6 @@ package com.ctb.pilot.study.algorithm.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 
 import javax.annotation.Resource;
@@ -12,7 +11,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.ctb.pilot.study.algorithm.model.AlgorithmContestHistory;
 import com.ctb.pilot.study.algorithm.model.ProgrammingLanguage;
@@ -66,4 +64,10 @@ public class AlgorithmContestController {
 		algorithmContestService.addhistory(history);
 		return "redirect:/common/web_template.jsp?body_path=/services/study/algorithm_contest/index.html";
 	}
+
+	@RequestMapping("/services/study/algorithm_contest/show.do")
+	public String show() {
+		return "show_algorithm_contest";
+	}
+
 }
