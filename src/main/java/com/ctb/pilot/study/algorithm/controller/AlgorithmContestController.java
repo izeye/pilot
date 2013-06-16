@@ -3,6 +3,7 @@ package com.ctb.pilot.study.algorithm.controller;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ctb.pilot.gamification.model.Leaderboard;
 import com.ctb.pilot.study.algorithm.model.AlgorithmContestHistory;
+import com.ctb.pilot.study.algorithm.model.AlgorithmProblem;
 import com.ctb.pilot.study.algorithm.model.ProgrammingLanguage;
 import com.ctb.pilot.study.algorithm.service.AlgorithmContestService;
 import com.ctb.pilot.user.model.User;
@@ -71,7 +73,12 @@ public class AlgorithmContestController {
 	public String show(Model model) {
 		Leaderboard leaderboard = algorithmContestService.getLeaderboard();
 		model.addAttribute("leaderboardEntries", leaderboard.getEntries());
-		return "show_algorithm_contest";
+
+		List<AlgorithmProblem> problemList = algorithmContestService
+				.getAllProblems();
+		model.addAttribute("problemList", problemList);
+
+		return "services/study/algorithm_contest/show_algorithm_contest";
 	}
 
 }
