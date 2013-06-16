@@ -3,6 +3,9 @@ package com.ctb.pilot.study.algorithm.controller;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -11,8 +14,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ctb.pilot.study.algorithm.model.AlgorithmContestHistory;
+import com.ctb.pilot.study.algorithm.model.AlgorithmProblem;
 import com.ctb.pilot.study.algorithm.model.ProgrammingLanguage;
 import com.ctb.pilot.study.algorithm.service.AlgorithmContestService;
 import com.ctb.pilot.user.model.User;
@@ -66,8 +71,17 @@ public class AlgorithmContestController {
 	}
 
 	@RequestMapping("/services/study/algorithm_contest/show.do")
-	public String show() {
-		return "show_algorithm_contest";
+	public ModelAndView show() {
+		List<AlgorithmProblem> problemList = algorithmContestService.getAllProblems();
+		
+		Map<String, Object> model = new HashMap<String,Object>();
+		model.put("problemList", problemList);
+	
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addAllObjects(model);
+		modelAndView.setViewName("services/study/algorithm_contest/show_algorithm_contest");
+		return modelAndView;
 	}
 
 }

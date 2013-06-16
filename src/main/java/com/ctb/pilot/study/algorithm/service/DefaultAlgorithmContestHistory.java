@@ -1,11 +1,14 @@
 package com.ctb.pilot.study.algorithm.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
 import com.ctb.pilot.study.algorithm.dao.AlgorithmContestDao;
 import com.ctb.pilot.study.algorithm.model.AlgorithmContestHistory;
+import com.ctb.pilot.study.algorithm.model.AlgorithmProblem;
 
 @Service("algorithmContestHistory")
 public class DefaultAlgorithmContestHistory implements AlgorithmContestService {
@@ -16,6 +19,11 @@ public class DefaultAlgorithmContestHistory implements AlgorithmContestService {
 	@Override
 	public void addhistory(AlgorithmContestHistory history) {
 		algorithmContestDao.insertHistory(history);
+	}
+
+	@Override
+	public List<AlgorithmProblem> getAllProblems() {
+		return algorithmContestDao.getAllProblems();
 	}
 
 }
