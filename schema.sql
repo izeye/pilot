@@ -122,4 +122,28 @@ INSERT INTO tb_image (type, name) VALUES (2, 'elevator_led_16');
 INSERT INTO tb_image (type, name) VALUES (2, 'elevator_led_17');
 INSERT INTO tb_image (type, name) VALUES (2, 'elevator_led_18');
 
+DROP TABLE tb_algorithm_contest_history;
+CREATE TABLE tb_algorithm_contest_history (
+	seq INT AUTO_INCREMENT,
+	user_seq INT,
+	contest_seq INT,
+	-- 1: Programming Challenges
+	problem_id VARCHAR(128),
+	submit_id VARCHAR(128),
+	submit_time DATETIME,
+	runtime FLOAT,
+	language_seq INT,
+	-- 1: Java
+	source_url VARCHAR(1024),
+	created_time DATETIME,
+	modified_time DATETIME,
+	PRIMARY KEY(seq),
+	UNIQUE KEY (user_seq, contest_seq, problem_id, submit_id)
+);
 
+CREATE TABLE tb_algorithm_problem (
+	contest_seq INT,
+	-- 1: Programming Challenges
+	problem_id INT,
+	PRIMARY KEY (problem_id)
+);

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ctb.pilot.study.algorithm.dao.mybatis.AlgorithmContestMapper">
+	<insert id="insertHistory">
+		INSERT INTO
+			tb_algorithm_contest_history (user_seq, contest_seq, problem_id, submit_id, submit_time, runtime, language_seq, source_url, created_time)
+		values (
+			#{userSequence}, #{contestSequence}, #{problemId}, #{submitId}, #{submitTime}, #{runtime}, #{languageSequence}, #{sourceUrl}, now() 
+		)
+	</insert>
+</mapper>

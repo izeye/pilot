@@ -13,5 +13,7 @@
 		<typeAlias alias="LeaderboardEntry" type="com.ctb.pilot.gamification.model.LeaderboardEntry" />
 		<typeAlias alias="GameLog" type="com.ctb.pilot.gamification.model.GameLog" />
 		<typeAlias alias="GameImage" type="com.ctb.pilot.game.memory.model.Image" />
+		
+		<package name="com.ctb.pilot.study.algorithm.model" />
 	</typeAliases>
 </configuration>
