@@ -28,7 +28,7 @@ public class AlgorithmContestDaoTest {
 	@Test
 	public void insertHistory() {
 		int userSequence = 1;
-		int contestSequence = AlgorithmContest.PROGRAMMING_CHALLENGE
+		int contestSequence = AlgorithmContest.PROGRAMMING_CHALLENGES
 				.getSequence();
 		String problemId = "110101";
 		String submitId = "476006";
@@ -53,6 +53,21 @@ public class AlgorithmContestDaoTest {
 	public void getLeaderboard() {
 		Leaderboard leaderboard = algorithmContestDao.getLeaderboard();
 		System.out.println(leaderboard);
+	}
+
+	@Test
+	public void getAllHistories() {
+		List<AlgorithmContestHistory> allHistories = algorithmContestDao
+				.getAllHistories();
+		System.out.println(allHistories);
+	}
+
+	@Test
+	public void getHistories() {
+		int userSequence = 1;
+		List<AlgorithmContestHistory> histories = algorithmContestDao
+				.getHistories(userSequence);
+		System.out.println(histories);
 	}
 
 }

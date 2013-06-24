@@ -14,4 +14,8 @@ public interface AlgorithmContestMapper {
 
 	List<LeaderboardEntry> getLeaderboard();
 
+	List<AlgorithmContestHistory> getAllHistories();
+
+	List<AlgorithmContestHistory> getHistories(int userSequence);
+
 }

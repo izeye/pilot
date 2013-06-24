@@ -70,7 +70,18 @@ public class AlgorithmContestController {
 	}
 
 	@RequestMapping("/services/study/algorithm_contest/show.do")
-	public String show(Model model) {
+	public String show(Model model, HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		User user = (User) session.getAttribute("user");
+		int userSequence = user.getSequence();
+		List<AlgorithmContestHistory> yourHistories = algorithmContestService
+				.getHistories(userSequence);
+		model.addAttribute("yourHistories", yourHistories);
+
+		List<AlgorithmContestHistory> allHistories = algorithmContestService
+				.getAllHistories();
+		model.addAttribute("allHistories", allHistories);
+
 		Leaderboard leaderboard = algorithmContestService.getLeaderboard();
 		model.addAttribute("leaderboardEntries", leaderboard.getEntries());
 

@@ -10,6 +10,14 @@
 		<id column="created_time" property="createdTime" />
 		<id column="modified_time" property="modifiedTime" />
 	</resultMap>
+
+	<resultMap id="algorithmContestHistory" type="AlgorithmContestHistory">
+		<id column="seq" property="sequence" />
+		<id column="user_seq" property="userSequence" />
+		<id column="nickname" property="userNickname" />
+		<id column="contest_seq" property="contestSequence" />
+		<id column="language_seq" property="languageSequence" />
+	</resultMap>
 	
 	<insert id="insertHistory">
 		INSERT INTO
@@ -27,11 +35,13 @@
 	
 	<select id="getLeaderboard" resultType="LeaderboardEntry">
 		SELECT
-			@rn:=@rn+1 AS rank, nickname, point
+			@rn:=@rn+1 AS rank, nickname, point, country_code
 		FROM
 			(
 				SELECT
-					nickname, COUNT(1) AS point
+					nickname,
+					COUNT(1) AS point,
+					country_code
 				FROM
 					(SELECT user_seq, problem_id FROM tb_algorithm_contest_history GROUP BY user_seq, problem_id) t,
 					tb_user u
@@ -43,5 +53,11 @@
 					point DESC, nickname ASC
 			) t1,
 			(SELECT @rn:=0) t2;
+	</select>
+	<select id="getAllHistories" resultMap="algorithmContestHistory">
+		SELECT * FROM tb_algorithm_contest_history h, tb_user u WHERE h.user_seq = u.seq ORDER BY h.seq DESC
+	</select>
+	<select id="getHistories" resultMap="algorithmContestHistory">
+		SELECT * FROM tb_algorithm_contest_history WHERE user_seq = #{userSequence} ORDER BY seq DESC
 	</select>
 </mapper>

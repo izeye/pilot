@@ -14,4 +14,8 @@ public interface AlgorithmContestDao {
 
 	Leaderboard getLeaderboard();
 
+	List<AlgorithmContestHistory> getAllHistories();
+
+	List<AlgorithmContestHistory> getHistories(int userSequence);
+
 }

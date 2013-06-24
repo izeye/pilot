@@ -6,6 +6,7 @@ public class AlgorithmContestHistory {
 
 	private Integer sequence;
 	private int userSequence;
+	private String userNickname;
 	private int contestSequence;
 	private String problemId;
 	private String submitId;
@@ -16,11 +17,9 @@ public class AlgorithmContestHistory {
 	private Date createdTime;
 	private Date modifiedTime;
 
-	public AlgorithmContestHistory(Integer sequence, int userSequence,
-			int contestSequence, String problemId, String submitId,
-			Date submitTime, float runtime, int languageSequence,
-			String sourceUrl, Date createdTime, Date modifiedTime) {
-		this.sequence = sequence;
+	public AlgorithmContestHistory(int userSequence, int contestSequence,
+			String problemId, String submitId, Date submitTime, float runtime,
+			int languageSequence, String sourceUrl) {
 		this.userSequence = userSequence;
 		this.contestSequence = contestSequence;
 		this.problemId = problemId;
@@ -29,15 +28,9 @@ public class AlgorithmContestHistory {
 		this.runtime = runtime;
 		this.languageSequence = languageSequence;
 		this.sourceUrl = sourceUrl;
-		this.createdTime = createdTime;
-		this.modifiedTime = modifiedTime;
 	}
 
-	public AlgorithmContestHistory(int userSequence, int contestSequence,
-			String problemId, String submitId, Date submitTime, float runtime,
-			int languageSequence, String sourceUrl) {
-		this(null, userSequence, contestSequence, problemId, submitId,
-				submitTime, runtime, languageSequence, sourceUrl, null, null);
+	public AlgorithmContestHistory() {
 	}
 
 	public Integer getSequence() {
@@ -56,12 +49,24 @@ public class AlgorithmContestHistory {
 		this.userSequence = userSequence;
 	}
 
+	public String getUserNickname() {
+		return userNickname;
+	}
+
+	public void setUserNickname(String userNickname) {
+		this.userNickname = userNickname;
+	}
+
 	public int getContestSequence() {
 		return contestSequence;
 	}
 
 	public void setContestSequence(int contestSequence) {
 		this.contestSequence = contestSequence;
+	}
+
+	public String getContest() {
+		return AlgorithmContest.getBySequence(contestSequence).getDisplayName();
 	}
 
 	public String getProblemId() {
@@ -104,6 +109,11 @@ public class AlgorithmContestHistory {
 		this.languageSequence = languageSequence;
 	}
 
+	public String getLanguage() {
+		return ProgrammingLanguage.getBySequence(languageSequence)
+				.getDisplayName();
+	}
+
 	public String getSourceUrl() {
 		return sourceUrl;
 	}
@@ -131,11 +141,12 @@ public class AlgorithmContestHistory {
 	@Override
 	public String toString() {
 		return "AlgorithmContestHistory [sequence=" + sequence
-				+ ", userSequence=" + userSequence + ", contestSequence="
-				+ contestSequence + ", problemId=" + problemId + ", submitId="
-				+ submitId + ", submitTime=" + submitTime + ", runtime="
-				+ runtime + ", languageSequence=" + languageSequence
-				+ ", sourceUrl=" + sourceUrl + ", createdTime=" + createdTime
+				+ ", userSequence=" + userSequence + ", userNickname="
+				+ userNickname + ", contestSequence=" + contestSequence
+				+ ", problemId=" + problemId + ", submitId=" + submitId
+				+ ", submitTime=" + submitTime + ", runtime=" + runtime
+				+ ", languageSequence=" + languageSequence + ", sourceUrl="
+				+ sourceUrl + ", createdTime=" + createdTime
 				+ ", modifiedTime=" + modifiedTime + "]";
 	}
 

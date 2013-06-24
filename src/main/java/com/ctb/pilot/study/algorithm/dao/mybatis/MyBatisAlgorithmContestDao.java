@@ -41,4 +41,18 @@ public class MyBatisAlgorithmContestDao implements AlgorithmContestDao {
 		return new Leaderboard(leaderboardEntries);
 	}
 
+	@Override
+	public List<AlgorithmContestHistory> getAllHistories() {
+		AlgorithmContestMapper mapper = session
+				.getMapper(AlgorithmContestMapper.class);
+		return mapper.getAllHistories();
+	}
+
+	@Override
+	public List<AlgorithmContestHistory> getHistories(int userSequence) {
+		AlgorithmContestMapper mapper = session
+				.getMapper(AlgorithmContestMapper.class);
+		return mapper.getHistories(userSequence);
+	}
+
 }

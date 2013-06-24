@@ -14,4 +14,8 @@ public interface AlgorithmContestService {
 
 	Leaderboard getLeaderboard();
 
+	List<AlgorithmContestHistory> getAllHistories();
+
+	List<AlgorithmContestHistory> getHistories(int userSequence);
+
 }

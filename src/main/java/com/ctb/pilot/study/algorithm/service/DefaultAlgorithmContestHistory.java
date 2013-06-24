@@ -32,4 +32,14 @@ public class DefaultAlgorithmContestHistory implements AlgorithmContestService {
 		return algorithmContestDao.getAllProblems();
 	}
 
+	@Override
+	public List<AlgorithmContestHistory> getAllHistories() {
+		return algorithmContestDao.getAllHistories();
+	}
+
+	@Override
+	public List<AlgorithmContestHistory> getHistories(int userSequence) {
+		return algorithmContestDao.getHistories(userSequence);
+	}
+
 }
