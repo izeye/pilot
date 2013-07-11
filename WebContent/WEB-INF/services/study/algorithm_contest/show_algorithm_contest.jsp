@@ -31,7 +31,7 @@ Your submission history: <input type="text" name="submissionHistory" id="submiss
 				<td>${yourHistory.problemId}</td>
 				<td>${yourHistory.runtime}</td>
 				<td>${yourHistory.language}</td>
-				<td><a href="${yourHistory.sourceUrl}">${yourHistory.submitId}</a></td>
+				<td><a href="/services/study/algorithm_contest/showSource.do?submitId=${yourHistory.submitId}">${yourHistory.submitId}</a></td>
 				<td>${yourHistory.createdTime}</td>
 			</tr>
 		</c:forEach>
@@ -57,7 +57,7 @@ Your submission history: <input type="text" name="submissionHistory" id="submiss
 				<td>${history.problemId}</td>
 				<td>${history.runtime}</td>
 				<td>${history.language}</td>
-				<td><a href="${history.sourceUrl}">${history.submitId}</a></td>
+				<td><a href="/services/study/algorithm_contest/showSource.do?submitId=${history.submitId}">${history.submitId}</a></td>
 				<td>${history.createdTime}</td>
 			</tr>
 		</c:forEach>
