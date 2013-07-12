@@ -3,10 +3,8 @@ package com.ctb.pilot.study.algorithm.controller;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -107,15 +105,10 @@ public class AlgorithmContestController {
 						+ submitId).get();
 		Elements text = doc.select("pre");
 
-		List<String> source = new ArrayList<String>();
-
 		for (Element e : text) {
-			System.out.println(e.text());
-			source.add(e.text());
+			model.addAttribute("source", e.text());
 		}
-
-		model.addAttribute("source", source);
-
+		
 		return "services/study/algorithm_contest/show_source";
 	}
 
