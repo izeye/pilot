@@ -17,6 +17,6 @@
 </head>
 <body style="background: white; font-family: Helvetica">
 	<pre class="brush: java">
-		${ source }
+${ source }
 	</pre>
 </body>

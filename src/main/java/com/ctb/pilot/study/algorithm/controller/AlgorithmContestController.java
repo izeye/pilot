@@ -104,9 +104,14 @@ public class AlgorithmContestController {
 				"http://www.programming-challenges.com/pg.php?page=viewsubmission&subid="
 						+ submitId).get();
 		Elements text = doc.select("pre");
-
+		
 		for (Element e : text) {
-			model.addAttribute("source", e.text());
+			String temp = e.text();
+			temp = temp.replaceAll("&", "&amp;");
+			temp = temp.replaceAll("<", "&lt;");
+			temp = temp.replaceAll(">", "&gt;");
+			System.out.println(temp);
+			model.addAttribute("source", temp);
 		}
 		
 		return "services/study/algorithm_contest/show_source";
