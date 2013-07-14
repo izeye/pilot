@@ -12,12 +12,12 @@ public class HomeController {
 
 	private final Logger log = LoggerFactory.getLogger(getClass());
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/index.do", method = RequestMethod.GET)
 	public String home(Model model) {
 		return "view/home";
 	}
 
-	@RequestMapping(value = "/m/", method = RequestMethod.GET)
+	@RequestMapping(value = "/m/index.do", method = RequestMethod.GET)
 	public String mobile(Model model) {
 		return "view/mobile";
 	}
