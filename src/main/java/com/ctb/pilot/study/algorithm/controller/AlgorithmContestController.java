@@ -1,5 +1,6 @@
 package com.ctb.pilot.study.algorithm.controller;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -9,6 +10,10 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -90,6 +95,26 @@ public class AlgorithmContestController {
 		model.addAttribute("problemList", problemList);
 
 		return "services/study/algorithm_contest/show_algorithm_contest";
+	}
+
+	@RequestMapping("/services/study/algorithm_contest/showSource.do")
+	public String showSource(Model model, @RequestParam String submitId)
+			throws IOException {
+		Document doc = Jsoup.connect(
+				"http://www.programming-challenges.com/pg.php?page=viewsubmission&subid="
+						+ submitId).get();
+		Elements text = doc.select("pre");
+		
+		for (Element e : text) {
+			String temp = e.text();
+			temp = temp.replaceAll("&", "&amp;");
+			temp = temp.replaceAll("<", "&lt;");
+			temp = temp.replaceAll(">", "&gt;");
+			System.out.println(temp);
+			model.addAttribute("source", temp);
+		}
+		
+		return "services/study/algorithm_contest/show_source";
 	}
 
 }

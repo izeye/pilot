@@ -1,5 +1,20 @@
 <%@page contentType="text/html; charset=utf-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<head>
+	<script type="text/javascript">
+	function popup(popHeight,popWidth,submitId){ 
+		var winHeight = document.body.clientHeight;	 
+		var winWidth = document.body.clientWidth;	 
+		var winX = window.screenLeft;	 
+		var winY = window.screenTop;	
+
+		var popX = winX + (winWidth - popWidth)/2; 
+		var popY = winY + (winHeight - popHeight)/2; 
+			window.open("/services/study/algorithm_contest/showSource.do?submitId="+submitId
+					,"sourceView","width="+popWidth+"px,height="+popHeight+"px,top="+popY+",left="+popX);
+		} 
+	</script>
+</head>
 
 <h1>Submit Your Result</h1>
 <form method="post" action="/services/study/algorithm_contest/addHistory.do">
@@ -31,7 +46,7 @@ Your submission history: <input type="text" name="submissionHistory" id="submiss
 				<td>${yourHistory.problemId}</td>
 				<td>${yourHistory.runtime}</td>
 				<td>${yourHistory.language}</td>
-				<td><a href="${yourHistory.sourceUrl}">${yourHistory.submitId}</a></td>
+				<td><a href="javascript:popup(800,900,${yourHistory.submitId});">${yourHistory.submitId}</a></td>
 				<td>${yourHistory.createdTime}</td>
 			</tr>
 		</c:forEach>
@@ -57,7 +72,7 @@ Your submission history: <input type="text" name="submissionHistory" id="submiss
 				<td>${history.problemId}</td>
 				<td>${history.runtime}</td>
 				<td>${history.language}</td>
-				<td><a href="${history.sourceUrl}">${history.submitId}</a></td>
+				 <td><a href="javascript:popup(800,900,${history.submitId});">${history.submitId}</a></td> 
 				<td>${history.createdTime}</td>
 			</tr>
 		</c:forEach>
