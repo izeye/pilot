@@ -146,6 +146,7 @@
 			<version>${org.slf4j-version}</version>
 			<scope>runtime</scope>
 		</dependency>
+		
 		<!-- Database, JPA -->
 		<dependency>
 			<groupId>org.hsqldb</groupId>
