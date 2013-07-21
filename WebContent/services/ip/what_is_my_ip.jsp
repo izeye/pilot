@@ -1,1 +1,0 @@
-Your IP address is <%= request.getRemoteAddr() %>.
