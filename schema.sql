@@ -56,17 +56,6 @@ create table tb_visit_log (
 	PRIMARY KEY (seq)
 );
 
-DROP TABLE tb_qrcode_history;
-CREATE TABLE tb_qrcode_history (
-	seq INT AUTO_INCREMENT,
-	text VARCHAR(1000) NOT NULL,
-	width INT NOT NULL,
-	height INT NOT NULL,
-	created_time DATETIME NOT NULL,
-	ip VARCHAR(100) NOT NULL,
-	PRIMARY KEY (seq)
-);
-
 -- For gamification
 DROP TABLE tb_reward;
 CREATE TABLE tb_reward (
