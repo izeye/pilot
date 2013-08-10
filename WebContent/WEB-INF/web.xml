@@ -48,8 +48,10 @@
 	<!-- Map all *.spring requests to the DispatcherServlet for handling -->
 	<servlet-mapping>
 		<servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
+		<!--
 		<url-pattern>*.do</url-pattern>
-		<!-- <url-pattern>/</url-pattern> -->
+		-->
+		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
 	<filter>

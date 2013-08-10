@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+  "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+  "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	<definition name="base.definition" template="/WEB-INF/tiles/jsp/layout.jsp">
+		<put-attribute name="title" value="izeye's Playground" />
+		<put-attribute name="main_menu" value="/WEB-INF/tiles/jsp/main_menu.jsp" />
+		<put-attribute name="sub_menu" value="" />
+		<put-attribute name="body_title" value="" />
+		<put-attribute name="facebook_like" value="" />
+		<put-attribute name="facebook_share" value="" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/tiles/jsp/footer.jsp" />
+	</definition>
+
+	<definition name="home/home" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/views/home/home.jsp" />
+	</definition>
+	
+	<definition name="pilot/pilot" extends="base.definition">
+		<put-attribute name="sub_menu" value="/WEB-INF/tiles/jsp/sub_menu.jsp" />
+		<put-attribute name="facebook_like" value="/WEB-INF/tiles/jsp/facebook_like.jsp" />
+		<put-attribute name="facebook_share" value="/WEB-INF/tiles/jsp/facebook_share.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/pilot/pilot.jsp" />
+	</definition>
+
+	<definition name="pilot/algorithm_contest/programming_challenge" extends="pilot/pilot">
+		<put-attribute name="body_title" value="Programming Challenge" />
+		<put-attribute name="body" value="/WEB-INF/views/pilot/algorithm_contest/programming_challenge/programming_challenge.jsp" />
+	</definition>
+
+	<definition name="about/about" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/views/about/about.jsp" />
+	</definition>
+
+	<definition name="admin/admin" extends="base.definition">
+		<put-attribute name="sub_menu" value="/WEB-INF/tiles/jsp/sub_menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/admin/admin.jsp" />
+	</definition>
+
+	<!--
+	<definition name="admin/analytics/audience/overview" extends="admin/admin">
+		<put-attribute name="body" value="/WEB-INF/views/admin/analytics/audience/overview.jsp" />
+	</definition>
+	-->
+</tiles-definitions>

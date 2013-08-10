@@ -1,0 +1,1 @@
+<p>&copy; CTB Research Group 2013</p>
