@@ -2,10 +2,10 @@ package com.ctb.pilot.util.translation.service;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.catalina.util.URLEncoder;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -43,9 +43,11 @@ public class BingTranslationService implements TranslationService {
 
 	private static final String KEY_ACCESS_TOKEN = "access_token";
 
-	private String createLanguageDetectUrl(String accessToken, String text) {
-		String encodedAccessToken = new URLEncoder().encode(" " + accessToken);
-		String encodedText = new URLEncoder().encode(text);
+	private String createLanguageDetectUrl(String accessToken, String text)
+			throws UnsupportedEncodingException {
+		String encodedAccessToken = URLEncoder.encode(" " + accessToken,
+				"UTF-8");
+		String encodedText = URLEncoder.encode(text, "UTF-8");
 		return BING_LANGUAGE_DETECT_URL.replace(PLACEHOLDER_ACCESS_TOKEN,
 				encodedAccessToken).replace(PLACEHOLDER_TEXT, encodedText);
 	}
