@@ -17,7 +17,8 @@ import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
 import org.springframework.stereotype.Controller;
 
 @Configuration
-@ImportResource("classpath:applicationContext.xml")
+@ImportResource({ "classpath:applicationContext.xml",
+		"classpath:applicationContext-security.xml" })
 @ComponentScan(basePackages = "com.ctb.pilot", excludeFilters = {
 		@Filter(Configuration.class), @Filter(Controller.class) })
 // @PropertySource("classpath:com/ctb/pilot/config/application.properties")
