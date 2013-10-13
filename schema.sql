@@ -46,6 +46,21 @@ insert into tb_user (user_id, password, nickname, join_date) values ('eliza@eliz
 update tb_user set role='staff' where nickname in ('izeye', 'icpu', 'toujour19', 'enosent7', 'oasishun');
 update tb_user set role='staff' where nickname in ('Hanael');
 
+DROP TABLE tb_authorities;
+CREATE TABLE tb_authorities (
+	seq INT NOT NULL AUTO_INCREMENT,
+	user_seq INT NOT NULL,
+	authority VARCHAR(128) NOT NULL,
+	CONSTRAINT fk_authorities_users FOREIGN KEY (user_seq) REFERENCES tb_user (seq),
+	PRIMARY KEY(seq)
+);
+
+-- NOTE: Only for test.
+INSERT INTO tb_authorities (user_seq, authority) VALUES ((SELECT seq FROM tb_user WHERE user_id='izeye@naver.com'), 'ROLE_SUPERVISOR');
+INSERT INTO tb_authorities (user_seq, authority) VALUES ((SELECT seq FROM tb_user WHERE user_id='icpu@naver.com'), 'ROLE_SUPERVISOR');
+
+CREATE UNIQUE INDEX ix_auth_user_seq on tb_authorities (user_seq, authority);
+
 create table tb_visit_log (
 	seq INT AUTO_INCREMENT,
 	visit_date DATETIME not null,

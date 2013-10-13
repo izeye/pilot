@@ -9,15 +9,16 @@
 		var winY = window.screenTop;	
 
 		var popX = winX + (winWidth - popWidth)/2; 
-		var popY = winY + (winHeight - popHeight)/2; 
-			window.open("/pilot/algorithm_contest/programming_challenge/view_source?submitId="+submitId
-					,"sourceView","width="+popWidth+"px,height="+popHeight+"px,top="+popY+",left="+popX);
-		} 
+		var popY = winY + (winHeight - popHeight)/2;
+		var url = "<c:url value="/pilot/algorithm_contest/programming_challenge/view_source" />" +
+				"?submitId="+submitId;
+		window.open(url,"sourceView","width="+popWidth+"px,height="+popHeight+"px,top="+popY+",left="+popX);
+	}
 	</script>
 </head>
 
 <h1>Submit Your Result</h1>
-<form method="post" action="/pilot/algorithm_contest/programming_challenge/addSubmissionHistory">
+<form method="post" action="<c:url value="/pilot/algorithm_contest/programming_challenge/addSubmissionHistory" />">
 Contest:
 <select name="contestSequence" id="contestSequence">
 	<option value="1">Programming Challenge</option>

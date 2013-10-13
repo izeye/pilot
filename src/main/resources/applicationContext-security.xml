@@ -21,10 +21,15 @@
 	
 	<security:authentication-manager>
 		<security:authentication-provider>
-			<security:user-service>
-				<security:user name="admin" password="admin123" authorities="ROLE_SUPERVISOR"/>
-				<security:user name="izeye" password="izeye345" authorities="ROLE_USER"/>
-			</security:user-service>
+			<security:jdbc-user-service data-source-ref="dataSource"
+					users-by-username-query="
+							SELECT user_id, password, true
+							FROM tb_user
+							WHERE user_id=?"
+					authorities-by-username-query="
+							SELECT u.user_id, a.authority
+							FROM tb_user u, tb_authorities a
+							WHERE u.user_id=? AND u.seq=a.user_seq" />
 		</security:authentication-provider>
 	</security:authentication-manager>
 </beans>
